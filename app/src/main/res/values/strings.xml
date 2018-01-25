@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">BonApp</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_chooseusers">chooseusers</string>
-</resources>
