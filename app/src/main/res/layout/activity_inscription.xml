@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bonapp.ujm.myapplication.InscriptionActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="337dp">
+
+        <EditText
+            android:id="@+id/inscriptFirstNameId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="FirstName"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="173dp" />
+
+        <EditText
+            android:id="@+id/inscriptNameId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Name"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="232dp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adresse :" />
+
+        <EditText
+            android:id="@+id/inscriptRueId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Rue"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="283dp" />
+        <EditText
+            android:id="@+id/inscriptPostaleId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Code Postale"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="283dp" />
+        <EditText
+            android:id="@+id/inscriptVilleId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Ville"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="283dp" />
+        <EditText
+            android:id="@+id/inscriptPseudoId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Pseudo"
+            android:inputType="textEmailAddress"
+            tools:layout_editor_absoluteX="44dp"
+            tools:layout_editor_absoluteY="28dp" />
+
+        <EditText
+            android:id="@+id/inscriptPassWordId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="passWord"
+            android:inputType="numberPassword"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="98dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Je m'inscris" />
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

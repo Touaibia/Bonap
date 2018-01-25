@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccueil"
+    tools:context="com.bonapp.ujm.myapplication.Accueil">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#5F9EA0">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="378dp"
+            android:layout_height="172dp"
+            android:icon="@drawable/googleg_standard_color_18"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
+            android:id="@+id/filtreRech"
+            android:layout_width="132dp"
+            android:layout_height="wrap_content"
+            android:text="filtre votre recherche"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            android:clickable="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="246dp" />
+
+        <EditText
+            android:id="@+id/Recherche"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/roundedwhite"
+            android:clickable="true"
+            android:drawablePadding="5dp"
+            android:drawableRight="@android:drawable/ic_menu_search"
+            android:hint="Recherche"
+            android:paddingStart="10dp"
+            android:textSize="14dp"
+            android:textStyle="normal"
+
+            />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Suggestions"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="246dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:color="@color/colorPrimaryDark" />
+        </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
