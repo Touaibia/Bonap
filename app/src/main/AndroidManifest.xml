@@ -61,6 +61,8 @@
         <activity android:name=".ListeRestauSuggestion"></activity>
         <activity android:name=".loginActivity" />
         <activity android:name=".chooseusers" />
+        <activity android:name=".GestionPublication" />
+        <activity android:name=".GestionProfil" />
     </application>
 
 </manifest>

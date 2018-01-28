@@ -68,10 +68,21 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/login"
                 android:textColor="@color/white"
-                android:text="Login"
+                android:text="Client"
                 android:textStyle="normal"
                 android:background="@drawable/registerbutton"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login1"
+                android:textColor="@color/white"
+                android:text="Restaurateur"
+                android:textStyle="normal"
+                android:background="@drawable/registerbutton"
                 android:layout_marginTop="20dp"
                 />
 
@@ -103,13 +114,6 @@
                 android:paddingStart="84dp"
           />
 
-
-
         </LinearLayout>
-
-
-
-
-
 
 </RelativeLayout>
