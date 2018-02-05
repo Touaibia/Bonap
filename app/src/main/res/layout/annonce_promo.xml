@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <EditText
+        android:id="@+id/titre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="@string/intitul_de_l_annonce"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/date_debut"/>
+    <DatePicker
+        android:id="@+id/dateDebut"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date_fin"
+        android:layout_gravity="center"/>
+    <DatePicker
+        android:id="@+id/dateFin"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:layout_marginBottom="10dp">
+
+        <CheckBox
+            android:id="@+id/lun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="L" />
+
+        <CheckBox
+            android:id="@+id/mar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ma" />
+
+        <CheckBox
+            android:id="@+id/mer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Me" />
+
+        <CheckBox
+            android:id="@+id/jeu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="J" />
+
+        <CheckBox
+            android:id="@+id/ven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="V" />
+
+        <CheckBox
+            android:id="@+id/sam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S" />
+
+        <CheckBox
+            android:id="@+id/dim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Les Menus concernés" />
+
+        <Spinner
+            android:id="@+id/selectMenus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/list_menu"
+            android:spinnerMode="dropdown"></Spinner>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/mont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/montant_de_la_r_duction"
+        />
+
+    <ImageView
+        android:id="@+id/imgPic"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <Button
+        android:id="@+id/selctImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="selectImageFromGalery"
+        android:layout_gravity="center"
+        android:text="@string/select_image" />
+
+</LinearLayout>

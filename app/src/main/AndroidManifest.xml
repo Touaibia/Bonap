@@ -58,7 +58,7 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".ListeRestauSuggestion"></activity>
+        <activity android:name=".ListeRestauSuggestion" />
         <activity android:name=".loginActivity" />
         <activity android:name=".chooseusers" />
         <activity android:name=".GestionPublication" />

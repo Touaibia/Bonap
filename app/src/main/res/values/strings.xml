@@ -29,9 +29,31 @@
         <item>Annonce Promotionnelle</item>
         <item>Annonce d'événement</item>
     </string-array>
+
+    <string-array name="list_menu">
+        <item>Tous les Menus</item>
+        <item>Ratatouille</item>
+        <item>Gibier + Gratin</item>
+        <item>Cabillot</item>
+        <item>Cochon + Ecrasé</item>
+    </string-array>
     <!-- -
         This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="message_publier">Message à publier</string>
+    <string name="titre_de_la_publication">Titre de la publication</string>
+    <string name="select_image">Select Image</string>
+    <string name="nom_du_menu">Nom du Menu</string>
+    <string name="nom_de_l_entr_e">Nom de l\'Entrée</string>
+    <string name="nom_du_plat">Nom du Plat</string>
+    <string name="nom_du_dessert">Nom du Dessert</string>
+    <string name="prix_du_menu">Prix du Menu</string>
+    <string name="entree_plat_et_dessert">Entree, Plat et Dessert</string>
+    <string name="title_activity_basic">basic</string>
+    <string name="intitul_de_l_annonce">Intitulé de l\'Annonce</string>
+    <string name="date_debut">Date Debut</string>
+    <string name="date_fin">Date Fin</string>
+    <string name="montant_de_la_r_duction">Montant de la réduction</string>
 </resources>
