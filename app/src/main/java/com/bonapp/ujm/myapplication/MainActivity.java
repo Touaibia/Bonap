@@ -21,15 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.Connect:
-                Intent intent = new Intent(MainActivity.this, Accueil.class);
-                startActivity(intent);
-                break;
-            case R.id.inscription:
-                Intent intentConnect = new Intent(MainActivity.this, Accueil.class);
-                startActivity(intentConnect);
-                break;
-        }
+
     }
+
 }

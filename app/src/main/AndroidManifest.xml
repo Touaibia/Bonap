@@ -63,6 +63,9 @@
         <activity android:name=".chooseusers" />
         <activity android:name=".GestionPublication" />
         <activity android:name=".GestionProfil" />
+        <activity android:name=".clientregister" />
+        <activity android:name=".restaurantregister" />
+        <activity android:name=".profilclient"></activity>
     </application>
 
 </manifest>
