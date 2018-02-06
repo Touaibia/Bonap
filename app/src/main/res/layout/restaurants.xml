@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="69dp"
-    android:background="@drawable/roundedwhite2"
     android:orientation="vertical"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp">
@@ -16,8 +15,10 @@
         android:layout_width="100dp"
         android:layout_height="65dp"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
         android:layout_toEndOf="@+id/NomRest"
         android:color="#88bcd4d7"
+        android:background="@color/white"
         app:srcCompat="@drawable/icons8couverts50" />
 
     <TextView
@@ -26,7 +27,9 @@
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
         android:color="#88bcd4d7"
+        android:background="@color/white"
         android:gravity="center"
         android:text="AuBureau" />
 

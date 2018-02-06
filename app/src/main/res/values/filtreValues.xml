@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_distance">
+        <item>1 km</item>
+        <item>2 km</item>
+        <item>3 km</item>
+        <item>4 km</item>
+        <item>5 km</item>
+        <item>6 km</item>
+        <item>7 km</item>
+        <item>8 km</item>
+        <item>plus</item>
+    </string-array>
+    <string-array name="array_budget">
+        <item>10 eurros</item>
+        <item>15 eurros</item>
+        <item>20 euros</item>
+        <item>25 euros</item>
+        <item>30 euros</item>
+        <item>35 euros</item>
+        <item>40 euros</item>
+        <item>50 euros</item>
+        <item>plus</item>
+    </string-array>
+    <string-array name="array_type">
+        <item>Italien</item>
+        <item>Resto rapide</item>
+        <item>Pizzeria</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="array_typeambiance">
+        <item>10 eurros</item>
+        <item>15 eurros</item>
+        <item>20 euros</item>
+
+    </string-array>
+
+</resources>

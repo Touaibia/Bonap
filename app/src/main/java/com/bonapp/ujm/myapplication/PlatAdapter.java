@@ -15,24 +15,24 @@ import java.util.List;
  * Created by Nianfo on 21/01/2018.
  */
 
-public class SuggestionAdapter extends BaseAdapter {
-    private List<Restaurant> restauts;
+public class PlatAdapter extends BaseAdapter {
+    private List<Restaurant.Plats> plat;
     private Context context;
     private LayoutInflater inflater;
-    SuggestionAdapter(Context context, List ListRestaus){
+    PlatAdapter(Context context, List Listplats){
         this.context =context;
-        this.restauts = ListRestaus;
+        this.plat = Listplats;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return restauts.size();
+        return plat.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return restauts.get(i);
+        return plat.get(i);
     }
 
     @Override
@@ -44,14 +44,14 @@ public class SuggestionAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         if(view == null){
-            view =  inflater.inflate(R.layout.restaurants,viewGroup,false);
+            view =  inflater.inflate(R.layout.un_plat,viewGroup,false);
         }
 
-        TextView Nom = (TextView) view.findViewById(R.id.NomRest);
-        ImageView img = (ImageView) view.findViewById(R.id.imageRestau);
+        TextView Nom = (TextView) view.findViewById(R.id.nomPlat);
+        ImageView img = (ImageView) view.findViewById(R.id.imagePlat);
 
-        Nom.setText(restauts.get(i).nom);
-        img.setImageResource(restauts.get(i).image);
+        Nom.setText(plat.get(i).nom);
+        img.setImageResource(plat.get(i).image);
         return view;
     }
 }
