@@ -31,6 +31,7 @@
     <string name="img_pub">image de la publication</string>
     <string name="nouv">Ajouter Nouvelle</string>
     <string-array name="type_pub">
+        <item>Type de publication</item>
         <item>Publication Simple</item>
         <item>Menu du Jour</item>
         <item>Annonce Promotionnelle</item>

@@ -24,7 +24,7 @@ public class loginActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 Log.i("Bouton :","Client");
-                startActivity(new Intent(loginActivity.this, GestionProfil.class));
+                startActivity(new Intent(loginActivity.this, Accueil.class));
             }
         });
 
