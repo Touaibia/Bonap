@@ -1,17 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+        <ImageView
+            android:id="@+id/img_prof"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:src="@drawable/restau"
+            android:contentDescription="Image de Profil"/>
+        <RelativeLayout
+            android:id="@+id/info_gen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/img_prof">
 
+            <TextView
+                android:id="@+id/nom_restau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Un Eléphant dans un Jeu de Quille"
+                android:textSize="20sp"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/adr_restau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5 Rue Léon Nautin 42100"
+                android:textSize="20sp"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:layout_below="@id/nom_restau"
+                />
+
+            <Button
+                android:id="@+id/mod_info_gen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modifier vos Données"
+                android:onClick="modif_donnees"
+                android:layout_below="@id/adr_restau"
+                />
+        </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tit_typ_cuisine"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bienvenue"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="231dp"
-        tools:ignore="MissingConstraints" />
-</android.support.constraint.ConstraintLayout>
+        android:text="Nos Types de Cuisines"
+        android:textSize="30sp"
+        android:background="@color/colorAccent"
+        android:textAlignment="center"
+        android:layout_below="@id/info_gen"/>
+    <TextView
+        android:id="@+id/tit_plan_restau"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plan du Restatrant"
+        android:textSize="30sp"
+        android:background="@color/colorAccent"
+        android:textAlignment="center"
+        android:layout_below="@id/tit_typ_cuisine"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tit_typ_amb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nos Types d'Ambiances"
+        android:textSize="30sp"
+        android:background="@color/colorAccent"
+        android:textAlignment="center"
+        android:layout_below="@id/tit_plan_restau"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tit_horaire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nos Horaires"
+        android:textSize="30sp"
+        android:background="@color/colorAccent"
+        android:textAlignment="center"
+        android:layout_below="@id/tit_typ_amb"
+        android:layout_marginTop="10dp"/>
+</RelativeLayout>
