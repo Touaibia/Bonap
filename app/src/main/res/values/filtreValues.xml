@@ -35,5 +35,27 @@
         <item>20 euros</item>
 
     </string-array>
-
+    <string-array name="nb_personne">
+        <item>0 quantités</item>
+        <item>1 quantités</item>
+        <item>2 quantités</item>
+        <item>3 quantités</item>
+        <item>4 quantités</item>
+        <item>5 quantités</item>
+        <item>6 quantités</item>
+        <item>7 quantités</item>
+        <item>8 quantités</item>
+        <item>9 quantités</item>
+        <item>10 quantités</item>
+        <item>11 quantités</item>
+        <item>12 quantités</item>
+        <item>13 quantités</item>
+        <item>14 quantités</item>
+        <item>15 quantités</item>
+        <item>16 quantités</item>
+        <item>17 quantités</item>
+        <item>18 quantités</item>
+        <item>19 quantités</item>
+        <item>20 quantités</item>
+    </string-array>
 </resources>

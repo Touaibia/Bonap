@@ -16,71 +16,17 @@
         />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:background="@drawable/transwhiterectangle"
         android:orientation="vertical"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="70dp"
-        android:weightSum="1">
+        android:layout_marginTop="233dp">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="100dp"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <ImageButton
-                android:id="@+id/imageButtonRestaurateur"
-                android:layout_width="134dp"
-                android:layout_height="134dp"
-                android:layout_marginStart="30dp"
-                app:srcCompat="@drawable/restaurateur"/>
-
-            <ImageButton
-                android:id="@+id/imageButtonClient"
-                android:layout_width="134dp"
-                android:layout_height="134dp"
-                android:layout_marginEnd="30dp"
-                app:srcCompat="@drawable/client"
-
-                />
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="18dp"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Restaurateur"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="55dp"
 
 
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Client"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                />
-
-        </LinearLayout>
 
     </LinearLayout>
 

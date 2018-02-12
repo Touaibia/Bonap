@@ -62,7 +62,9 @@
                 />
 
 
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,17 +78,17 @@
                 />
 
             <Button
+                android:id="@+id/login1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/login1"
-                android:textColor="@color/white"
-                android:text="Restaurateur"
-                android:textStyle="normal"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/login"
                 android:background="@drawable/registerbutton"
-                android:layout_marginTop="20dp"
-                />
+                android:text="Restaurateur"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
 
-
+        </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

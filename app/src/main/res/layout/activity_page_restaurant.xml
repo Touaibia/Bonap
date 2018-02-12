@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d16a4d"
-    tools:context="com.bonapp.ujm.myapplication.PageRestaurant">
+    tools:context="com.bonapp.ujm.myapplication.Controller.PageRestaurant">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,16 +130,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="97dp"
-                android:layout_marginBottom="2dp"
+                android:layout_height="127dp"
+                android:layout_marginBottom="10dp"
                 android:background="#FFAABB"
-                android:paddingBottom="0dp">
+               >
 
                 <TextView
                     android:id="@+id/MenuJour"
@@ -155,19 +155,48 @@
                     android:id="@+id/imageView2"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="60dp"
-                    android:layout_toStartOf="@+id/textView11"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/MenuJour"
+                    android:background="@drawable/roundedwhite"
+                    android:scaleType="centerCrop"
+
                     app:srcCompat="@drawable/planchecharcuterie" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/reserve"
+                    android:layout_alignParentEnd="true"
                     android:layout_below="@+id/MenuJour"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="21dp"
-                    android:text="TextView" />
+
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:text="TextView33" />
+
+                <TextView
+                    android:id="@+id/reserve"
+                    android:layout_width="115dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/border_bacgrdcolor_vert"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="Reserver" />
+
+                <TextView
+                    android:id="@+id/commande"
+                    android:layout_width="115dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:background="@drawable/border_bacgrdcolor_vert"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="Commander" />
 
 
             </RelativeLayout>
@@ -182,6 +211,7 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="onClick"
+
                 android:paddingBottom="4dp"
                 android:text="Carte Menu"
                 android:textColor="@color/white"
@@ -235,7 +265,24 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="45dp" />
+
+            <EditText
+                android:id="@+id/commentaireRech"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/roundedwhite"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:hint="Commentaire"
+                android:onClick="onClick"
+                android:paddingStart="10dp"
+                android:textSize="14dp"
+                android:textStyle="normal"
+
+                />
 
 
         </LinearLayout>
