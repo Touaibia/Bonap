@@ -45,6 +45,16 @@
         <item>Cabillot</item>
         <item>Cochon + Ecrasé</item>
     </string-array>
+
+    <string-array name="type_voie">
+        <item>Rue</item>
+        <item>Boulevard</item>
+        <item>Avenue</item>
+        <item>Cours</item>
+        <item>Chemin</item>
+        <item>Place</item>
+        <item>Square</item>
+    </string-array>
     <!-- -
         This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
         For more information, see https://support.google.com/admob/answer/3052638

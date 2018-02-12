@@ -6,145 +6,161 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     >
-    <ImageView
-        android:id="@+id/img_prof"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:src="@drawable/restau"
-        android:contentDescription="Image de Profil"/>
-    <RelativeLayout
-        android:id="@+id/info_gen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_toRightOf="@id/img_prof">
-
-        <TextView
-            android:id="@+id/nom_restau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Un Eléphant dans un Jeu de Quille"
-            android:textSize="15sp"
-            android:lines="1"
-            android:ellipsize="end"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:id="@+id/adr_restau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="5 Rue Léon Nautin 42100"
-            android:textSize="15sp"
-            android:lines="1"
-            android:ellipsize="end"
-            android:textStyle="bold"
-            android:layout_below="@id/nom_restau"
-            />
-
-        <TextView
-            android:id="@+id/tel_restau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/mod_info_gen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Modifier vos Données"
-            android:onClick="modif_info_gen"
-            android:layout_below="@id/adr_restau"
-            />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/block_type_cuis"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/img_prof"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tit_typ_cuisine"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nos Types de Cuisines"
-            android:textSize="30sp"
-            android:background="@color/colorAccent"
-            android:textAlignment="center"
-            android:layout_below="@id/info_gen"/>
+            android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_type_cuis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            <ImageView
+                android:id="@+id/img_prof"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:contentDescription="Image de Profil"
+                android:src="@drawable/restau" />
 
-        </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:id="@+id/info_gen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_toRightOf="@id/img_prof">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/nom_restau"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Un Eléphant dans un Jeu de Quille"
+                    android:textSize="15sp"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    />
 
-    <LinearLayout
-        android:id="@+id/block_plan_restau"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/block_type_cuis"
-        android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/adr_restau"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5 Rue Léon Nautin 42100"
+                    android:textSize="15sp"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:layout_below="@id/nom_restau"
+                    />
 
-        <TextView
-            android:id="@+id/tit_plan_restau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Plan du Restatrant"
-            android:textSize="30sp"
-            android:background="@color/colorAccent"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/tel_restau"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="+334 77 58 96 24"
+                    android:layout_below="@id/adr_restau"
+                    />
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/mod_info_gen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Modifier vos Données"
+                    android:onClick="modif_info_gen"
+                    android:layout_below="@id/tel_restau"
+                    />
+            </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/block_type_amb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/block_plan_restau"
-        android:layout_marginTop="10dp"
-        >
+            <LinearLayout
+                android:id="@+id/block_type_cuis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/img_prof"
+                android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/tit_typ_amb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nos Types d'Ambiances"
-            android:textSize="30sp"
-            android:background="@color/colorAccent"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/tit_typ_cuisine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nos Types de Cuisines"
+                    android:textSize="30sp"
+                    android:background="@color/colorAccent"
+                    android:textAlignment="center"
+                    android:layout_below="@id/info_gen"/>
 
-    </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_type_cuis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
 
-    <LinearLayout
-        android:id="@+id/block_horaire"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/block_type_amb"
-        android:layout_marginTop="10dp">
+                </android.support.v7.widget.RecyclerView>
 
-        <TextView
-            android:id="@+id/tit_horaire"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nos Horaires"
-            android:textSize="30sp"
-            android:background="@color/colorAccent"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/block_plan_restau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/block_type_cuis"
+                android:layout_marginTop="10dp">
 
+                <TextView
+                    android:id="@+id/tit_plan_restau"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Plan du Restatrant"
+                    android:textSize="30sp"
+                    android:background="@color/colorAccent"
+                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/block_type_amb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/block_plan_restau"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/tit_typ_amb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nos Types d'Ambiances"
+                    android:textSize="30sp"
+                    android:background="@color/colorAccent"
+                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/block_horaire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/block_type_amb"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/tit_horaire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nos Horaires"
+                    android:textSize="30sp"
+                    android:background="@color/colorAccent"
+                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

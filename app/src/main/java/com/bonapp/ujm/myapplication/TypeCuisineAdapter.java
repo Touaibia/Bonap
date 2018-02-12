@@ -77,7 +77,6 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
         public void display(Pair<String, Integer> pair) {
             leType = pair;
             typeCuisine.setText(pair.first);
-
         }
 
     }
