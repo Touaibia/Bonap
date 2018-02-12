@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccueil"
-    tools:context="com.bonapp.ujm.myapplication.Accueil">
+    android:background="#d16a4d"
+    tools:context="com.bonapp.ujm.myapplication.Controller.Accueil">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#d16a4d"
         android:orientation="vertical"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         tools:layout_editor_absoluteY="47dp">
 
 
@@ -20,8 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/roundedwhite"
             android:clickable="true"
@@ -50,8 +49,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
             android:background="#4b4948"
             android:gravity="center"
             android:paddingBottom="8dp"
@@ -65,8 +62,6 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
             android:color="@color/colorPrimaryDark"
             android:paddingBottom="10dp" />
     </LinearLayout>

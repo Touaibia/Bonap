@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bonapp.ujm.myapplication.Controller.fait_la_commande">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="16dp">
+        <TextView
+            android:id="@+id/titreCommad"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="10dp"
+            android:background="#4b4948"
+            android:gravity="center"
+            android:text="Commandez vos plats"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/commandeNbpersonne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="saisie le nombre de personne"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="34dp" />
+
+        <EditText
+            android:id="@+id/commandeDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:ems="10"
+            android:inputType="date"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="34dp" />
+
+        <EditText
+            android:id="@+id/commandetimeDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:ems="10"
+            android:inputType="datetime"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="34dp" />
+
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="10dp"
+            android:background="#4b4948"
+            android:gravity="center"
+            android:text="Cocher vos plats"
+            android:textColor="@color/white" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="258dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/border1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="Plats"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/border1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onClick"
+
+                    android:text="Entrees"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="Desserts"
+                    android:textColor="@color/white" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/commandeGridPlat"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textView14"
+                    android:layout_marginTop="10dp"
+                    android:background="#7898" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/commandeValide"
+            android:layout_width="100dp"
+            android:layout_height="43dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/border_bacgrdcolor_vert"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="validé" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
