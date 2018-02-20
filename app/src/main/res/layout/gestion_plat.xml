@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp">
+
+    <ImageView
+        android:id="@+id/img_plat"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:src="@drawable/planchecharcuterie"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@id/img_plat">
+
+        <TextView
+            android:id="@+id/nom_plat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Le Nom du plat"/>
+
+        <TextView
+            android:id="@+id/desc_plat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="La Description du plat"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/plat_opt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:text="&#8942;"
+        />
+
+</RelativeLayout>

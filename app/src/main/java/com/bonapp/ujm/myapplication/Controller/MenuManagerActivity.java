@@ -34,18 +34,20 @@ public abstract class MenuManagerActivity extends AppCompatActivity{
         switch (item.getItemId()) {
             case R.id.pub:
                 startActivity(new Intent(MenuManagerActivity.this, GestionPublication.class));
+                break;
             case R.id.event:
             /* DO ADD */
-
+                break;
             case R.id.profil:
             /* DO DELETE */
                 startActivity(new Intent(MenuManagerActivity.this, GestionProfil.class));
+                break;
             case R.id.stat:
             /* DO DELETE */
-
+                break;
             case R.id.opt:
             /* DO DELETE */
-
+                break;
         }
     }
 

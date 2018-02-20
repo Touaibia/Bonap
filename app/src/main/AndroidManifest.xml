@@ -64,7 +64,8 @@
         <activity android:name=".Controller.GestionProfil" />
         <activity android:name=".Controller.GestionPublication" />
         <activity android:name=".Controller.MesReservations" />
-        <activity android:name=".Controller.fait_la_commande"></activity>
+        <activity android:name=".Controller.fait_la_commande" />
+        <activity android:name=".Controller.MaCarteMenu"></activity>
     </application>
 
 </manifest>

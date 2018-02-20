@@ -31,6 +31,7 @@
     <string name="img_pub">image de la publication</string>
     <string name="nouv">Ajouter Nouvelle</string>
     <string-array name="type_pub">
+        <item>Type de Publication</item>
         <item>Publication Simple</item>
         <item>Menu du Jour</item>
         <item>Annonce Promotionnelle</item>
@@ -53,6 +54,7 @@
         <item>Chemin</item>
         <item>Place</item>
         <item>Square</item>
+        <item>Autre</item>
     </string-array>
     <!-- -
         This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.

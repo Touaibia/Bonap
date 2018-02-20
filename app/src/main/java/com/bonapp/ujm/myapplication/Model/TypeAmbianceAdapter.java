@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bonapp.ujm.myapplication.Controller.GestionProfil;
 import com.bonapp.ujm.myapplication.R;
 
 import java.util.Arrays;
@@ -19,7 +17,7 @@ import java.util.List;
  * Created by maham on 12/02/2018.
  */
 
-public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.MyViewHolder> {
+public class TypeAmbianceAdapter extends RecyclerView.Adapter<TypeAmbianceAdapter.MyViewHolder> {
 
     private List<Pair<String,Integer>> lesTypes = Arrays.asList(
             Pair.create("Lyra Belacqua", 0),
@@ -45,10 +43,10 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
     }
 
     @Override
-    public TypeCuisineAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TypeAmbianceAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.types_cuisines, parent, false);
-        return new TypeCuisineAdapter.MyViewHolder(view);
+        View view = inflater.inflate(R.layout.type_ambiances, parent, false);
+        return new TypeAmbianceAdapter.MyViewHolder(view);
     }
 
     @Override
@@ -75,8 +73,9 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
         public MyViewHolder(View itemView){
             super(itemView);
 
-            typeCuisine = (TextView) itemView.findViewById(R.id.type_cuis);
-            boutonSup = (Button) itemView.findViewById(R.id.sup_type_cuis);
+            typeCuisine = (TextView) itemView.findViewById(R.id.type_amb);
+            boutonSup = (Button) itemView.findViewById(R.id.sup_type_amb);
+
         }
 
         public void display(Pair<String, Integer> pair) {
@@ -86,3 +85,4 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
 
     }
 }
+
