@@ -29,7 +29,6 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:paddingBottom="4dp"
                 android:text="Menu"
                 android:textColor="@color/white"
                 android:textSize="19dp" />
@@ -45,7 +44,6 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:paddingBottom="4dp"
                 android:text="Plats"
                 android:textColor="@color/white"
                 android:textSize="19dp" />
@@ -61,7 +59,6 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:paddingBottom="4dp"
                 android:text="Entrées"
                 android:textColor="@color/white"
                 android:textSize="19dp" />
@@ -80,20 +77,26 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:paddingBottom="4dp"
                 android:text="Desserts"
                 android:textColor="@color/white"
                 android:textSize="19dp" />
         </LinearLayout>
 
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/gridPlat"
             android:layout_width="match_parent"
-            android:layout_height="630dp"
-            android:layout_marginTop="10dp"
-            android:background="#7898" />
+            android:layout_height="400dp"
+            android:layout_marginTop="5dp"
+            />
 
+        <Button
+            android:id="@+id/ajout_nouv_plat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:text="+"/>
 
     </LinearLayout>
 

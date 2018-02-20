@@ -1,5 +1,8 @@
 package com.bonapp.ujm.myapplication.Controller;
 
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +20,14 @@ public class MaCarteMenu extends MenuManagerActivity {
 
     GestionPlatAdapter adapter;
 
+    AlertDialog.Builder builder;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+
+        builder = new AlertDialog.Builder(this);
 
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
@@ -42,7 +49,7 @@ public class MaCarteMenu extends MenuManagerActivity {
         recyclerView = (RecyclerView) findViewById(R.id.gridPlat);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new GestionPlatAdapter(this,restaurant.plats);
+        adapter = new GestionPlatAdapter(this,restaurant.plats, builder);
         recyclerView.setAdapter(adapter);
 
 
@@ -52,17 +59,17 @@ public class MaCarteMenu extends MenuManagerActivity {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.plat:
-                adapter = new GestionPlatAdapter(this,restaurant.plats);
+                adapter = new GestionPlatAdapter(this,restaurant.plats, builder);
                 recyclerView.setAdapter(adapter);
                 break;
 
             case R.id.entree:
-                adapter = new GestionPlatAdapter(this,restaurant.entrees);
+                adapter = new GestionPlatAdapter(this,restaurant.entrees, builder);
                 recyclerView.setAdapter(adapter);
                 break;
 
             case R.id.dessert:
-                adapter = new GestionPlatAdapter(this,restaurant.desserts);
+                adapter = new GestionPlatAdapter(this,restaurant.desserts, builder);
                 recyclerView.setAdapter(adapter);
                 break;
         }
@@ -71,5 +78,16 @@ public class MaCarteMenu extends MenuManagerActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_ma_carte_menu;
+    }
+
+    //la methode qui recupere l'image selectionnée
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (resultCode == RESULT_OK && requestCode == 20){
+            Uri imageUri = data.getData();
+            //set the image in an ImageView
+            adapter.setUri(imageUri);
+        }
     }
 }
