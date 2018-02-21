@@ -27,7 +27,7 @@
         <item>Publication Simple</item>
         <item>Menu du Jour</item>
         <item>Annonce Promotionnelle</item>
-        <item>Annonce d'événement</item>
+        <item>Annonce d\'événement</item>
     </string-array>
 
     <string-array name="list_menu">
