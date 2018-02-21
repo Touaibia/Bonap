@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d16a4d"
+    tools:context="com.bonapp.ujm.myapplication.Controller.MesReservations">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        tools:layout_editor_absoluteX="279dp"
+        tools:layout_editor_absoluteY="8dp">
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:text="Mes reservations"
+        android:background="#4b4948"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textSize="30dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listReservation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

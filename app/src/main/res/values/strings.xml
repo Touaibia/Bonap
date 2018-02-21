@@ -21,9 +21,17 @@
     <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
     <string name="start_level">Level 1</string>
     <string name="next_level">Next Level</string>
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="key_google_maps">AIzaSyBBTnOzy7pTwcpM0ytgUUqolFo4vXoWmL0</string>
+
     <string name="img_pub">image de la publication</string>
     <string name="nouv">Ajouter Nouvelle</string>
     <string-array name="type_pub">
+        <item>Type de Publication</item>
         <item>Publication Simple</item>
         <item>Menu du Jour</item>
         <item>Annonce Promotionnelle</item>
@@ -37,11 +45,21 @@
         <item>Cabillot</item>
         <item>Cochon + Ecrasé</item>
     </string-array>
+
+    <string-array name="type_voie">
+        <item>Rue</item>
+        <item>Boulevard</item>
+        <item>Avenue</item>
+        <item>Cours</item>
+        <item>Chemin</item>
+        <item>Place</item>
+        <item>Square</item>
+        <item>Autre</item>
+    </string-array>
     <!-- -
         This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
-    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="message_publier">Message à publier</string>
     <string name="titre_de_la_publication">Titre de la publication</string>
     <string name="select_image">Select Image</string>

@@ -2,10 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.bonapp.ujm.myapplication"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -29,5 +28,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile('org.mapsforge:mapsforge-map-android-extras:0.6.0') {
+        transitive = false
+    }
+    /*compile('com.google.android.gms:play-services-location:11.0.1'){
+        transitive = false
+    }*/
+    //compile 'org.mapsforge:mapsforge-map-android-extras:0.6.0'
+
+
 }

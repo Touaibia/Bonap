@@ -1,22 +1,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.bonapp.ujm.myapplication.MainActivity">
+    tools:context="com.bonapp.ujm.myapplication.Controller.MainActivity">
 
     <item
         android:id="@+id/accueil"
         android:title="accueil"
-        android:icon="@drawable/icons8menuutilisateurhomme50"
+        android:icon="@drawable/icons8accueil40"
         app:showAsAction="always" />
     <item
         android:id="@+id/profile"
         android:title="profile"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/icons8modifierlutilisateurhomme40"
         app:showAsAction="always" />
     <item
         android:id="@+id/Reservation"
         android:title="reservations"
-        android:icon="@drawable/icons8repas50"
+        android:icon="@drawable/icons8restaurantlieu40"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/Reglage"
+        android:title="reservations"
+        android:icon="@drawable/icons8outilsadministratifs40"
         app:showAsAction="always" />
 
 </menu>
