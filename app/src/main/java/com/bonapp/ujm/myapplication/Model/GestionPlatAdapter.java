@@ -81,7 +81,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
                                 break;
                             case R.id.sup_plat:
                                 //Suppression du plat
-
+                                confirSuppression();
                                 break;
 
                         }
@@ -145,8 +145,8 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
     }
 
     public void confirSuppression(){
-        builder.setMessage("Voulez vous vraiment le supprimer ?")
-                .setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+        builder.setMessage("Voulez vous vraiment supprimer ce plat ?")
+                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // ici on traite la suppression de l'élément
