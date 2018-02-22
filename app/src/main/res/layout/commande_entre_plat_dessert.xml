@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/border2"
+    android:layout_marginBottom="1dp">
+
+    <TextView
+        android:id="@+id/commandenomPlat"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/commandeNbpersonnePlat"
+        android:entries="@array/nb_personne"
+        android:gravity="center"
+        android:text="PlancheCharcuterie"
+        android:textSize="20dp" />
+    <Spinner
+        android:id="@+id/commandeNbpersonnePlat"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:entries="@array/nb_personne"
+        android:gravity="center"
+        android:text="PlancheCharcuterie"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:id="@+id/commandeimagePlat"
+        android:layout_width="100dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/commandenomPlat"
+        android:adjustViewBounds="false"
+        android:background="@drawable/roundedwhite"
+        android:scaleType="centerCrop"
+        android:textAlignment="center"
+        android:src="@drawable/planchecharcuterie"
+         />
+
+</RelativeLayout>
