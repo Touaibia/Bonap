@@ -1,6 +1,6 @@
-package com.bonapp.ujm.myapplication;
+package com.bonapp.ujm.myapplication.Model;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bonapp.ujm.myapplication.Controller.PageRestaurant;
+import com.bonapp.ujm.myapplication.R;
+
 import java.util.List;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by Nianfo on 23/01/2018.
  */
 
-public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionRestoAdapter.RestoViewHolder>{
+public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionRestoAdapter.RestoViewHolder> {
 
     List<Restaurant> list;
 
@@ -45,14 +50,17 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
        public ImageView img;
        public Restaurant current;
 
-        public RestoViewHolder(View itemView) {
+        public RestoViewHolder(final View itemView) {
             super(itemView);
             nom = (TextView) itemView.findViewById(R.id.NomRest);
             img = (ImageView) itemView.findViewById(R.id.imageRestau);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), PageRestaurant.class);
+                    startActivity(view.getContext(),intent, null);
 
                 }
             });

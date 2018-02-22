@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:background="@drawable/border2"
+    android:layout_marginBottom="1dp"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
+
+
+    <ImageView
+        android:id="@+id/imagePlat"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="80"
+        android:autoSizeTextType="uniform"
+        android:scaleType="centerCrop"
+        android:src="@drawable/planchecharcuterie"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/nomPlat"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="20"
+        android:entries="@array/nb_personne"
+        android:gravity="center"
+        android:text="PlancheCharcuterie"
+        android:textSize="20dp" />
+
+</LinearLayout>

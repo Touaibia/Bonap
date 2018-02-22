@@ -1,7 +1,9 @@
-package com.bonapp.ujm.myapplication;
+package com.bonapp.ujm.myapplication.Controller;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.bonapp.ujm.myapplication.R;
 
 public class chooseusers extends AppCompatActivity {
 

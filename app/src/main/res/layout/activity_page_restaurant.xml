@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d16a4d"
+    tools:context="com.bonapp.ujm.myapplication.Controller.PageRestaurant">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#4b4948"
+                android:gravity="center"
+                android:text="Pizzeria Restaurant"
+                android:textColor="@color/white"
+                android:textSize="19dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="left"
+                    android:text="Type :"
+                    android:textColor="@color/white"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/typeResto"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignBaseline="@+id/textView9"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:layout_toEndOf="@+id/textView9"
+                    android:gravity="left"
+                    android:text="cuisine italienne"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="left"
+                    android:text="Budget :"
+                    android:textColor="@color/white"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/budgetResto"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView12"
+                    android:layout_alignBottom="@+id/textView12"
+                    android:layout_toEndOf="@+id/textView12"
+                    android:gravity="left"
+                    android:text="6 à 40 euros"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="left"
+                    android:text="Horaires :"
+                    android:textColor="@color/white"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/Resto"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/textView10"
+                    android:gravity="left"
+                    android:text="Lundi au Vendredi 11h-15h et 19h-23h\n  Samedi 11h-00h"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="127dp"
+                android:layout_marginBottom="10dp"
+                android:background="#FFAABB"
+               >
+
+                <TextView
+                    android:id="@+id/MenuJour"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#4b4948"
+                    android:gravity="center"
+                    android:text="Plat du jour"
+                    android:textColor="@color/white"
+                    android:textSize="19dp" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/MenuJour"
+                    android:background="@drawable/roundedwhite"
+                    android:scaleType="centerCrop"
+
+                    app:srcCompat="@drawable/planchecharcuterie" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/reserve"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/MenuJour"
+                    android:layout_marginTop="21dp"
+
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:text="TextView33" />
+
+                <TextView
+                    android:id="@+id/reserve"
+                    android:layout_width="115dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/border_bacgrdcolor_vert"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="Reserver" />
+
+                <TextView
+                    android:id="@+id/commande"
+                    android:layout_width="115dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:background="@drawable/border_bacgrdcolor_vert"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="Commander" />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/CarteMenu"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="2dp"
+                android:background="#4b4948"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onClick"
+
+                android:paddingBottom="4dp"
+                android:text="Carte Menu"
+                android:textColor="@color/white"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/offrepromo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="2dp"
+                android:background="#4b4948"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:paddingBottom="4dp"
+                android:text="Offres promotionnelles"
+                android:textColor="@color/white"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/evenements"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="2dp"
+                android:background="#4b4948"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:paddingBottom="4dp"
+                android:text="Evénements"
+                android:textColor="@color/white"
+                android:textSize="19dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="172dp"
+            android:background="#d16a4d"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/commentaires"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#4b4948"
+                android:gravity="center"
+                android:text="Commentaires"
+                android:textColor="@color/white"
+                android:textSize="19dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+
+            <EditText
+                android:id="@+id/commentaireRech"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/roundedwhite"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:hint="Commentaire"
+                android:onClick="onClick"
+                android:paddingStart="10dp"
+                android:textSize="14dp"
+                android:textStyle="normal"
+
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.bonapp.ujm.myapplication;
+package com.bonapp.ujm.myapplication.Controller;
 
 
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.bonapp.ujm.myapplication.R;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -20,15 +22,17 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         entry.setOnClickListener( this);*/
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(this);
+        Button login1 = (Button) findViewById(R.id.login1);
+        login1.setOnClickListener(this);
     }
     public void onClick(View v) {
         switch (v.getId()) {
-            //case R.id.link:
-                //startActivity(new Intent(this, MainActivity.class));
-               // break;
+            case R.id.login1:
+                startActivity(new Intent(this, GestionPublication.class));
+                break;
             case R.id.login:
                 startActivity(new Intent(this, Accueil.class));
-                //startActivity(new Intent(this, MainActivity.class));
+                break;
         }
     }
 }
