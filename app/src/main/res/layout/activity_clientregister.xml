@@ -112,7 +112,7 @@
                 android:drawablePadding="5dp"
                 android:paddingStart="10dp"
                 android:inputType="textPassword"
-                android:id="@+id/clientCpswrd"
+                android:id="@+id/clientConfirmPswrd"
                 android:layout_marginBottom="10dp"
 
                 />
@@ -162,7 +162,7 @@
                 android:drawablePadding="5dp"
                 android:paddingStart="10dp"
                 android:inputType="number"
-                android:id="@+id/clientPswrd"
+                android:id="@+id/clientPhone"
                 android:layout_marginBottom="10dp"
 
 
@@ -172,6 +172,7 @@
 
 
             <Button
+                android:id="@+id/clientRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
