@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Bonap.iml" filepath="$PROJECT_DIR$/.idea/Bonap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bonap.iml" filepath="$PROJECT_DIR$/Bonap.iml" />
+      <module fileurl="file://C:\Users\Nianfo\Documents\GitHub\Bonap\Bonapp.iml" filepath="C:\Users\Nianfo\Documents\GitHub\Bonap\Bonapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

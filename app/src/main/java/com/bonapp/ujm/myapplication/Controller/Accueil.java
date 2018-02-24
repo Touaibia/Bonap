@@ -3,6 +3,7 @@ package com.bonapp.ujm.myapplication.Controller;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bonapp.ujm.myapplication.Model.BaseDonnees;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
 import com.bonapp.ujm.myapplication.Model.SuggestionRestoAdapter;
@@ -47,18 +49,33 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     LocationManager locationManager;
     GoogleMap gMap;
     LatLng latLng;
-    Location location;
     double lng;
     double ltd;
     String [] adress = {"2 rue camille colard 42000 saint-etienne","88 rue antoine durafour"};
-   // FusedLocationProviderClient mFusedLocationClient;
+    BaseDonnees db ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
+        List<Restaurant> list = new ArrayList<Restaurant>();
+        db = new BaseDonnees(this);
+        db.open();
+        // insertion des données
+        /*db.insertResto("Resto 1","Since 1889,Italien",""+R.drawable.planchecharcuterie);
+        db.insertResto("Resto 2","Since 1889,Italien",""+R.drawable.planchecharcuterie);*/
+       if( db.insertResto("1","Since 1889,Italien","essai")){
+           Toast.makeText(this,"Insertion ok",Toast.LENGTH_LONG).show();
+        }
+        else {
+           Toast.makeText(this,"echec d'insertion",Toast.LENGTH_LONG).show();
+       }
 
-        //Toolbar toolb = findViewById(R.id.toolbar);
-       // toolb.setTitle("okkkkkk");
+        // recuperation des données dans la base "pas operationnel pour le moment
+        /*Cursor cursor = db.getAllResto();
+        while (cursor.moveToNext()){
+            list.add(new Restaurant(cursor.getString(1),cursor.getInt(2)));
+        }*/
 
         Toast.makeText(this,"ok1",Toast.LENGTH_LONG);
         Restaurant R1 = new Restaurant("R1", R.drawable.common_full_open_on_phone);
@@ -67,7 +84,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         Restaurant R4 = new Restaurant("R4", R.drawable.icons8fork50);
         Restaurant R5 = new Restaurant("R4", R.drawable.icons8fork50);
         Restaurant R6 = new Restaurant("R4", R.drawable.icons8fork50);
-        List<Restaurant> list = new ArrayList<Restaurant>();
+
         list.add(R1);
         list.add(R2);
         list.add(R3);
@@ -85,7 +102,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mmap);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync( this);
 
 
 
@@ -93,13 +110,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
         if (locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER)) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 gMap.setMyLocationEnabled(true);
                 return;
             }
@@ -112,25 +122,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                     latLng = new LatLng(ltd, lng);
                     Geocoder geocoder = new Geocoder(getApplicationContext());
                     try {
-
-
-
-                        int i;
-                        for(i=0;i<adress.length;i++) {
-                            List<Address> addresses = geocoder.getFromLocationName(adress[i], 1);
-                            double ltde = addresses.get(0).getLatitude();
-                            final double lont = addresses.get(0).getLongitude();
-                            Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adress[i]));
-                            marker.setTag(0);
-                            gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                                @Override
-                                public boolean onMarkerClick(Marker marker) {
-                                    Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
-                                    return false;
-                                }
-                            });
-                        }
-
 
                         List<Address> addresses1 =  geocoder.getFromLocation(ltd,lng,1);
 
@@ -176,29 +167,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                     latLng = new LatLng(ltd, lng);
                     Geocoder geocoder = new Geocoder(getApplicationContext());
                     try {
-
-
-
-
-
-                        int i;
-                        for(i=0;i<adress.length;i++) {
-                            List<Address> addresses = geocoder.getFromLocationName(adress[i], 1);
-                            double ltde = addresses.get(0).getLatitude();
-                            final double lont = addresses.get(0).getLongitude();
-                            Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adress[i]));
-                            marker.setTag(0);
-                            gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                                @Override
-                                public boolean onMarkerClick(Marker marker) {
-                                    Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
-                                    return false;
-                                }
-                            });
-                        }
-
-
-
 
                         //localisation de l'utilisateur
                         List<Address> addresses1 =  geocoder.getFromLocation(ltd,lng,1);
@@ -283,23 +251,30 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
 
-
-        /*lng = location.getLongitude();
-        ltd = location.getLatitude();
-        latLng = new LatLng(ltd,lng);
         Geocoder geocoder = new Geocoder(getApplicationContext());
-        List <Address> addresses = null;
+
         try {
-            addresses = geocoder.getFromLocation(ltd,lng,2);
-            String str = addresses.get(0).getLocality()+",";
-            str +=addresses.get(0).getCountryName();
-            gMap.addMarker(new MarkerOptions().position(new LatLng(ltd,lng)).title(str));
-            gMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10.2f));
+            int i;
+            for(i=0;i<adress.length;i++) {
+                List<Address> addresses = null;
+
+                    addresses = geocoder.getFromLocationName(adress[i], 1);
+
+                double ltde = addresses.get(0).getLatitude();
+                final double lont = addresses.get(0).getLongitude();
+                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adress[i]));
+                marker.setTag(0);
+                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
+                        return false;
+                    }
+                });
+        }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-
+        }
 
     }
 
