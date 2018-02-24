@@ -18,6 +18,7 @@ import java.util.List;
 public class Restaurant {
     public String nom;
     public int image;
+    public String description;
     public List<Plats> plats;
     public List<Plats> entrees;
     public List<Plats> desserts;
