@@ -31,6 +31,9 @@ public class Restaurant{
     public ArrayList<Plat> desserts =  new ArrayList<>();
 
 
+    public Restaurant() {
+    }
+
     public Restaurant(String nom, String email, String mot_passe, Adresse adresse, int tel) {
         this.nom = nom;
         this.email = email;
@@ -110,6 +113,8 @@ public class Restaurant{
     public void setTypeCuisines(ArrayList<TypeCuisine> typeCuisines) {
         this.typeCuisines = typeCuisines;
     }
+
+
 
     public ArrayList<Plat> getPlats() {
         return plats;

@@ -21,10 +21,10 @@ import java.util.List;
  */
 
 public class CarteMenuPlatAdapter extends RecyclerView.Adapter<CarteMenuPlatAdapter.carteMenuPlatViewHolder> {
-    private List<Restaurant.Plats> plat;
+    private List<Plat> plat;
     private Context context;
     private LayoutInflater inflater;
-    public CarteMenuPlatAdapter (CarteMenu context, List<Restaurant.Plats> list){
+    public CarteMenuPlatAdapter (CarteMenu context, List<Plat> list){
         this.plat = list;
     }
     @Override
@@ -36,7 +36,7 @@ public class CarteMenuPlatAdapter extends RecyclerView.Adapter<CarteMenuPlatAdap
 
     @Override
     public void onBindViewHolder(carteMenuPlatViewHolder holder, int position) {
-        Restaurant.Plats plats = plat.get(position);
+        Plat plats = plat.get(position);
         holder.display(plats);
     }
 
@@ -56,7 +56,7 @@ public class CarteMenuPlatAdapter extends RecyclerView.Adapter<CarteMenuPlatAdap
             imageView = (ImageView) view.findViewById(R.id.imagePlat);
         }
 
-        public void display(Restaurant.Plats plats) {
+        public void display(Plat plats) {
             nom.setText(plats.nom);
             imageView.setImageResource(plats.image);
         }
