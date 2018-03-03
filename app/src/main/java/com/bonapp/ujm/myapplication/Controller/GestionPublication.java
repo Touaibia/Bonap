@@ -29,7 +29,7 @@ public class GestionPublication extends MenuManagerActivity implements AdapterVi
     ImageView conteneur;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
