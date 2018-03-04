@@ -15,7 +15,7 @@ import com.bonapp.ujm.myapplication.R;
 public abstract class MenuManagerActivity extends AppCompatActivity{
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         setTitle("BonApp");

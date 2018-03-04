@@ -31,7 +31,7 @@ public class MaCarteMenu extends MenuManagerActivity {
     int onglet;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 

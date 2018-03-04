@@ -54,6 +54,8 @@
         <item>Chemin</item>
         <item>Place</item>
         <item>Square</item>
+        <item>Impasse</item>
+        <item>Montee</item>
         <item>Autre</item>
     </string-array>
     <!-- -

@@ -25,21 +25,21 @@ public class CarteMenu extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carte_menu);
 
-        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-
-        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-
-        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
-        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
-        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
-        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
+//        /*restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
+//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
+//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
+//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
+//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
+//
+//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
+//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
+//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
+//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
+//
+//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
+//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
+//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
+//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);*/
 
         recyclerView = (RecyclerView) findViewById(R.id.gridPlat);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
