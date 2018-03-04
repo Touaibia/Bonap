@@ -62,6 +62,8 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                     user.setCity(villle);
 
 
+
+
                     helper.insertContact(user);
                     Intent i = new Intent(restaurantregister.this, PageRestaurant.class);
                     startActivity(i);
