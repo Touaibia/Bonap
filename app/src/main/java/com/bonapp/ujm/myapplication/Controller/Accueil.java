@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.BaseDonnees;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
@@ -59,39 +60,31 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
         List<Restaurant> list = new ArrayList<Restaurant>();
-        db = new BaseDonnees(this);
-        db.open();
+        //db = new BaseDonnees(this);
+       // db.open();
         // insertion des données
-        /*db.insertResto("Resto 1","Since 1889,Italien",""+R.drawable.planchecharcuterie);
-        db.insertResto("Resto 2","Since 1889,Italien",""+R.drawable.planchecharcuterie);*/
-       if( db.insertResto("1","Since 1889,Italien","essai")){
+       // db.insertResto("Resto 1","Since 1889,Italien",""+R.drawable.planchecharcuterie);
+        //db.insertResto("Resto 2","Since 1889,Italien",""+R.drawable.planchecharcuterie);
+       /*if( db.insertResto("resto 3","Since 1879,Italien",""+R.drawable.icons8fork50)){
            Toast.makeText(this,"Insertion ok",Toast.LENGTH_LONG).show();
         }
         else {
            Toast.makeText(this,"echec d'insertion",Toast.LENGTH_LONG).show();
-       }
+       }*/
 
         // recuperation des données dans la base "pas operationnel pour le moment
-        /*Cursor cursor = db.getAllResto();
+       /* Cursor cursor = db.getAllResto();
         while (cursor.moveToNext()){
             list.add(new Restaurant(cursor.getString(1),cursor.getInt(2)));
         }*/
 
         Toast.makeText(this,"ok1",Toast.LENGTH_LONG);
-        Restaurant R1 = new Restaurant("R1", R.drawable.common_full_open_on_phone);
-        Restaurant R2 = new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50);
-        Restaurant R3 = new Restaurant("R3", R.drawable.common_google_signin_btn_icon_dark_normal);
-        Restaurant R4 = new Restaurant("R4", R.drawable.icons8fork50);
-        Restaurant R5 = new Restaurant("R4", R.drawable.icons8fork50);
-        Restaurant R6 = new Restaurant("R4", R.drawable.icons8fork50);
+        Restaurant R1 = new Restaurant("Rest 1","email","1234",
+                new Adresse("2","rue","Camille Colard","42000"),"0638927926");
+        R1.setImage(R.drawable.icons8couverts50);
+
 
         list.add(R1);
-        list.add(R2);
-        list.add(R3);
-        list.add(R4);
-        list.add(R5);
-        list.add(R6);
-
 
         RecyclerView listv = (RecyclerView) findViewById(R.id.list);
 
@@ -132,7 +125,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                                 .position(latLng).title(str1)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         );
-                        gMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                        gMap.setMapType(GoogleMap.MAP_TYPE_NONE);
                         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
 
                     } catch (IOException e) {
@@ -176,7 +169,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         str1 += addresses1.get(0).getFeatureName();
                         gMap.addMarker(new MarkerOptions().position(latLng).title(str1).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                         ));
-                        gMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                        gMap.setMapType(GoogleMap.MAP_TYPE_NONE);
                         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
 
                     } catch (IOException e) {

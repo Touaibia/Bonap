@@ -114,17 +114,16 @@
                 />
 
             <TextView
-                android:id="@+id/link"
+                android:id="@+id/inscriptionClient_Resto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Inscrivez vous !"
-                android:textColor="@color/white"
-                android:clickable="true"
-
-                android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:onClick="onClick"
+                android:clickable="true"
                 android:paddingStart="84dp"
-          />
+                android:text="Inscrivez vous !"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

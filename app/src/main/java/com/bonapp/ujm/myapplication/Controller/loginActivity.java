@@ -70,7 +70,9 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
 
                 }
-
+                break;
+            case R.id.inscriptionClient_Resto:
+                startActivity(new Intent(this, chooseusers.class));
 
 
                 break;

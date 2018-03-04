@@ -1,6 +1,8 @@
 package com.bonapp.ujm.myapplication.Model;
 
 
+import android.widget.Spinner;
+
 /**
  * Created by maham on 24/02/2018.
  */
@@ -12,6 +14,7 @@ public class Plat {
     public int prix;
     public String description;
     public String type;
+    public Spinner nb_plats;
 
     public Plat(int image, String nom, int prix, String description,String type) {
         this.image = image;

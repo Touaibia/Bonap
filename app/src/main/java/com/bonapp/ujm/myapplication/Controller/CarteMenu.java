@@ -25,21 +25,13 @@ public class CarteMenu extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carte_menu);
 
-//        /*restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-//        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
-//
-//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-//        restaurant.ajouteEntree("salade gambas",R.drawable.saladecrevettes);
-//
-//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
-//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
-//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);
-//        restaurant.ajouteDessert("mouche Chololat",R.drawable.dessert);*/
+       restaurant.ajoutePlat(R.drawable.planchecharcuterie,"Planche Charcuterie",12,"Description","italien");
+
+
+        restaurant.ajouteEntree(R.drawable.saladecrevettes,"Salade au gambace",10,"Description","entree");
+
+
+      restaurant.ajouteDessert(R.drawable.dessert,"Mouche au chocolat",10,"Description","dessert");
 
         recyclerView = (RecyclerView) findViewById(R.id.gridPlat);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

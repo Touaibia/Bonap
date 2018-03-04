@@ -22,8 +22,8 @@ import java.util.List;
 
 public class CommandePlatAdapter extends RecyclerView.Adapter<CommandePlatAdapter.commdViewHolder> {
 
-    private List<Restaurant.Plats> plat;
-    public CommandePlatAdapter(fait_la_commande fait_la_commande, List<Restaurant.Plats> list){
+    private List<Plat> plat;
+    public CommandePlatAdapter(fait_la_commande fait_la_commande, List<Plat> list){
         this.plat = list;
     }
     @Override
@@ -35,7 +35,7 @@ public class CommandePlatAdapter extends RecyclerView.Adapter<CommandePlatAdapte
 
     @Override
     public void onBindViewHolder(commdViewHolder holder, int position) {
-        Restaurant.Plats plats = plat.get(position);
+        Plat plats = plat.get(position);
         holder.display(plats);
     }
 
@@ -46,20 +46,20 @@ public class CommandePlatAdapter extends RecyclerView.Adapter<CommandePlatAdapte
 
     public class commdViewHolder extends RecyclerView.ViewHolder{
 
-        Spinner nb_personnes;
+        Spinner nb_plats;
         ImageView imageView;
         TextView nom ;
 
         public commdViewHolder(View view){
             super(view);
             nom = (TextView) view.findViewById(R.id.commandenomPlat);
-            nb_personnes =  (Spinner) view.findViewById(R.id.commandeNbpersonnePlat);
+            nb_plats =  (Spinner) view.findViewById(R.id.commandeNbpersonnePlat);
             imageView = (ImageView) view.findViewById(R.id.commandeimagePlat);
         }
 
-        public void display(Restaurant.Plats plats){
+        public void display(Plat plats){
             nom.setText(plats.nom);
-            nb_personnes.setTag(plats.nb_personnes);
+            nb_plats.setTag(plats.nb_plats);
             imageView.setImageResource(plats.image);
         }
     }

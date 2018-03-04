@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DessertAdapter extends BaseAdapter {
 
-    private List<Restaurant.Plats> plat;
+    private List<Plat> plat;
     private Context context;
     private LayoutInflater inflater;
     DessertAdapter(Context context, List Listplats){

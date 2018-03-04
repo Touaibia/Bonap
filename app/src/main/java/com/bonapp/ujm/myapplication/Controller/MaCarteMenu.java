@@ -37,7 +37,7 @@ public class MaCarteMenu extends MenuManagerActivity {
 
         builder = new AlertDialog.Builder(this);
 
-        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
+        /*restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
@@ -58,7 +58,7 @@ public class MaCarteMenu extends MenuManagerActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new GestionPlatAdapter(this,restaurant.plats, builder);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
 
         onglet = 1;
 

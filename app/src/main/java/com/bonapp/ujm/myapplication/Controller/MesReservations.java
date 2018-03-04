@@ -27,7 +27,7 @@ public class MesReservations extends AppCompatActivity {
 
         List<Reservation> list = new ArrayList<>();
 
-        Reservation r1 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "12h-13h");
+       /* Reservation r1 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "12h-13h");
         Reservation r2 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "14h-14h30");
         Reservation r3 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "12h-13h30");
         Reservation r4 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "20h-21h");
@@ -35,7 +35,7 @@ public class MesReservations extends AppCompatActivity {
         list.add(r1);
         list.add(r2);
         list.add(r3);
-        list.add(r4);
+        list.add(r4);*/
 
         RecyclerView listv = (RecyclerView) findViewById(R.id.listReservation);
 

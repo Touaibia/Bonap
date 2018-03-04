@@ -34,14 +34,14 @@ import static android.support.v4.app.ActivityCompat.startActivityForResult;
  */
 
 public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.MyViewHolder> {
-    List<Restaurant.Plats> plats;
+    List<Plat> plats;
 
     Context myContext;
 
     AlertDialog.Builder builder;
     ImageView conteneur;
 
-    public GestionPlatAdapter(MaCarteMenu maCarteMenu, List<Restaurant.Plats> list, AlertDialog.Builder build) {
+    public GestionPlatAdapter(MaCarteMenu maCarteMenu, List<Plat> list, AlertDialog.Builder build) {
         this.plats = list;
         this.builder = build;
         this.myContext = maCarteMenu;
@@ -61,7 +61,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Restaurant.Plats plat = plats.get(position);
+        Plat plat = plats.get(position);
 
         holder.optPlat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +187,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
             optPlat = (TextView) view.findViewById(R.id.plat_opt);
         }
 
-        public void display(Restaurant.Plats plat) {
+        public void display(Plat plat) {
             nom.setText(plat.nom);
             imageView.setImageResource(plat.image);
         }
