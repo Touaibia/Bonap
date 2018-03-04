@@ -46,15 +46,29 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 String identif = identifiant.getText().toString();
                 String pass = password.getText().toString();
 
-                String paswrd = helper.search(pass);
+                String paswrdClient = helper.searchClient(identif);
 
-                if(paswrd.equals(pass)){
+
+
+                if(paswrdClient.equals(pass)){
                     Intent i = new Intent(loginActivity.this,Accueil.class);
                     startActivity(i);
                 }
                 else{
-                    Toast temp = Toast.makeText(loginActivity.this," User Not Found",Toast.LENGTH_SHORT);
-                    temp.show();
+                    String paswrdrRestaurant = helper.searchrRestaurant(identif);
+
+                    if(paswrdrRestaurant.equals(pass)){
+
+                        Intent i = new Intent(loginActivity.this,GestionPublication.class);
+                        startActivity(i);
+                    }
+                    else{
+                        Toast temp = Toast.makeText(loginActivity.this," User Not Found",Toast.LENGTH_SHORT);
+                        temp.show();
+                    }
+
+
+
                 }
 
 
