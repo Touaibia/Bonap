@@ -5,7 +5,7 @@ import android.media.Image;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
-import com.bonapp.ujm.myapplication.Controller.Contact;
+
 import com.bonapp.ujm.myapplication.Controller.fait_la_commande;
 
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import java.util.List;
 
 public class Restaurant{
     public int id;
+    public String type;
     public String nom;
     public String email;
     public String mot_passe;
@@ -40,6 +41,14 @@ public class Restaurant{
         this.mot_passe = mot_passe;
         this.adresse = adresse;
         this.tel = tel;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getId() {
