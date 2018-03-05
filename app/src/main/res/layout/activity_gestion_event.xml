@@ -4,14 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.bonapp.ujm.myapplication.Controller.GestionEvent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
 
+        <TextView
+            android:id="@+id/go_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:text="<"/>
 
+        <TextView
+            android:id="@+id/today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="Aujourd'hui" />
+
+        <TextView
+            android:id="@+id/go_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:text=">"/>
 
     </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/select_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/serv_midi"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        >
+
+        <RadioButton
+            android:id="@+id/serv_midi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Midi"
+            android:layout_marginRight="15dp"/>
+
+        <RadioButton
+            android:id="@+id/serv_soir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soir"
+            android:layout_marginLeft="10dp"/>
+
+    </RadioGroup>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/les_reserv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
