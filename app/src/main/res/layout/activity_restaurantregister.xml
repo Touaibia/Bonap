@@ -153,15 +153,16 @@
 
 
             <Button
+                android:id="@+id/resgisterRestaurateur"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:text="Register"
-                android:textStyle="normal"
-                android:background="@drawable/registerbutton"
                 android:layout_gravity="center"
                 android:layout_marginBottom="15dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:background="@drawable/registerbutton"
+                android:text="Register"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
 
         </LinearLayout>
 

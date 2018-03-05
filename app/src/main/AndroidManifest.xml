@@ -67,6 +67,8 @@
         <activity android:name=".Controller.fait_la_commande" />
         <activity android:name=".Controller.MaCarteMenu" />
         <activity android:name=".Controller.GestionEvent"></activity>
+        <activity android:name=".Controller.restaurantregister"></activity>
+        <activity android:name=".Controller.clientregister"></activity>
     </application>
 
 </manifest>

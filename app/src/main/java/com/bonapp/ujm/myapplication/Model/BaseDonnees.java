@@ -14,34 +14,26 @@ import android.widget.Toast;
 public class BaseDonnees extends SQLiteOpenHelper {
     SQLiteDatabase DB ;
     public static final String DATA_BASE_NAME = "bonapp.db ";
-    public static final String RESTAURANT_TABLE_NAME = "restaurant ";
     public static final int VERSION = 1;
-    // table restaurant
-    public static final String ID = "ID INTEGER PRIMARY KEY AUTOINCREMENT ";
-    public static final String NAME = "NAME TEXT ";
-    public static final String IMAGE = "IMAGE INTEGER ";
+    private String creerTable;
 
 
-    public BaseDonnees(Context context) {
+    public BaseDonnees(Context context, String creerTable) {
         super(context, DATA_BASE_NAME, null, VERSION);
-        DB = this.getWritableDatabase();
-        Toast.makeText(context,"base ok",Toast.LENGTH_LONG).show();
-
+        this.creerTable = creerTable;
+        //SQLiteDatabase db = getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table essai( id INTEGER, nom TEXT );");
-        /*sqLiteDatabase.execSQL("create table "+RESTAURANT_TABLE_NAME
-                +"(ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "NAME TEXT,"
-                + "IMAGE INTEGER )");*/
+
+        sqLiteDatabase.execSQL(this.creerTable);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+RESTAURANT_TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+this.creerTable);
             onCreate(sqLiteDatabase);
     }
 
@@ -51,11 +43,12 @@ public class BaseDonnees extends SQLiteOpenHelper {
     public void close(){
         DB.close();
     }
+
     public boolean insertResto(String nom,String descript, String img){
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id",nom);
-        contentValues.put("nom",img);
+        contentValues.put("",nom);
+       // contentValues.put(IMAGE,img);
         if(DB.insert("essai",null,contentValues)==-1){
 
         return false;
@@ -63,9 +56,9 @@ public class BaseDonnees extends SQLiteOpenHelper {
         else return true;
     }
 
-    public Cursor getAllResto(){
+    /*public Cursor getAllResto(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("select * from "+RESTAURANT_TABLE_NAME,null);
+        //Cursor cursor = DB.rawQuery("select * from "+RESTAURANT_TABLE_NAME,null);
         return cursor;
-    }
+    }*/
 }

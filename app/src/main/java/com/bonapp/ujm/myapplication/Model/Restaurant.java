@@ -22,7 +22,7 @@ public class Restaurant{
     public String email;
     public String mot_passe;
     public Adresse adresse;
-    public int tel;
+    public String tel;
     public String description;
     public int image;
     public ArrayList<TypeCuisine> typeCuisines=  new ArrayList<>();
@@ -34,7 +34,7 @@ public class Restaurant{
     public Restaurant() {
     }
 
-    public Restaurant(String nom, String email, String mot_passe, Adresse adresse, int tel) {
+    public Restaurant(String nom, String email, String mot_passe, Adresse adresse, String tel) {
         this.nom = nom;
         this.email = email;
         this.mot_passe = mot_passe;
@@ -82,11 +82,11 @@ public class Restaurant{
         this.adresse = adresse;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
@@ -138,5 +138,17 @@ public class Restaurant{
 
     public void setDesserts(ArrayList<Plat> desserts) {
         this.desserts = desserts;
+    }
+
+    public void ajoutePlat(int image, String nom, int prix,String description, String type ) {
+        this.plats.add(new Plat(image,nom,prix,description,type));
+    }
+
+    public void ajouteEntree(int image, String nom, int prix,String description, String type) {
+        this.entrees.add(new Plat(image,nom,prix,description,type));
+    }
+
+    public void ajouteDessert(int image, String nom, int prix,String description, String type) {
+        this.desserts.add(new Plat(image,nom,prix,description,type));
     }
 }

@@ -18,7 +18,7 @@ public class fait_la_commande extends AppCompatActivity {
         setContentView(R.layout.activity_fait_la_commande);
         Restaurant restaurant = new Restaurant();
 
-        restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
+        /*restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
         restaurant.ajoutePlat("planchecharcuterie",R.drawable.planchecharcuterie);
@@ -39,7 +39,7 @@ public class fait_la_commande extends AppCompatActivity {
         listtv.setLayoutManager(new LinearLayoutManager(this));
         listtv.setAdapter(adapter1);
 
-       /* GridView gridView11 = (GridView) findViewById(R.id.commandeGridEntree);
+        GridView gridView11 = (GridView) findViewById(R.id.commandeGridEntree);
         CommandePlatAdapter adapter11 = new CommandePlatAdapter(this,restaurant.entrees);
         gridView11.setAdapter(adapter11);
 

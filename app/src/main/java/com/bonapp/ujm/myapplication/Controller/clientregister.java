@@ -53,7 +53,7 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
                     pass.show();
                 }
                 else{
-                        Contact user = new Contact();
+                        Client user = new Client();
 
                         user.setType("client");
                         user.setUsername(userName);

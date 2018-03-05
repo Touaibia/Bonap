@@ -23,16 +23,21 @@
         android:layout_marginTop="233dp">
 
 
+        <Button
+            android:id="@+id/inscriptionResto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
 
+            android:text="Inscription en tant que Restaurateur" />
 
-
-
-
+        <Button
+            android:id="@+id/inscriptionClient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inscription en tant que Client" />
     </LinearLayout>
-
-
-
-
 
 
 </RelativeLayout>

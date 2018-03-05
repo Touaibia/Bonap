@@ -4,7 +4,7 @@ package com.bonapp.ujm.myapplication.Controller;
  * Created by Smaïl on 23/02/2018.
  */
 
-public class Contact {
+public class Client {
 
     String username,email,password,adress,city,phone,type;
 

@@ -16,7 +16,9 @@ public class Databasehelper extends SQLiteOpenHelper{
 
     private  static  final int DATABASE_VERSION = 1;
     private  static  final String DATABASE_NAME = "bonapp.db";
-    private  static  final String TABLE_NAME = "contacts";
+    private  static  final String TABLE_NAME_CLIENT = "clients";
+    private  static  final String TABLE_NAME_RESTAURANT = "restaurants";
+
     private  static  final String COLUMN_ID ="id";
     private  static  final String COLUMN_TYPE ="type";
     private  static  final String COLUMN_USERNAME ="username";
@@ -26,7 +28,8 @@ public class Databasehelper extends SQLiteOpenHelper{
     private  static  final String COLUMN_CITY ="ville";
     private  static  final String COLUMN_TELEPHONE ="telephone";
 
-    private  static  final String TABLE_CREATE = "create table contacts(id integer primary key not null ,"+"type text not null , username text not null , email text not null , password text not null , adress text not null , ville text not null , telephone text not null";
+    private  static  final String TABLE_CREATE_CLIENT = "create table clients(id integer primary key not null ,"+"type text not null , username text not null , email text not null , password text not null , adress text not null , ville text not null , telephone text not null";
+    private  static  final String TABLE_CREATE_RESTAURANT = "create table restaurants(id integer primary key not null ,"+"type text not null , username text not null , email text not null , password text not null , adress text not null , ville text not null , telephone text not null";
 
 
     public Databasehelper(Context context) {
@@ -36,13 +39,13 @@ public class Databasehelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
+        db.execSQL(TABLE_CREATE_CLIENT);
         this.db = db;
     }
 
-    public String search(String identif){
+    public String searchClient(String identif){
         db = this.getReadableDatabase();
-        String query = " select type, username, password from"+TABLE_NAME;
+        String query = " select type, username, password from"+TABLE_NAME_CLIENT;
         Cursor curseur = db.rawQuery(query,null);
         String mdp,ident,type;
         mdp = "Not Found";
@@ -54,7 +57,7 @@ public class Databasehelper extends SQLiteOpenHelper{
 
                     if(ident.equals(identif)){
                         mdp = curseur.getString(2);
-                        //a voir type = curseur.getString(0);
+
                         break;
 
                     }
@@ -64,7 +67,31 @@ public class Databasehelper extends SQLiteOpenHelper{
         return mdp;
     }
 
-    public void insertContact(Contact conctact){
+    public String searchrRestaurant(String identif){
+        db = this.getReadableDatabase();
+        String query = " select type, username, password from"+TABLE_NAME_RESTAURANT;
+        Cursor curseur = db.rawQuery(query,null);
+        String mdp,ident,type;
+        mdp = "Not Found";
+        if(curseur.moveToFirst()){
+            do {
+
+                ident = curseur.getString(1);
+
+
+                if(ident.equals(identif)){
+                    mdp = curseur.getString(2);
+
+                    break;
+
+                }
+
+            }while (curseur.moveToNext());
+        }
+        return mdp;
+    }
+
+    public void insertContact(Client conctact){
 
         db = this.getWritableDatabase();
 
@@ -77,7 +104,7 @@ public class Databasehelper extends SQLiteOpenHelper{
         values.put(COLUMN_CITY,conctact.getCity());
         values.put(COLUMN_TELEPHONE,conctact.getPhone());
 
-        db.insert(TABLE_NAME,null,values);
+        db.insert(TABLE_NAME_CLIENT,null,values);
         db.close();
 
 
@@ -86,7 +113,7 @@ public class Databasehelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
-        String query = "DROP TABLE IF EXISTS"+TABLE_NAME;
+        String query = "DROP TABLE IF EXISTS"+TABLE_NAME_CLIENT;
         db.execSQL(query);
         this.onCreate(db);
 
