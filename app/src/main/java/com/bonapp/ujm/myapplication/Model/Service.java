@@ -1,5 +1,5 @@
 package com.bonapp.ujm.myapplication.Model;
-
+import java.util.Date;
 /**
  * Created by Davy on 05/03/2018.
  */
