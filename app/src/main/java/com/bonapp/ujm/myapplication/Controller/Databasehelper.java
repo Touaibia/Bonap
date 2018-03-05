@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.bonapp.ujm.myapplication.Model.Client;
+
 /**
  * Created by Smaïl on 23/02/2018.
  */

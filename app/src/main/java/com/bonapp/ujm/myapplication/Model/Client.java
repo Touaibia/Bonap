@@ -1,4 +1,6 @@
-package com.bonapp.ujm.myapplication.Controller;
+package com.bonapp.ujm.myapplication.Model;
+
+import android.location.Address;
 
 /**
  * Created by Smaïl on 23/02/2018.
@@ -6,7 +8,13 @@ package com.bonapp.ujm.myapplication.Controller;
 
 public class Client {
 
-    String username,email,password,adress,city,phone,type;
+    String username;
+    String email;
+    String password;
+    Adresse adress;
+    String city;
+    String phone;
+    String type;
 
     public void setType(String type) {
         this.type = type;
@@ -39,11 +47,11 @@ public class Client {
         return password;
     }
 
-    public void setAdress(String adress) {
+    public void setAdress(Adresse adress) {
         this.adress = adress;
     }
 
-    public String getAdress() {
+    public Adresse getAdress() {
         return adress;
     }
 

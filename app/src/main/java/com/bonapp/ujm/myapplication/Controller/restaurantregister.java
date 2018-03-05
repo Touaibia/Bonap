@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bonapp.ujm.myapplication.Model.Client;
 import com.bonapp.ujm.myapplication.R;
 
 public class restaurantregister extends AppCompatActivity implements View.OnClickListener {
