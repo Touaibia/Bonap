@@ -11,12 +11,13 @@ public class Plat {
     public int id;
     public int image;
     public String nom;
-    public int prix;
+    public float prix;
     public String description;
     public String type;
     public Spinner nb_plats;
 
-    public Plat(int image, String nom, int prix, String description,String type) {
+    
+    public Plat(int image, String nom, float prix, String description,String type) {
         this.image = image;
         this.nom = nom;
         this.prix = prix;
@@ -32,7 +33,7 @@ public class Plat {
         return nom;
     }
 
-    public int getPrix() {
+    public float getPrix() {
         return prix;
     }
 
@@ -48,7 +49,7 @@ public class Plat {
         this.nom = nom;
     }
 
-    public void setPrix(int prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
 
