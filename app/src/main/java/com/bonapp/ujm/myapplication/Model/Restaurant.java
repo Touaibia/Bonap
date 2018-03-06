@@ -149,15 +149,15 @@ public class Restaurant{
         this.desserts = desserts;
     }
 
-    public void ajoutePlat(int image, String nom, int prix,String description, String type ) {
-        this.plats.add(new Plat(image,nom,prix,description,type));
+    public void ajoutePlat(int image, String nom, float prix,String description ) {
+        this.plats.add(new Plat(nom,image,prix,description,1,id));
     }
 
-    public void ajouteEntree(int image, String nom, int prix,String description, String type) {
-        this.entrees.add(new Plat(image,nom,prix,description,type));
+    public void ajouteEntree(int image, String nom, int prix,String description) {
+        this.entrees.add(new Plat(nom,image,prix,description,2,id));
     }
 
-    public void ajouteDessert(int image, String nom, int prix,String description, String type) {
-        this.desserts.add(new Plat(image,nom,prix,description,type));
+    public void ajouteDessert(int image, String nom, int prix,String description) {
+        this.desserts.add(new Plat(nom,image,prix,description,3,id));
     }
 }

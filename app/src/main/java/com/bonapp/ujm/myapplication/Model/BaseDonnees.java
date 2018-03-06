@@ -18,17 +18,14 @@ public class BaseDonnees extends SQLiteOpenHelper {
     private String creerTable;
 
 
-    public BaseDonnees(Context context, String creerTable) {
+    public BaseDonnees(Context context, String create) {
         super(context, DATA_BASE_NAME, null, VERSION);
-        this.creerTable = creerTable;
-        //SQLiteDatabase db = getWritableDatabase();
+        this.creerTable = create;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
-        sqLiteDatabase.execSQL(this.creerTable);
-
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(this.creerTable);
     }
 
     @Override

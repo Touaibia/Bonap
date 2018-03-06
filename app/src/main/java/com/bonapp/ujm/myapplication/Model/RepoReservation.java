@@ -47,7 +47,7 @@ public class RepoReservation extends BaseDonnees {
         DB.insert(TABLE_NAME,null,contVal);
     }
 
-    public void supprimer(long id){
+    public void supprimer(int id){
         DB.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
     }
 

@@ -8,7 +8,7 @@ import android.widget.Spinner;
  */
 
 public class Plat {
-    public long id;
+    public int id;
     public int image;
     public String nom;
     public float prix;
@@ -18,7 +18,7 @@ public class Plat {
     public Spinner nb_plats;
 
 
-    public Plat(long id, int image, String nom, float prix, String description) {
+    public Plat(int id, int image, String nom, float prix, String description) {
         this.id = id;
         this.image = image;
         this.nom = nom;
@@ -75,7 +75,7 @@ public class Plat {
         this.type = type;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

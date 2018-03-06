@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Reservation {
 
-    long id;
+    int id;
     int nb_personnes;
     int service;
     Date date;
@@ -30,7 +30,7 @@ public class Reservation {
     }
 
     //Recuperer les Reserv depuis le compte Retaurant
-    public Reservation(long id, int nb_personnes, int service, String heure, int id_client) {
+    public Reservation(int id, int nb_personnes, int service, String heure, int id_client) {
         this.id = id;
         this.nb_personnes = nb_personnes;
         this.service = service;
@@ -39,7 +39,7 @@ public class Reservation {
     }
 
     //Recuperer les Reserv depuis le compte Cleint
-    public Reservation(long id, int nb_personnes, int service, Date date,String heure, int id_restau) {
+    public Reservation(int id, int nb_personnes, int service, Date date,String heure, int id_restau) {
         this.id = id;
         this.nb_personnes = nb_personnes;
         this.service = service;
@@ -49,11 +49,11 @@ public class Reservation {
     }
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
