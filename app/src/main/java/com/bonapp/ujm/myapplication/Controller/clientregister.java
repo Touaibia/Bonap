@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.Client;
+import com.bonapp.ujm.myapplication.Model.RepoInscription;
 import com.bonapp.ujm.myapplication.R;
 
 
@@ -63,9 +64,11 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
                         user.setAdress(Adress);
                         user.setCity(villle);
                         user.setPhone(Telephone);
-
-                        helper.insertContact(user);
-                    Intent i = new Intent(clientregister.this,Accueil.class);
+                    RepoInscription repoInscription = new RepoInscription(this);
+                    repoInscription.insertContact(user);
+                    repoInscription.close();
+                    Intent i = new Intent(this,Accueil.class);
+                    i.putExtra("client", user);
                     startActivity(i);
                 }
                 break;

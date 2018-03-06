@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/pseudo0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="131dp"
+            android:layout_weight="50"
+            android:text="Pseudo :" />
+
+        <EditText
+            android:id="@+id/pseudo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/pseudo0"
+            android:layout_alignBottom="@+id/pseudo0"
+            android:layout_alignParentEnd="true"
+            android:layout_weight ="50"
+            android:ems="10"
+            android:text="pseudo"
+            android:inputType="text" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="66dp">
+
+        <TextView
+            android:id="@+id/clientemail0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="50"
+            android:text="Email"/>
+
+        <EditText
+            android:id="@+id/clientemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/clientemail0"
+            android:layout_alignBottom="@+id/clientemail0"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="50"
+            android:ems="10"
+            android:inputType="text"
+            android:text="email"/>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
