@@ -9,16 +9,16 @@ public class Menu {
 
 
     public String nom;
-    public int prix;
-    public Plat entre;
+    public float prix;
+    public Plat entree;
     public Plat plat_chaud;
     public Plat dessert;
     public String description;
 
-    public Menu(String nom, int prix, Plat entre, Plat plat_chaud, Plat dessert, String description) {
+    public Menu(String nom, float prix, Plat entree, Plat plat_chaud, Plat dessert, String description) {
         this.nom = nom;
         this.prix = prix;
-        this.entre = entre;
+        this.entree = entree;
         this.plat_chaud = plat_chaud;
         this.dessert = dessert;
         this.description = description;
@@ -36,20 +36,20 @@ public class Menu {
         this.nom = nom;
     }
 
-    public int getPrix() {
+    public float getPrix() {
         return prix;
     }
 
-    public void setPrix(int prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
 
     public Plat getEntre() {
-        return entre;
+        return entree;
     }
 
     public void setEntre(Plat entre) {
-        this.entre = entre;
+        this.entree = entre;
     }
 
     public Plat getPlat_chaud() {

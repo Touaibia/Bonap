@@ -8,20 +8,31 @@ import android.widget.Spinner;
  */
 
 public class Plat {
-    public int id;
+    public long id;
     public int image;
     public String nom;
-    public int prix;
+    public float prix;
     public String description;
-    public String type;
+    public int type;
+    long id_restau;
     public Spinner nb_plats;
 
-    public Plat(int image, String nom, int prix, String description,String type) {
+
+    public Plat(long id, int image, String nom, float prix, String description) {
+        this.id = id;
+        this.image = image;
+        this.nom = nom;
+        this.prix = prix;
+        this.description = description;
+    }
+
+    public Plat(String nom, int image, float prix, String description, int type, long id_restau) {
         this.image = image;
         this.nom = nom;
         this.prix = prix;
         this.description = description;
         this.type = type;
+        this.id_restau=id_restau;
     }
 
     public int getImage() {
@@ -32,7 +43,7 @@ public class Plat {
         return nom;
     }
 
-    public int getPrix() {
+    public float getPrix() {
         return prix;
     }
 
@@ -48,7 +59,7 @@ public class Plat {
         this.nom = nom;
     }
 
-    public void setPrix(int prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
 
@@ -56,15 +67,23 @@ public class Plat {
         this.description = description;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public long getId_restau() {
+        return id_restau;
+    }
+
+    public void setId_restau(long id_restau) {
+        this.id_restau = id_restau;
     }
 }

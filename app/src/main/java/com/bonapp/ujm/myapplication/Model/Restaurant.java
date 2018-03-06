@@ -1,16 +1,6 @@
 package com.bonapp.ujm.myapplication.Model;
 
-import android.content.Context;
-import android.media.Image;
-import android.widget.CheckBox;
-import android.widget.Spinner;
-
-import com.bonapp.ujm.myapplication.Controller.Client;
-import com.bonapp.ujm.myapplication.Controller.fait_la_commande;
-
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.List;
 
 /**
  * Created by Nianfo on 21/01/2018.
@@ -141,14 +131,14 @@ public class Restaurant{
     }
 
     public void ajoutePlat(int image, String nom, int prix,String description, String type ) {
-        this.plats.add(new Plat(image,nom,prix,description,type));
+       // this.plats.add(new Plat(image,nom,prix,description,type));
     }
 
     public void ajouteEntree(int image, String nom, int prix,String description, String type) {
-        this.entrees.add(new Plat(image,nom,prix,description,type));
+        //this.entrees.add(new Plat(image,nom,prix,description,type));
     }
 
     public void ajouteDessert(int image, String nom, int prix,String description, String type) {
-        this.desserts.add(new Plat(image,nom,prix,description,type));
+       // this.desserts.add(new Plat(image,nom,prix,description,type));
     }
 }

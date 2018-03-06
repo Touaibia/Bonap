@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.widget.Toast;
 
-import com.bonapp.ujm.myapplication.Controller.Client;
-
 import java.util.ArrayList;
 import java.util.List;
 

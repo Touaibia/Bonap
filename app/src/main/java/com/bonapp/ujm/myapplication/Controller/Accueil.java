@@ -3,7 +3,6 @@ package com.bonapp.ujm.myapplication.Controller;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,6 +24,7 @@ import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.BaseDonnees;
+import com.bonapp.ujm.myapplication.Model.Client;
 import com.bonapp.ujm.myapplication.Model.RepoClientRestoFavori;
 import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;

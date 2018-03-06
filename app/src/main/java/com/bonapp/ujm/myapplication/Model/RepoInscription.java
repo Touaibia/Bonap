@@ -5,9 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.widget.Toast;
 
-import com.bonapp.ujm.myapplication.Controller.Client;
-import com.bonapp.ujm.myapplication.Controller.Client;
-
 /**
  * Created by Nianfo on 04/03/2018.
  */

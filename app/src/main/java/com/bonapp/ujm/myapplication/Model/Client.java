@@ -1,4 +1,4 @@
-package com.bonapp.ujm.myapplication.Controller;
+package com.bonapp.ujm.myapplication.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
