@@ -16,18 +16,26 @@ public class BaseDonnees extends SQLiteOpenHelper {
     public static final String DATA_BASE_NAME = "bonapp.db ";
     public static final int VERSION = 1;
     private String creerTable;
-
+    private  static  final String TABLE_CREATE =
+            "create table restaurant0(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "nom TEXT, " +
+                    "email TEXT, " +
+                    "password TEXT, " +
+                    "adresse TEXT, " +
+                    "telephone TEXT);";
 
     public BaseDonnees(Context context, String creerTable) {
         super(context, DATA_BASE_NAME, null, VERSION);
         this.creerTable = creerTable;
-        //SQLiteDatabase db = getWritableDatabase();
+       //SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL(this.creerTable);
+
 
     }
 
@@ -44,21 +52,4 @@ public class BaseDonnees extends SQLiteOpenHelper {
         DB.close();
     }
 
-    public boolean insertResto(String nom,String descript, String img){
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("",nom);
-       // contentValues.put(IMAGE,img);
-        if(DB.insert("essai",null,contentValues)==-1){
-
-        return false;
-        }
-        else return true;
-    }
-
-    /*public Cursor getAllResto(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        //Cursor cursor = DB.rawQuery("select * from "+RESTAURANT_TABLE_NAME,null);
-        return cursor;
-    }*/
 }

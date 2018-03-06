@@ -5,7 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.widget.Toast;
 
-import com.bonapp.ujm.myapplication.Controller.Contact;
+import com.bonapp.ujm.myapplication.Controller.Client;
+import com.bonapp.ujm.myapplication.Controller.Client;
 
 /**
  * Created by Nianfo on 04/03/2018.
@@ -33,7 +34,7 @@ public class RepoInscription {
                     "password TEXT, " +
                     "adress TEXT, " +
                     "ville TEXT, " +
-                    "telephone TEXT)";
+                    "telephone TEXT);";
 
 
     public RepoInscription(Context context){
@@ -56,7 +57,7 @@ public class RepoInscription {
 
 
 
-    public void insertContact(Contact conctact){
+    public void insertContact(Client conctact){
         ContentValues values = new ContentValues();
         values.put(COLUMN_TYPE,conctact.getType());
         values.put(COLUMN_USERNAME,conctact.getUsername());

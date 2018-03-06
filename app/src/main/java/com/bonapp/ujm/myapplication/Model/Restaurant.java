@@ -5,7 +5,7 @@ import android.media.Image;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
-import com.bonapp.ujm.myapplication.Controller.Contact;
+import com.bonapp.ujm.myapplication.Controller.Client;
 import com.bonapp.ujm.myapplication.Controller.fait_la_commande;
 
 import java.util.ArrayList;

@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.BaseDonnees;
+import com.bonapp.ujm.myapplication.Model.RepoClientRestoFavori;
+import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
 import com.bonapp.ujm.myapplication.Model.SuggestionRestoAdapter;
@@ -60,29 +62,24 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
         List<Restaurant> list = new ArrayList<Restaurant>();
-        //db = new BaseDonnees(this);
-       // db.open();
-        // insertion des données
-       // db.insertResto("Resto 1","Since 1889,Italien",""+R.drawable.planchecharcuterie);
-        //db.insertResto("Resto 2","Since 1889,Italien",""+R.drawable.planchecharcuterie);
-       /*if( db.insertResto("resto 3","Since 1879,Italien",""+R.drawable.icons8fork50)){
-           Toast.makeText(this,"Insertion ok",Toast.LENGTH_LONG).show();
-        }
-        else {
-           Toast.makeText(this,"echec d'insertion",Toast.LENGTH_LONG).show();
-       }*/
 
-        // recuperation des données dans la base "pas operationnel pour le moment
-       /* Cursor cursor = db.getAllResto();
-        while (cursor.moveToNext()){
-            list.add(new Restaurant(cursor.getString(1),cursor.getInt(2)));
-        }*/
 
-        Toast.makeText(this,"ok1",Toast.LENGTH_LONG);
         Restaurant R1 = new Restaurant("Rest 1","email","1234",
                 new Adresse("2","rue","Camille Colard","42000"),"0638927926");
-        R1.setImage(R.drawable.icons8couverts50);
-
+        Restaurant R2 = new Restaurant("Rest 3","email","1234",
+                new Adresse("2","rue","Camille Colard","42000"),"0638927926");
+        RepoRestaurant repo = new RepoRestaurant(this);
+        repo.ajouteRestaurant(R1);
+        repo.ajouteRestaurant(R2);
+        //repo.close();
+        RepoClientRestoFavori rc = new RepoClientRestoFavori(this);
+        rc.ajouteResto(1,2);
+        //rc.close();
+        /*List<Restaurant> l = repo.getAllResto();
+        for (int i =0 ;i<l.size();i++) {
+            l.get(i).setImage(R.drawable.icons8couverts50);
+            list.add(l.get(i));
+        }*/
 
         list.add(R1);
 
@@ -125,7 +122,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                                 .position(latLng).title(str1)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         );
-                        gMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+                        gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
 
                     } catch (IOException e) {
@@ -169,7 +166,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         str1 += addresses1.get(0).getFeatureName();
                         gMap.addMarker(new MarkerOptions().position(latLng).title(str1).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                         ));
-                        gMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+                        gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
 
                     } catch (IOException e) {
@@ -233,6 +230,20 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
             case R.id.Reservation:
                 startActivity(new Intent(this,MesReservations.class));
                 return  true;
+            case R.id.Reglage:
+                AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
+                View view2 = getLayoutInflater().inflate(R.layout.parametre, null);
+                builder.setTitle("Parametre");
+                TextView pseudo = view2.findViewById(R.id.pseudo);
+                TextView email = view2.findViewById(R.id.clientemail);
+                Intent intent = getIntent();
+                Client client = (Client) intent.getSerializableExtra("client");
+                pseudo.setText(client.getUsername());
+                email.setText(client.getEmail());
+                builder.setView(view2);
+
+                builder.create().show();
+                return true;
 
 
         }
