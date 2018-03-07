@@ -11,6 +11,10 @@ public class Adresse {
     public String intitule;
     public String code_postal;
 
+    public Adresse(){
+
+    }
+
     public Adresse(String numero, String type_voie, String intitule, String code_postal) {
         this.id = id;
         this.numero = numero;

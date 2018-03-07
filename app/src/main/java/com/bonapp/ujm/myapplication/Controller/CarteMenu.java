@@ -11,8 +11,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bonapp.ujm.myapplication.Model.CarteMenuPlatAdapter;
+import com.bonapp.ujm.myapplication.Model.Plat;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarteMenu extends AppCompatActivity implements View.OnClickListener {
 

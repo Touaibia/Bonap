@@ -1,16 +1,6 @@
 package com.bonapp.ujm.myapplication.Model;
 
-import android.content.Context;
-import android.media.Image;
-import android.widget.CheckBox;
-import android.widget.Spinner;
-
-
-import com.bonapp.ujm.myapplication.Controller.fait_la_commande;
-
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.List;
 
 /**
  * Created by Nianfo on 21/01/2018.
@@ -18,13 +8,13 @@ import java.util.List;
 
 public class Restaurant{
     public int id;
-    public String type;
     public String nom;
     public String email;
     public String mot_passe;
     public Adresse adresse;
     public String tel;
     public String description;
+    public   String type;
     public int image;
     public ArrayList<TypeCuisine> typeCuisines=  new ArrayList<>();
     public ArrayList<Plat> plats=new ArrayList<>();
@@ -41,14 +31,7 @@ public class Restaurant{
         this.mot_passe = mot_passe;
         this.adresse = adresse;
         this.tel = tel;
-    }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public int getId() {
@@ -149,15 +132,19 @@ public class Restaurant{
         this.desserts = desserts;
     }
 
-    public void ajoutePlat(int image, String nom, float prix,String description ) {
-        this.plats.add(new Plat(nom,image,prix,description,1,id));
+    public void ajoutePlat(int image, String nom, int prix,String description, String type ) {
+        this.plats.add(new Plat(0,image,nom,prix,description));
     }
 
-    public void ajouteEntree(int image, String nom, int prix,String description) {
-        this.entrees.add(new Plat(nom,image,prix,description,2,id));
+    public void ajouteEntree(int image, String nom, int prix,String description, String type) {
+        this.entrees.add(new Plat(0,image,nom,prix,description));
     }
 
-    public void ajouteDessert(int image, String nom, int prix,String description) {
-        this.desserts.add(new Plat(nom,image,prix,description,3,id));
+    public void ajouteDessert(int image, String nom, float prix,String description, String type) {
+       this.desserts.add(new Plat(0,image,nom,prix,description));
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

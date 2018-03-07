@@ -3,6 +3,7 @@ package com.bonapp.ujm.myapplication.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ import java.util.List;
  */
 
 public class RepoRestaurant {
-    BaseDonnees db;
+    //BaseDonnees db;
     Context context;
     String TABLE = "restaurant";
-
+    BaseDonnees db;
     private String TABLE_CREATE =
             "CREATE TABLE  restaurant("+
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -28,10 +29,11 @@ public class RepoRestaurant {
 
 
     public RepoRestaurant(Context context){
-       Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
-        db = new BaseDonnees(context, TABLE_CREATE);
+       //Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
+        db = new BaseDonnees(context, TABLE_CREATE,"restaurant");
         //db.DB.execSQL(TABLE_CREATE);
         this.context = context;
+        this.db = db;
         db.open();
 
     }
@@ -45,12 +47,7 @@ public class RepoRestaurant {
         contentValues.put("adresse",r.getAdresse().getId());
         contentValues.put("telephone",r.getTel());
         //Toast.makeText(context,r.getNom()+" "+r.getEmail()+" "+r.getMot_passe()+" "+r.getAdresse().getId()+" "+r.getTel(),Toast.LENGTH_LONG).show();
-        if(db.DB.insert(TABLE,null,contentValues)==-1){
-
-            Toast.makeText(context,"echec d'insertion restaurant",Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context,"restaurant insertion ok",Toast.LENGTH_LONG).show();
-        }
+        db.DB.insert("restaurant",null,contentValues);
 
     }
 
@@ -58,11 +55,12 @@ public class RepoRestaurant {
         Cursor cursor = db.DB.rawQuery("select* from restaurant",null);
         List idt = new ArrayList();
         while(cursor.moveToNext()){
-            Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
-            ad.moveToNext();
-            Adresse d = new Adresse(ad.getString(2),ad.getString(3),ad.getString(4),ad.getString(5));
-            idt.add(new Restaurant(cursor.getString(2),cursor.getString(3),cursor.getString(4),d,
-                    cursor.getString(6)));
+            //Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
+           // ad.moveToNext();
+           // Adresse d = new Adresse(ad.getString(2),ad.getString(3),ad.getString(4),ad.getString(5));
+            idt.add(new Restaurant(cursor.getString(1),cursor.getString(2),cursor.getString(3),
+                    new Adresse(),
+                    cursor.getString(5)));
         }
         return idt;
     }

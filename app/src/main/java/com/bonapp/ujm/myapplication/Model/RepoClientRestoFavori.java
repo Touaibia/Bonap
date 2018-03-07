@@ -3,6 +3,7 @@ package com.bonapp.ujm.myapplication.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -13,32 +14,33 @@ import java.util.List;
  */
 
 public class RepoClientRestoFavori {
-    BaseDonnees db;
+    //BaseDonnees db;
     Context context;
-    String TABLE_CREATE = "create table clientResto(id integer primary key autoincrement, " +
+    BaseDonnees db;
+    String TABLE_CREATE =
+            "create table clientResto(" +
+            "id integer primary key autoincrement, " +
             "id_client text, " +
             "id_resto text);";
 
-    public RepoClientRestoFavori(Context context){
-        Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
-        db = new BaseDonnees(context, TABLE_CREATE);
+    public RepoClientRestoFavori(Context context ){
+    //Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
+        db = new BaseDonnees(context, TABLE_CREATE,"clientResto");
         this.context = context;
         db.open();
 
     }
     public void ajouteResto(int r, int c){
+        //String insert = "insert into clientResto(id_client,id_resto) values('ok','insertion')";
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id_client","rrrr");
-        contentValues.put("id_resto","rrr");
-       if( db.DB.insert("clientResto",null,contentValues)==-1){
-           Toast.makeText(context,"echec d'insertion restau client",Toast.LENGTH_LONG).show();
-       }else {
-           Toast.makeText(context,"echec d'insertion restau client",Toast.LENGTH_LONG).show();
-       }
+        contentValues.put("id_client","rrggg");
+        contentValues.put("id_resto","rrressai");
+
+        db.DB.insert("clientResto",null,contentValues);
     }
     public List<Restaurant> getAllResto(int c){
-        Cursor cursor = db.DB.rawQuery("select* from restaurant" +
-                " where id in (select id_resto from "+TABLE_CREATE+" where ic_client ="+c+")",null);
+        Cursor cursor = db.DB.rawQuery("select* from restaurant",null);
+               // " where id in (select id_resto from clientResto where ic_client ="+c+")",null);
         List idt = new ArrayList();
         while(cursor.moveToNext()){
             Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);

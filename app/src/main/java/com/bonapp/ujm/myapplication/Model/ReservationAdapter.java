@@ -77,7 +77,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         public void display(Reservation rest){
             current = rest;
             nom.setText(rest.restaurant.nom);
-            date.setText(rest.date);
+            //date.setText(rest.date);
            // nbper.setText(rest.nb_personnes);
            // jour.setText(rest.jour);
         }

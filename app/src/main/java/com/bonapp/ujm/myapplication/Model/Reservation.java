@@ -15,6 +15,7 @@ public class Reservation {
     String heure;
     int id_restau;
     int id_client;
+    Restaurant restaurant;
 
     public Reservation() {
     }

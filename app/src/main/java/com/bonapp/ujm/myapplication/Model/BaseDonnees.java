@@ -12,25 +12,45 @@ import android.widget.Toast;
  */
 
 public class BaseDonnees extends SQLiteOpenHelper {
-    SQLiteDatabase DB ;
+    public SQLiteDatabase DB ;
     public static final String DATA_BASE_NAME = "bonapp.db ";
-    public static final int VERSION = 1;
+    private static final int VERSION =6;
     private String creerTable;
+    private String tableName;
+   /* private String TABLE_CREATE = "create table clientResto(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_client TEXT, " +
+                    "id_resto TEXT)";
+    private String TABLE_CREATE1 = "create table restaurant("+
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "nom TEXT, " +
+                    "email TEXT, " +
+                    "password TEXT, " +
+                    "adresse INTEGER, " +
+                    "telephone TEXT)";*/
 
 
-    public BaseDonnees(Context context, String create) {
+    public BaseDonnees(Context context, String creerTable,String tableName) {
         super(context, DATA_BASE_NAME, null, VERSION);
-        this.creerTable = create;
+        this.creerTable = creerTable;
+        this.tableName = tableName;
+       //SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(this.creerTable);
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+        sqLiteDatabase.execSQL(this.creerTable);
+        //sqLiteDatabase.execSQL(TABLE_CREATE);
+        //sqLiteDatabase.execSQL(TABLE_CREATE1);
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+this.creerTable);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+tableName);
+           // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+"restaurant");
             onCreate(sqLiteDatabase);
     }
 
@@ -41,21 +61,4 @@ public class BaseDonnees extends SQLiteOpenHelper {
         DB.close();
     }
 
-    public boolean insertResto(String nom,String descript, String img){
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("",nom);
-       // contentValues.put(IMAGE,img);
-        if(DB.insert("essai",null,contentValues)==-1){
-
-        return false;
-        }
-        else return true;
-    }
-
-    /*public Cursor getAllResto(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        //Cursor cursor = DB.rawQuery("select * from "+RESTAURANT_TABLE_NAME,null);
-        return cursor;
-    }*/
 }

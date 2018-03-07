@@ -14,9 +14,8 @@
 
     <ImageView
         android:id="@+id/imagePlat"
-        android:layout_width="match_parent"
+        android:layout_width="45dp"
         android:layout_height="100dp"
-        android:layout_weight="80"
         android:autoSizeTextType="uniform"
         android:scaleType="centerCrop"
         android:src="@drawable/planchecharcuterie"
@@ -24,12 +23,10 @@
 
     <TextView
         android:id="@+id/nomPlat"
-        android:layout_width="match_parent"
+        android:layout_width="337dp"
         android:layout_height="100dp"
-        android:layout_weight="20"
         android:entries="@array/nb_personne"
         android:gravity="center"
-        android:text="PlancheCharcuterie"
-        android:textSize="20dp" />
+        android:text="PlancheCharcuterie" />
 
 </LinearLayout>
