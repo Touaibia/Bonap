@@ -83,7 +83,7 @@ public class RepoPlat extends BaseDonnees {
 
     public Plat selectionnerPlat(int id){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NOM +", "+ IMAGE +", "+ PRIX +", "+ DESCRIP +
-                " FROM "+ TABLE_NAME +"where id = ?", new String[]{""+id} );
+                " FROM "+ TABLE_NAME +" where id = ? ", new String[]{""+id} );
 
         int num = c.getInt(0);
         String nom = c.getString(1);
