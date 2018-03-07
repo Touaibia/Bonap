@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class RepoInscription {
 
-    BaseDonnees db;
+    public BaseDonnees db;
     Context context;
     private  static  final String TABLE_NAME = "contacts";
     private  static  final String COLUMN_ID ="id";
@@ -36,7 +36,7 @@ public class RepoInscription {
 
     public RepoInscription(Context context){
         Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
-       db = new BaseDonnees(context, TABLE_CREATE);
+       db = new BaseDonnees(context, TABLE_CREATE,TABLE_NAME);
        this.context = context;
        db.open();
 

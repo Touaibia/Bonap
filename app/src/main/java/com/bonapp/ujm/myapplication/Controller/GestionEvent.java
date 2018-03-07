@@ -24,7 +24,7 @@ public class GestionEvent extends MenuManagerActivity {
         //Affectation de la liste des publication
         RecyclerView rv = (RecyclerView) findViewById(R.id.les_reserv);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new LesResevationsJourAdapter());
+        rv.setAdapter(new LesResevationsJourAdapter(lesReserv));
     }
 
     @Override

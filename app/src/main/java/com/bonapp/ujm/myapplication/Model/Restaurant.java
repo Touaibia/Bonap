@@ -14,6 +14,7 @@ public class Restaurant{
     public Adresse adresse;
     public String tel;
     public String description;
+    public   String type;
     public int image;
     public ArrayList<TypeCuisine> typeCuisines=  new ArrayList<>();
     public ArrayList<Plat> plats=new ArrayList<>();
@@ -30,6 +31,7 @@ public class Restaurant{
         this.mot_passe = mot_passe;
         this.adresse = adresse;
         this.tel = tel;
+
     }
 
     public int getId() {
@@ -131,14 +133,18 @@ public class Restaurant{
     }
 
     public void ajoutePlat(int image, String nom, int prix,String description, String type ) {
-       // this.plats.add(new Plat(image,nom,prix,description,type));
+        this.plats.add(new Plat(0,image,nom,prix,description));
     }
 
     public void ajouteEntree(int image, String nom, int prix,String description, String type) {
-        //this.entrees.add(new Plat(image,nom,prix,description,type));
+        this.entrees.add(new Plat(0,image,nom,prix,description));
     }
 
-    public void ajouteDessert(int image, String nom, int prix,String description, String type) {
-       // this.desserts.add(new Plat(image,nom,prix,description,type));
+    public void ajouteDessert(int image, String nom, float prix,String description, String type) {
+       this.desserts.add(new Plat(0,image,nom,prix,description));
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

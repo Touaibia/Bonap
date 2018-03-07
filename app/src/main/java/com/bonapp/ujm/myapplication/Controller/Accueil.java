@@ -3,6 +3,7 @@ package com.bonapp.ujm.myapplication.Controller;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -68,20 +69,27 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 new Adresse("2","rue","Camille Colard","42000"),"0638927926");
         Restaurant R2 = new Restaurant("Rest 3","email","1234",
                 new Adresse("2","rue","Camille Colard","42000"),"0638927926");
+        //BaseDonnees db = new BaseDonnees(this);
+        //db.open();
         RepoRestaurant repo = new RepoRestaurant(this);
         repo.ajouteRestaurant(R1);
-        repo.ajouteRestaurant(R2);
+        //repo.ajouteRestaurant(R2);
         //repo.close();
-        RepoClientRestoFavori rc = new RepoClientRestoFavori(this);
-        rc.ajouteResto(1,2);
-        //rc.close();
-        /*List<Restaurant> l = repo.getAllResto();
+        //RepoClientRestoFavori rc = new RepoClientRestoFavori(this);
+        //rc.ajouteResto(1,2);
+       /* Cursor cursor = db.DB.rawQuery("select* from clientResto",null);
+        while (cursor.moveToNext()){
+            Toast.makeText(getApplicationContext(), cursor.getString(2), Toast.LENGTH_LONG).show();
+
+        }*/
+       // rc.close();
+        List<Restaurant> l = repo.getAllResto();
         for (int i =0 ;i<l.size();i++) {
             l.get(i).setImage(R.drawable.icons8couverts50);
             list.add(l.get(i));
-        }*/
+        }
 
-        list.add(R1);
+       // list.add(R1);
 
         RecyclerView listv = (RecyclerView) findViewById(R.id.list);
 
@@ -96,6 +104,116 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
 
 
+
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.filtreRech:
+                AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
+                View view2 = getLayoutInflater().inflate(R.layout.layout_filtre, null);
+                TextView nview = (TextView) view2.findViewById(R.id.Position);
+                Spinner spd = (Spinner) view.findViewById(R.id.distance);
+                Button buttonfiltre = (Button) view2.findViewById(R.id.buttonFiltre);
+                builder.setTitle(" Filtre votre rechercher");
+                builder.setView(view2);
+
+                builder.create().show();
+                break;
+            case R.id.Reglage:
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(Accueil.this);
+                View view3 = getLayoutInflater().inflate(R.layout.parametre, null);
+                builder2.setTitle("Parametre");
+                TextView pseudo = view3.findViewById(R.id.pseudo);
+                TextView email = view3.findViewById(R.id.clientemail);
+                Intent intent = getIntent();
+                //Client client = (Client) intent.getSerializableExtra("client");
+               String us = intent.getStringExtra("client");
+                pseudo.setText(us);
+                //email.setText(client.getEmail());
+                builder2.setView(view3);
+
+                builder2.create().show();
+                break;
+        }
+    }
+    @Override
+   public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.accueil:
+                startActivity(new Intent(this,Accueil.class));
+                return  true;
+            case R.id.profile:
+                startActivity(new Intent(this,profilclient.class));
+                return  true;
+            case R.id.Reservation:
+                startActivity(new Intent(this,MesReservations.class));
+                return  true;
+            case R.id.Reglage:
+                AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
+                View view2 = getLayoutInflater().inflate(R.layout.parametre, null);
+                builder.setTitle("Parametre");
+                TextView pseudo = view2.findViewById(R.id.pseudo);
+                TextView email = view2.findViewById(R.id.clientemail);
+                Intent intent = getIntent();
+               // Client client = (Client) intent.getSerializableExtra("client");
+                String us = intent.getStringExtra("client");
+                pseudo.setText(us);
+                //pseudo.setText(us);
+               // email.setText(client.getEmail());
+                builder.setView(view2);
+
+                builder.create().show();
+                return true;
+
+
+        }
+
+        return super.onOptionsItemSelected(item);
+   }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gMap = googleMap;
+
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+
+        try {
+            int i;
+            for(i=0;i<adress.length;i++) {
+                List<Address> addresses = null;
+
+                    addresses = geocoder.getFromLocationName(adress[i], 1);
+
+                double ltde = addresses.get(0).getLatitude();
+                final double lont = addresses.get(0).getLongitude();
+                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adress[i]));
+                marker.setTag(0);
+                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
+                        return false;
+                    }
+                });
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        localisationClient();
+    }
+
+    public void localisationClient(){
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         if (locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER)) {
@@ -193,93 +311,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
             });
 
         }
-
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.filtreRech:
-                AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
-                View view2 = getLayoutInflater().inflate(R.layout.layout_filtre, null);
-                TextView nview = (TextView) view2.findViewById(R.id.Position);
-                Spinner spd = (Spinner) view.findViewById(R.id.distance);
-                Button buttonfiltre = (Button) view2.findViewById(R.id.buttonFiltre);
-                builder.setTitle(" Filtre votre rechercher");
-                builder.setView(view2);
-
-                builder.create().show();
-                break;
-        }
-    }
-    @Override
-   public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.accueil:
-                startActivity(new Intent(this,Accueil.class));
-                return  true;
-            case R.id.profile:
-                startActivity(new Intent(this,profilclient.class));
-                return  true;
-            case R.id.Reservation:
-                startActivity(new Intent(this,MesReservations.class));
-                return  true;
-            case R.id.Reglage:
-                AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
-                View view2 = getLayoutInflater().inflate(R.layout.parametre, null);
-                builder.setTitle("Parametre");
-                TextView pseudo = view2.findViewById(R.id.pseudo);
-                TextView email = view2.findViewById(R.id.clientemail);
-                Intent intent = getIntent();
-                Client client = (Client) intent.getSerializableExtra("client");
-                pseudo.setText(client.getUsername());
-                email.setText(client.getEmail());
-                builder.setView(view2);
-
-                builder.create().show();
-                return true;
-
-
-        }
-
-        return super.onOptionsItemSelected(item);
-   }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        gMap = googleMap;
-
-        Geocoder geocoder = new Geocoder(getApplicationContext());
-
-        try {
-            int i;
-            for(i=0;i<adress.length;i++) {
-                List<Address> addresses = null;
-
-                    addresses = geocoder.getFromLocationName(adress[i], 1);
-
-                double ltde = addresses.get(0).getLatitude();
-                final double lont = addresses.get(0).getLongitude();
-                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adress[i]));
-                marker.setTag(0);
-                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-                });
-        }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
 

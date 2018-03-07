@@ -27,7 +27,7 @@ public class RepoPlat extends BaseDonnees {
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     public RepoPlat(Context context, String creerTable) {
-        super(context, creerTable);
+        super(context,TABLE_CREATE,TABLE_NAME);
     }
 
     public void ajouter(Plat pl){

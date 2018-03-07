@@ -1,6 +1,7 @@
 package com.bonapp.ujm.myapplication.Controller;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -66,9 +67,14 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
                         user.setPhone(Telephone);
                     RepoInscription repoInscription = new RepoInscription(this);
                     repoInscription.insertContact(user);
-                    repoInscription.close();
+
+
                     Intent i = new Intent(this,Accueil.class);
-                    i.putExtra("client", user);
+                    Cursor cursor = repoInscription.db.DB.rawQuery("select* from contacts where username= userName",null);
+                    while(cursor.moveToNext()){
+                        i.putExtra("client", cursor.getString(2));
+                    }
+                    repoInscription.close();
                     startActivity(i);
                 }
                 break;
