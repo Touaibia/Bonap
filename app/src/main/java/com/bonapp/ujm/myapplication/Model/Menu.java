@@ -6,16 +6,26 @@ package com.bonapp.ujm.myapplication.Model;
 
 public class Menu {
     public int id;
-
-
     public String nom;
     public float prix;
     public Plat entree;
     public Plat plat_chaud;
     public Plat dessert;
     public String description;
+    public int id_restau;
 
-    public Menu(String nom, float prix, Plat entree, Plat plat_chaud, Plat dessert, String description) {
+    public Menu(String nom, float prix, Plat entree, Plat plat_chaud, Plat dessert, String description, int id_restau) {
+        this.nom = nom;
+        this.prix = prix;
+        this.entree = entree;
+        this.plat_chaud = plat_chaud;
+        this.dessert = dessert;
+        this.description = description;
+        this.id_restau = id_restau;
+    }
+
+    public Menu(int id, String nom, float prix, Plat entree, Plat plat_chaud, Plat dessert, String description) {
+        this.id = id;
         this.nom = nom;
         this.prix = prix;
         this.entree = entree;
@@ -44,11 +54,11 @@ public class Menu {
         this.prix = prix;
     }
 
-    public Plat getEntre() {
+    public Plat getEntree() {
         return entree;
     }
 
-    public void setEntre(Plat entre) {
+    public void setEntree(Plat entre) {
         this.entree = entre;
     }
 
@@ -74,5 +84,13 @@ public class Menu {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId_restau() {
+        return id_restau;
+    }
+
+    public void setId_restau(int id_restau) {
+        this.id_restau = id_restau;
     }
 }
