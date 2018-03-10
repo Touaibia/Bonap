@@ -31,7 +31,7 @@ public class RepoMenu extends BaseDonnees {
 
     public RepoMenu(Context context) {
 
-        super(context, TABLE_CREATE);
+        super(context, TABLE_CREATE,TABLE_NAME);
         super.onCreate(DB);
         this.context = context;
     }
@@ -85,11 +85,11 @@ public class RepoMenu extends BaseDonnees {
             float prix = c.getFloat(5);
             String descrip = c.getString(6);
 
-            Plat entree = repoPlat.selectionnerPlat(id_entree);
-            Plat chaud = repoPlat.selectionnerPlat(id_chaud);
-            Plat dessert = repoPlat.selectionnerPlat(id_dessert);
+           // Plat entree = repoPlat.selectionnerPlat(id_entree);
+            // Plat chaud = repoPlat.selectionnerPlat(id_chaud);
+           // Plat dessert = repoPlat.selectionnerPlat(id_dessert);
 
-            lesMenus.add(new Menu(num,nom,prix,entree,chaud,dessert,descrip));
+           // lesMenus.add(new Menu(num,nom,prix,entree,chaud,dessert,descrip));
         }
 
         return lesMenus;

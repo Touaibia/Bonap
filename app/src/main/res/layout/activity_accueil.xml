@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="#d16a4d"
     tools:context="com.bonapp.ujm.myapplication.Controller.Accueil">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,7 +66,7 @@
             android:layout_height="match_parent"
             android:color="@color/colorPrimaryDark"
             android:paddingBottom="10dp" />
-    </LinearLayout>
+    </LinearLayout>0
 
-
+</ScrollView>
 </android.support.constraint.ConstraintLayout>

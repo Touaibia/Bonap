@@ -69,6 +69,7 @@
         <activity android:name=".Controller.GestionEvent"></activity>
         <activity android:name=".Controller.restaurantregister"></activity>
         <activity android:name=".Controller.clientregister"></activity>
+        <activity android:name=".Controller.profilclient"></activity>
     </application>
 
 </manifest>

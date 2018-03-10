@@ -1,6 +1,7 @@
 package com.bonapp.ujm.myapplication.Controller;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -128,21 +129,14 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
                 builder.create().show();
                 break;
-            case R.id.Reglage:
-                AlertDialog.Builder builder2 = new AlertDialog.Builder(Accueil.this);
-                View view3 = getLayoutInflater().inflate(R.layout.parametre, null);
-                builder2.setTitle("Parametre");
-                TextView pseudo = view3.findViewById(R.id.pseudo);
-                TextView email = view3.findViewById(R.id.clientemail);
-                Intent intent = getIntent();
-                //Client client = (Client) intent.getSerializableExtra("client");
-               String us = intent.getStringExtra("client");
-                pseudo.setText(us);
-                //email.setText(client.getEmail());
-                builder2.setView(view3);
+            case R.id.buttonFiltre:
+                Spinner distance = (Spinner) findViewById(R.id.distance);
+                String d = distance.getTag().toString();
+                Toast.makeText(this, d, Toast.LENGTH_LONG).show();
 
-                builder2.create().show();
                 break;
+
+
         }
     }
     @Override
@@ -183,7 +177,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
-
+        final Context  c = this;
         Geocoder geocoder = new Geocoder(getApplicationContext());
 
         try {
@@ -200,7 +194,13 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
-                        Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+                        View resto = getLayoutInflater().inflate(R.layout.visiteresto,null);
+                        builder.setView(resto);
+                        builder.create().show();
+
+                        //Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
                         return false;
                     }
                 });

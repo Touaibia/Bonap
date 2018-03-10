@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="239dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:gravity="start|center"
+            android:text="Au Bureau villars"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            android:gravity="start|center"
+            android:text="Cuisine Francais, Italien"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#15590b"
+            android:gravity="start|center"
+            android:textColor="@color/white"
+            android:text="page du restaurant"
+            android:textSize="19dp"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="192dp" />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
