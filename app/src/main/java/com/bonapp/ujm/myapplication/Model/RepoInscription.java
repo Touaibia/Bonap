@@ -19,9 +19,13 @@ public class RepoInscription {
     private  static  final String COLUMN_USERNAME ="username";
     private  static  final String COLUMN_EMAIL = "email";
     private  static  final String COLUMN_PASSWORD ="password";
-    private  static  final String COLUMN_ADRESS = "adress";
-    private  static  final String COLUMN_CITY ="ville";
+   // private  static  final String COLUMN_ADRESS = "adress";
+   // private  static  final String COLUMN_CITY ="ville";
     private  static  final String COLUMN_TELEPHONE ="telephone";
+    private  static  final String COLUMN_NUMERORUE="numrue";
+    private  static  final String COLUMN_NOMRUE = "nomrue";
+    private  static  final String COLUMN_CODEPOSTAL = "codepostal";
+
     private  static  final String TABLE_CREATE =
             "create table contacts(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -29,9 +33,9 @@ public class RepoInscription {
                     "username TEXT, " +
                     "email TEXT, " +
                     "password TEXT, " +
-                    "adress TEXT, " +
-                    "ville TEXT, " +
-                    "telephone TEXT);";
+                    "numrue TEXT, " +
+                    "nomrue TEXT, " +
+                    "codepostal TEXT);";
 
 
     public RepoInscription(Context context){
@@ -60,8 +64,9 @@ public class RepoInscription {
         values.put(COLUMN_USERNAME,conctact.getUsername());
         values.put(COLUMN_EMAIL,conctact.getEmail());
         values.put(COLUMN_PASSWORD,conctact.getPassword());
-        values.put(COLUMN_ADRESS,conctact.getAdress());
-        values.put(COLUMN_CITY,conctact.getCity());
+        values.put(COLUMN_NUMERORUE,conctact.getAdresse().getNumero());
+        values.put(COLUMN_NOMRUE,conctact.getAdresse().getIntitule());
+        values.put(COLUMN_CODEPOSTAL,conctact.getAdresse().getCode_postal());
         values.put(COLUMN_TELEPHONE,conctact.getPhone());
 
         if(db.DB.insert(TABLE_NAME,null,values)==-1){

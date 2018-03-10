@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#d16a4d"
-    tools:context="com.bonapp.ujm.myapplication.Controller.clientregister">
 <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -53,7 +48,6 @@
                 android:layout_marginBottom="30dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"/>
-
 
             <EditText
                 android:layout_width="match_parent"
@@ -122,6 +116,7 @@
 
                 />
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,33 +124,66 @@
                 android:weightSum="1">
 
                 <EditText
-                    android:layout_width="20dp"
+                    android:id="@+id/ClientNumeRue"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
-                    android:hint="Adress"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="0.6"
+                    android:background="@drawable/roundedwhite"
+                    android:drawablePadding="5dp"
+                    android:hint="Numero "
+                    android:paddingStart="10dp"
+                    android:textSize="14dp" />
+
+
+                <Spinner
+
+                    android:id="@+id/ClientTypeVoix"
+                    android:layout_width="114dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0.6"
+                    android:background="@drawable/roundedwhite">
+
+                </Spinner>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <EditText
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:hint="Lebeller "
                     android:background="@drawable/roundedwhite"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:textSize="14dp"
                     android:drawablePadding="5dp"
                     android:paddingStart="10dp"
-                    android:id="@+id/clientadress"
+                    android:id="@+id/ClientLebel"
                     android:layout_marginBottom="10dp"
-                    android:layout_weight="0.6"/>
+                    />
 
                 <EditText
-                    android:id="@+id/Clienville"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/ClientCodePostal"
+                    android:layout_width="103dp"
                     android:layout_height="40dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_weight="0.30"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
                     android:background="@drawable/roundedwhite"
                     android:drawablePadding="5dp"
-                    android:hint="Ville"
+                    android:hint="Code postal"
+                    android:inputType="number"
                     android:paddingStart="10dp"
-                    android:textSize="14dp"/>
-
+                    android:textSize="14dp" />
             </LinearLayout>
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -167,26 +195,22 @@
                 android:drawablePadding="5dp"
                 android:paddingStart="10dp"
                 android:inputType="number"
-                android:id="@+id/clientPhone"
+                android:id="@+id/ClientPhone"
                 android:layout_marginBottom="10dp"
-
-
                 />
 
 
-
-
             <Button
-                android:id="@+id/clientRegister"
+                android:id="@+id/registerClient"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:text="Register"
-                android:textStyle="normal"
-                android:background="@drawable/registerbutton"
                 android:layout_gravity="center"
                 android:layout_marginBottom="15dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="15dp"
+                android:background="@drawable/registerbutton"
+                android:text="Register"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -194,5 +218,3 @@
     </ScrollView>
 
 </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>

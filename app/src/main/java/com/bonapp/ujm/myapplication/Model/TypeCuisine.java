@@ -10,7 +10,13 @@ public class TypeCuisine {
     public String description;
     public int image;
 
-    public TypeCuisine(int id, String nom, String description, int image) {
+    public TypeCuisine(String nom, int image, String description) {
+        this.nom = nom;
+        this.description = description;
+        this.image = image;
+    }
+
+    public TypeCuisine(int id, String nom,int image, String description) {
         this.id = id;
         this.nom = nom;
         this.description = description;

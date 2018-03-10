@@ -16,6 +16,7 @@ import java.util.List;
 public class Client implements Serializable {
 
     String username,email,password,adress,city,phone,type;
+    public Adresse adresse;
     int id;
 
     public int getId() {
@@ -27,6 +28,14 @@ public class Client implements Serializable {
     }
 
     List<Restaurant> restoFavoris = new ArrayList<>();
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
 
     public void setRestoFavoris(Restaurant r){
         this.restoFavoris.add(r);
