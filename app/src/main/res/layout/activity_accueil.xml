@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="#d16a4d"
     tools:context="com.bonapp.ujm.myapplication.Controller.Accueil">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +40,7 @@
             android:id="@+id/mmap"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="213dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="1dp"
             android:apiKey="@string/key_google_maps" />
@@ -64,7 +66,7 @@
             android:layout_height="match_parent"
             android:color="@color/colorPrimaryDark"
             android:paddingBottom="10dp" />
-    </LinearLayout>
+    </LinearLayout>0
 
-
+</ScrollView>
 </android.support.constraint.ConstraintLayout>

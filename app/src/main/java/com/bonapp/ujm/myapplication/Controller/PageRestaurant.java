@@ -97,6 +97,14 @@ public class PageRestaurant extends AppCompatActivity implements View.OnClickLis
                 String s = "Nombre de personnes: "+nbp;
                 nbpersonne.setText(s);
                 break;
+            case R.id.ajouteCommentaire:
+                AlertDialog.Builder buil = new AlertDialog.Builder(this);
+                View view1 = getLayoutInflater().inflate(R.layout.ajoutecommentaire,null);
+                //buil.setTitle("Ajoute d'un nouveau commentaire");
+                buil.setView(view1);
+                buil.create().show();
+
+                break;
         }
 
     }

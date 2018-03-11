@@ -15,6 +15,8 @@ import com.bonapp.ujm.myapplication.Model.Client;
 import com.bonapp.ujm.myapplication.Model.RepoInscription;
 import com.bonapp.ujm.myapplication.R;
 
+import static java.lang.Integer.parseInt;
+
 
 public class clientregister extends AppCompatActivity implements View.OnClickListener {
 
@@ -58,7 +60,7 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
               /*  String Adress = adress.getText().toString();
                 String villle = ville.getText().toString();
                 String Telephone = telephone.getText().toString();*/
-                String NumRue = numero.getText().toString();
+                int NumRue = parseInt(numero.getText().toString());
                 String NomRue = lebeller.getText().toString();
                 String CodPostal = codePostal.getText().toString();
                 String CleintTel = ClientPhone.getText().toString();

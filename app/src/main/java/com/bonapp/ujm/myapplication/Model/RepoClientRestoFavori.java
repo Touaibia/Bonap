@@ -45,7 +45,7 @@ public class RepoClientRestoFavori {
         while(cursor.moveToNext()){
             Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
             ad.moveToNext();
-            Adresse d = new Adresse(ad.getString(2),ad.getString(3),ad.getString(4),ad.getString(5));
+            Adresse d = new Adresse(ad.getInt(2),ad.getString(3),ad.getString(4),ad.getString(5));
             idt.add(new Restaurant(cursor.getString(2),cursor.getString(3),cursor.getString(4),d,
                     cursor.getString(6)));
         }
