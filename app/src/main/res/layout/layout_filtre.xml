@@ -139,7 +139,9 @@
             android:id="@+id/buttonFiltre"
             android:layout_width="371dp"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="onClick"
             android:background="#6c1220"
-            android:text="Valide" />
+            android:text="VALIDE" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -25,7 +25,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
     public Context context;
     public RepoTypeCuisineRestaurant(Context context, String create) {
-        super(context, create);
+        super(context, TABLE_CREATE,TABLE_NAME);
         this.context = context;
     }
 
@@ -62,7 +62,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
         while(c.moveToNext()){
             int num = c.getInt(1);
 
-            lesRestaus.add(new Restaurant(num,nom,img,descrip));
+           // lesRestaus.add(new Restaurant(num,nom,img,descrip));
         }
 
         return lesRestaus;

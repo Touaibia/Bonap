@@ -13,6 +13,8 @@ import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
 
+import static java.lang.Integer.parseInt;
+
 public class restaurantregister extends AppCompatActivity implements View.OnClickListener {
     Databasehelper helper = new Databasehelper(this);
 
@@ -52,7 +54,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                 String passWord = password.getText().toString();
                 String confirmPassword = confirmpassword.getText().toString();
                 String Email = email.getText().toString();
-                String NumRue = numero.getText().toString();
+                int NumRue = parseInt(numero.getText().toString());
                 String NomRue = lebeller.getText().toString();
                 String CodPostal = codePostal.getText().toString();
                 String resTel = restaurantPhone.getText().toString();
@@ -74,7 +76,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                                 Toast pass = Toast.makeText(restaurantregister.this, " Password don't match", Toast.LENGTH_SHORT);
                                 pass.show();
                             } else {
-                                if (NumRue.trim().length() > 4 || NumRue.trim().length() == 0) {
+                                if (NumRue < 1000 ) {
                                     Toast pass = Toast.makeText(restaurantregister.this, " Numero De Rue oas valid", Toast.LENGTH_SHORT);
                                     pass.show();
 

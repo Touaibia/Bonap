@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.BaseDonnees;
 import com.bonapp.ujm.myapplication.Model.Client;
+import com.bonapp.ujm.myapplication.Model.RepoAdresse;
 import com.bonapp.ujm.myapplication.Model.RepoClientRestoFavori;
 import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
@@ -48,6 +49,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class Accueil extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
 
@@ -56,41 +59,42 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     LatLng latLng;
     double lng;
     double ltd;
+    List listLTLG = new ArrayList<>();
     String [] adress = {"2 rue camille colard 42000 saint-etienne","88 rue antoine durafour"};
     BaseDonnees db ;
 
+    String distance;
+    String budget;
+    String type;
+    String typeAmbiance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
         List<Restaurant> list = new ArrayList<Restaurant>();
 
+        RepoAdresse rep = new RepoAdresse(this);
+        rep.open();
+       // rep.DB.execSQL("DROP TABLE adresse");
 
-        Restaurant R1 = new Restaurant("Rest 1","email","1234",
-                new Adresse("2","rue","Camille Colard","42000"),"0638927926");
-        Restaurant R2 = new Restaurant("Rest 3","email","1234",
-                new Adresse("2","rue","Camille Colard","42000"),"0638927926");
+              rep.insertAdresse(new Adresse(2,"rue","Camille Colard","42000"),0);
+
+              rep.insertAdresse(new Adresse(1,"Place","Villeboeuf","42000"),0);
+              rep.insertAdresse(new Adresse(2,"Rue","des Forces","69002"),1);
+
         //BaseDonnees db = new BaseDonnees(this);
-        //db.open();
+        //db.open();1 Place Villebœuf, 42000
         RepoRestaurant repo = new RepoRestaurant(this);
-        repo.ajouteRestaurant(R1);
+       // repo.ajouteRestaurant(R1);
         //repo.ajouteRestaurant(R2);
-        //repo.close();
-        //RepoClientRestoFavori rc = new RepoClientRestoFavori(this);
-        //rc.ajouteResto(1,2);
-       /* Cursor cursor = db.DB.rawQuery("select* from clientResto",null);
-        while (cursor.moveToNext()){
-            Toast.makeText(getApplicationContext(), cursor.getString(2), Toast.LENGTH_LONG).show();
 
-        }*/
-       // rc.close();
-        List<Restaurant> l = repo.getAllResto();
+       /* List<Restaurant> l = repo.;
         for (int i =0 ;i<l.size();i++) {
             l.get(i).setImage(R.drawable.icons8couverts50);
             list.add(l.get(i));
-        }
+        }*/
 
-       // list.add(R1);
+       list.add(new Restaurant());
 
         RecyclerView listv = (RecyclerView) findViewById(R.id.list);
 
@@ -131,8 +135,14 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 break;
             case R.id.buttonFiltre:
                 Spinner distance = (Spinner) findViewById(R.id.distance);
-                String d = distance.getTag().toString();
-                Toast.makeText(this, d, Toast.LENGTH_LONG).show();
+                String d = distance.getSelectedItem().toString();
+                Spinner budget = (Spinner) findViewById(R.id.budget);
+                String b = distance.getSelectedItem().toString();
+                Spinner type = (Spinner) findViewById(R.id.type);
+                String t = distance.getSelectedItem().toString();
+
+                this.distance = d;
+                //Toast.makeText(this, d, Toast.LENGTH_LONG).show();
 
                 break;
 
@@ -179,24 +189,41 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         gMap = googleMap;
         final Context  c = this;
         Geocoder geocoder = new Geocoder(getApplicationContext());
+        RepoAdresse repoAd = new RepoAdresse(this);
+        List<Adresse> list = new ArrayList<>();
+        list = repoAd.getAdresseProche();
+        RepoRestaurant rp = new RepoRestaurant(this);
 
+        Toast.makeText(this,""+list.size(),Toast.LENGTH_LONG);
+        localisationClient();
         try {
             int i;
-            for(i=0;i<adress.length;i++) {
+            for(i=0;i<list.size();i++) {
+                Toast.makeText(this,"okkk "+list.get(i).getId(),Toast.LENGTH_LONG);
+                // addresses = geocoder.getFromLocationName(adress[i], 1);
                 List<Address> addresses = null;
+                Adresse ad = list.get(i);
+                    String adr =ad.getNumero()+" "+ad.getType_voie()+" "+ad.getIntitule()+" "+ad.getCode_postal();
+                addresses = geocoder.getFromLocationName(adr, 1);
 
-                    addresses = geocoder.getFromLocationName(adress[i], 1);
 
                 double ltde = addresses.get(0).getLatitude();
-                final double lont = addresses.get(0).getLongitude();
-                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adress[i]));
+                Toast.makeText(this,""+ltde,Toast.LENGTH_LONG);
+
+                double lont = addresses.get(0).getLongitude();
+                Toast.makeText(this,""+lont,Toast.LENGTH_LONG);
+                //Toast.makeText(this,""+listLTLG.get(0)+" "+listLTLG.get(1) ,Toast.LENGTH_LONG);
+                double dist = calculeDistance(ltde,lont,ltd,lng);
+                int d=0;
+            if(d<10) {
+                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adr));
                 marker.setTag(0);
                 gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(c);
-                        View resto = getLayoutInflater().inflate(R.layout.visiteresto,null);
+                        View resto = getLayoutInflater().inflate(R.layout.visiteresto, null);
                         builder.setView(resto);
                         builder.create().show();
 
@@ -204,16 +231,16 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         return false;
                     }
                 });
+            }
         }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-        localisationClient();
     }
 
     public void localisationClient(){
+
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         if (locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER)) {
@@ -222,10 +249,13 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 return;
             }
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+
                 @Override
                 public void onLocationChanged(Location location) {
                     lng = location.getLongitude();
                     ltd = location.getLatitude();
+
+                  //  RepoAdresse repoAdresse = new RepoAdresse(this);
 
                     latLng = new LatLng(ltd, lng);
                     Geocoder geocoder = new Geocoder(getApplicationContext());
@@ -263,7 +293,9 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 public void onProviderDisabled(String s) {
 
                 }
+
             });
+
         } else if (locationManager.isProviderEnabled(locationManager.GPS_PROVIDER)) {
 
 
@@ -272,6 +304,8 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 public void onLocationChanged(Location location) {
                     double lng = location.getLongitude();
                     double ltd = location.getLatitude();
+                    listLTLG.add(ltd);
+                    listLTLG.add(lng);
                     latLng = new LatLng(ltd, lng);
                     Geocoder geocoder = new Geocoder(getApplicationContext());
                     try {
@@ -311,6 +345,19 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
             });
 
         }
+
+    }
+
+    public double calculeDistance(double ltde,double lng,double ltde2,double lng2){
+        double x = Math.pow(abs(ltde)-abs(ltde2),2);
+        double y = Math.pow(abs(lng)-abs(lng2),2);
+        double d = Math.sqrt(x+y);
+
+        return d;
+    }
+
+    public void plusProcheResto(int d){
+
     }
 
 

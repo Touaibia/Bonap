@@ -17,7 +17,7 @@ public class RepoRestaurant {
     //BaseDonnees db;
     Context context;
     String TABLE = "restaurant";
-    BaseDonnees db;
+    public BaseDonnees db;
     private String TABLE_CREATE =
             "CREATE TABLE  restaurant("+
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -51,18 +51,11 @@ public class RepoRestaurant {
 
     }
 
-    public List<Restaurant> getAllResto(){
-        Cursor cursor = db.DB.rawQuery("select* from restaurant",null);
+    public String getLeResto(int id){
+        Cursor cursor = db.DB.rawQuery("select* from restaurant where id="+id,null);
         List idt = new ArrayList();
-        while(cursor.moveToNext()){
-            //Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
-           // ad.moveToNext();
-           // Adresse d = new Adresse(ad.getString(2),ad.getString(3),ad.getString(4),ad.getString(5));
-            idt.add(new Restaurant(cursor.getString(1),cursor.getString(2),cursor.getString(3),
-                    new Adresse(),
-                    cursor.getString(5)));
-        }
-        return idt;
+        cursor.moveToNext();
+        return cursor.getString(1);
     }
     public void close(){db.close();}
 }
