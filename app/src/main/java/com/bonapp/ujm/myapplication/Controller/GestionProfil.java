@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
+import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.Model.TypeAmbianceAdapter;
 import com.bonapp.ujm.myapplication.Model.TypeCuisineAdapter;
 import com.bonapp.ujm.myapplication.R;
@@ -28,11 +30,22 @@ public class GestionProfil extends MenuManagerActivity {
     AlertDialog.Builder builder;
     String type="";
 
+    long id_restau;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+
+        Intent intent = getIntent();
+
+        id_restau = intent.getLongExtra("id_restau",1);
+
+        RepoRestaurant repoRestau = new RepoRestaurant(this);
+        repoRestau.open();
+
+        Restaurant restau = repoRestau.selectionnerProfil(id_restau);
 
         Button modifInfoGen = (Button) findViewById(R.id.mod_info_gen);
 
@@ -42,6 +55,8 @@ public class GestionProfil extends MenuManagerActivity {
                 modif_info_gen();
             }
         });
+
+
 
         //Affectation de la liste des types de cuisines
         RecyclerView rv = (RecyclerView) findViewById(R.id.list_type_cuis);

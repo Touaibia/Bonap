@@ -26,7 +26,7 @@ public class RepoPlat extends BaseDonnees {
 
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
-    public RepoPlat(Context context, String creerTable) {
+    public RepoPlat(Context context) {
         super(context,TABLE_CREATE,TABLE_NAME);
     }
 
@@ -59,14 +59,14 @@ public class RepoPlat extends BaseDonnees {
 
     }
 
-    public ArrayList<Plat> selectionner(long id, String type){
+    public ArrayList<Plat> selectionner(long id, int type){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NOM +", "+ IMAGE +", "+ PRIX +", "+ DESCRIP +
-                " FROM "+ TABLE_NAME +"where type = ? AND id_restau = ?", new String[]{""+id,type} );
+                " FROM "+ TABLE_NAME +"where type = ? AND id_restau = ?", new String[]{""+id,""+type} );
 
         ArrayList<Plat> lesPlats = new ArrayList<>();
 
         while(c.moveToNext()){
-            long num = c.getLong(0);
+            int num = c.getInt(0);
             String nom = c.getString(1);
             int img = c.getInt(2);
             float prix = c.getFloat(3);
@@ -76,5 +76,22 @@ public class RepoPlat extends BaseDonnees {
         }
 
         return lesPlats;
+    }
+
+    //Selectionner un Plat
+    public Plat selectionnerPlat(long id){
+        Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NOM +", "+ IMAGE +", "+ PRIX +", "+ DESCRIP +
+                " FROM "+ TABLE_NAME +"where id = ?", new String[]{""+id} );
+
+        int num = c.getInt(0);
+        String nom = c.getString(1);
+        int img = c.getInt(2);
+        float prix = c.getFloat(3);
+        String descrip = c.getString(4);
+
+        Plat plat = new Plat(num,img,nom,prix,descrip) ;
+
+
+        return plat;
     }
 }

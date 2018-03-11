@@ -10,8 +10,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.Adresse;
+import com.bonapp.ujm.myapplication.Model.RepoAdresse;
+import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
+
+import static java.lang.Integer.parseInt;
 
 public class restaurantregister extends AppCompatActivity implements View.OnClickListener {
     Databasehelper helper = new Databasehelper(this);
@@ -52,6 +56,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                 String passWord = password.getText().toString();
                 String confirmPassword = confirmpassword.getText().toString();
                 String Email = email.getText().toString();
+                String typeV = typeVoix.getSelectedItem().toString();
                 String NumRue = numero.getText().toString();
                 String NomRue = lebeller.getText().toString();
                 String CodPostal = codePostal.getText().toString();
@@ -92,16 +97,23 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                                                 pass.show();
                                             } else {
 
-                                                Restaurant resto = new Restaurant();
-                                                resto.setType("restaurant");
-                                                resto.setNom(userName);
-                                                resto.setMot_passe(passWord);
-                                                resto.setEmail(Email);
-                                                resto.setTel(resTel);
-                                                resto.setAdresse(new Adresse(NumRue,"type de voix a voir spinner",NomRue,CodPostal));
+                                                RepoRestaurant repoRestau = new RepoRestaurant(this);
+                                                RepoAdresse repoAd = new RepoAdresse(this);
+
+                                                repoRestau.open();
+
+                                                Restaurant resto = new Restaurant(userName,Email,passWord,resTel);
+
+                                                long idRestau = repoRestau.ajouteRestaurant(resto);
+                                                if (idRestau != -1){
+                                                    repoAd.ajouter(new Adresse(NumRue,typeV,NomRue,parseInt(CodPostal),idRestau));
+                                                }
+
+                                                repoRestau.close();
 
                                                 //helper.insertContact();
-                                                Intent i = new Intent(restaurantregister.this, PageRestaurant.class);
+                                                Intent i = new Intent(restaurantregister.this, GestionProfil.class);
+                                                i.putExtra("id_restau",idRestau);
                                                 startActivity(i);
 
                                             }

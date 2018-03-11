@@ -23,8 +23,8 @@ public class RepoTypeCuisine extends BaseDonnees {
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
 
-    public RepoTypeCuisine(Context context, String create) {
-        super(context, create);
+    public RepoTypeCuisine(Context context) {
+        super(context, TABLE_CREATE, TABLE_NAME);
     }
 
     public void ajouter(TypeCuisine tp){

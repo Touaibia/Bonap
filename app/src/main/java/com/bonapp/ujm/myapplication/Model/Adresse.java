@@ -5,17 +5,27 @@ package com.bonapp.ujm.myapplication.Model;
  */
 
 public class Adresse {
-    public int id;
+    public long id;
     public String numero;
     public String type_voie;
     public String intitule;
-    public String code_postal;
+    public int code_postal;
+    public long id_retau;
 
     public Adresse(){
 
     }
 
-    public Adresse(String numero, String type_voie, String intitule, String code_postal) {
+    public Adresse(String numero, String type_voie, String intitule, int code_postal, long idr) {
+        this.id = id;
+        this.numero = numero;
+        this.type_voie = type_voie;
+        this.intitule = intitule;
+        this.code_postal = code_postal;
+        this.id_retau = idr;
+    }
+
+    public Adresse(long id,String numero, String type_voie, String intitule, int code_postal) {
         this.id = id;
         this.numero = numero;
         this.type_voie = type_voie;
@@ -23,7 +33,7 @@ public class Adresse {
         this.code_postal = code_postal;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -55,11 +65,19 @@ public class Adresse {
         this.intitule = intitule;
     }
 
-    public String getCode_postal() {
+    public int getCode_postal() {
         return code_postal;
     }
 
-    public void setCode_postal(String code_postal) {
+    public void setCode_postal(int code_postal) {
         this.code_postal = code_postal;
+    }
+
+    public long getId_retau() {
+        return id_retau;
+    }
+
+    public void setId_retau(long id_retau) {
+        this.id_retau = id_retau;
     }
 }
