@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public class RepoRestaurant extends BaseDonnees {
-    //BaseDonnees db;
+
     public Context context;
     public static final String TABLE = "restaurant";
     private static final String TABLE_CREATE =
@@ -23,10 +23,8 @@ public class RepoRestaurant extends BaseDonnees {
                     "nom TEXT, " +
                     "email TEXT, " +
                     "password TEXT, " +
-                    "adresse INTEGER, " +
-                    "telephone TEXT"+
-                    "description TEXT"+
-                    "image INTEGER);";
+                    "telephone TEXT,"+
+                    "description TEXT);";
 
     public RepoRestaurant(Context context) {
         super(context, TABLE_CREATE, TABLE);
@@ -40,54 +38,36 @@ public class RepoRestaurant extends BaseDonnees {
         contentValues.put("nom",r.getNom());
         contentValues.put("email",r.getEmail());
         contentValues.put("password",r.getMot_passe());
-        contentValues.put("adresse",r.getAdresse().getId());
         contentValues.put("telephone",r.getTel());
-        contentValues.put("description",r.getDescription());
-        contentValues.put("image",r.getImage());
-
-        //Toast.makeText(context,r.getNom()+" "+r.getEmail()+" "+r.getMot_passe()+" "+r.getAdresse().getId()+" "+r.getTel(),Toast.LENGTH_LONG).show();
+        contentValues.put("description"," ");
        return DB.insert("restaurant",null,contentValues);
 
     }
 
-//    public List<Restaurant> getAllResto(){
-//        Cursor cursor = DB.rawQuery("select* from restaurant",null);
-//        List idt = new ArrayList();
-//        while(cursor.moveToNext()){
-//            //Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
-//           // ad.moveToNext();
-//           // Adresse d = new Adresse(ad.getString(2),ad.getString(3),ad.getString(4),ad.getString(5));
-//            idt.add(new Restaurant(cursor.getString(1),cursor.getString(2),cursor.getString(3),
-//                    new Adresse(),
-//                    cursor.getString(5)));
-//        }
-//        return idt;
-//    }
-
     //Selectionner un restaurant après recherche
     public Restaurant selectionnerAccueil(long id){
-        Cursor c = DB.rawQuery("SELECT id, nom, image"+
+        Cursor c = DB.rawQuery("SELECT id, nom"+
                 " FROM "+ TABLE +" where id = ?" , new String[]{""+id} );
 
         int idd = c.getInt(0);
         String nom = c.getString(1);
-        int img = c.getInt(2);
+        //int img = c.getInt(2);
 
         Adresse ad = new RepoAdresse(context).selectionner(idd);
 
-        return  new Restaurant(idd, nom, img, ad );
+        return  new Restaurant(idd, nom, 0, ad );
     }
 
     //Selectionner mon restaurant
     public Restaurant selectionnerProfil(long id){
-        Cursor c = DB.rawQuery("SELECT id, nom, email, telephone, image, description"+
+        Cursor c = DB.rawQuery("SELECT id, nom, email, telephone, description"+
                 " FROM "+ TABLE +" where id = ?" , new String[]{""+id} );
 
         String nom = c.getString(1);
         String email = c.getString(2);
         String tel = c.getString(3);
-        int img = c.getInt(4);
-        String descrip = c.getString(5);
+      //  int img = c.getInt(4);
+        String descrip = c.getString(4);
 
         Adresse ad = new RepoAdresse(context).selectionner(id);
 
@@ -99,6 +79,6 @@ public class RepoRestaurant extends BaseDonnees {
 
         ArrayList<TypeCuisine> types = new RepoTypeCuisineRestaurant(context).selectionnerType(id);
 
-        return  new Restaurant(id, nom,tel,descrip,img,types,chaud,entree,dessert, ad);
+        return  new Restaurant(id, nom,tel,descrip,0,types,chaud,entree,dessert, ad);
     }
 }
