@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -208,15 +209,12 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
 
                 double ltde = addresses.get(0).getLatitude();
-                Toast.makeText(this,""+ltde,Toast.LENGTH_LONG);
-
                 double lont = addresses.get(0).getLongitude();
-                Toast.makeText(this,""+lont,Toast.LENGTH_LONG);
-                //Toast.makeText(this,""+listLTLG.get(0)+" "+listLTLG.get(1) ,Toast.LENGTH_LONG);
                 double dist = calculeDistance(ltde,lont,ltd,lng);
-                int d=0;
-            if(d<10) {
-                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adr));
+                float[] results = new float[50];
+                Location.distanceBetween(ltd,lng,ltde,lont,results);
+            if(true) {
+                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(results[0]+","+results[0]*0.001));
                 marker.setTag(0);
                 gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
@@ -349,11 +347,22 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     }
 
     public double calculeDistance(double ltde,double lng,double ltde2,double lng2){
-        double x = Math.pow(abs(ltde)-abs(ltde2),2);
-        double y = Math.pow(abs(lng)-abs(lng2),2);
-        double d = Math.sqrt(x+y);
 
-        return d;
+        double dist =
+                Math.sin(deg2rad(ltde)) * Math.sin(deg2rad(ltde2))
+                + Math.cos(deg2rad(ltde)) * Math.cos(deg2rad(ltde2))
+                * Math.cos(deg2rad(lng-lng2));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+
+        return dist*1.609344;
+    }
+    public double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+    public double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
     }
 
     public void plusProcheResto(int d){

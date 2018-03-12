@@ -22,7 +22,6 @@ public class Adresse {
     public Adresse(int numero, String type_voie, String intitule, String code_postal) {
         this.id = id;
         this.numero = numero;
-
         this.type_voie = type_voie;
         this.intitule = intitule;
         this.code_postal = code_postal;
