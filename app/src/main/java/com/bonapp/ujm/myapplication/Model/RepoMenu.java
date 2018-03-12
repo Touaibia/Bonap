@@ -31,8 +31,7 @@ public class RepoMenu extends BaseDonnees {
 
     public RepoMenu(Context context) {
 
-        super(context, TABLE_CREATE, TABLE_NAME);
-        super.onCreate(DB);
+        super(context);
         this.context = context;
     }
 

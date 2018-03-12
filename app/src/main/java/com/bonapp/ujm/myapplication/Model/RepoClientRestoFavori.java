@@ -24,31 +24,30 @@ public class RepoClientRestoFavori {
             "id_resto text);";
 
     public RepoClientRestoFavori(Context context ){
-        db = new BaseDonnees(context, TABLE_CREATE,"clientResto");
+    //Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
+        db = new BaseDonnees(context);
         this.context = context;
         db.open();
 
     }
-    public void ajouteResto(int r, int c){
-        //String insert = "insert into clientResto(id_client,id_resto) values('ok','insertion')";
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("id_client","rrggg");
-        contentValues.put("id_resto","rrressai");
+            public void ajouteResto(int r, int c){
+                //String insert = "insert into clientResto(id_client,id_resto) values('ok','insertion')";
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("id_client","rrggg");
+                contentValues.put("id_resto","rrressai");
 
-        db.DB.insert("clientResto",null,contentValues);
-    }
-    public List<Restaurant> getAllResto(int c){
-        Cursor cursor = db.DB.rawQuery("select* from restaurant",null);
-               // " where id in (select id_resto from clientResto where ic_client ="+c+")",null);
-        List idt = new ArrayList();
-        while(cursor.moveToNext()){
-            Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
-            ad.moveToNext();
-           //Adresse(String numero, String type_voie, String intitule, int code_postal, long idr)
-            /*Adresse d = new Adresse(ad.getInt(2),ad.getString(3),ad.getString(4),ad.getString(5));
-
-            idt.add(new Restaurant(cursor.getString(2),cursor.getString(3),cursor.getString(4),d,
-                    cursor.getString(6)));*/
+                db.DB.insert("clientResto",null,contentValues);
+            }
+            public List<Restaurant> getAllResto(int c){
+                Cursor cursor = db.DB.rawQuery("select* from restaurant",null);
+                // " where id in (select id_resto from clientResto where ic_client ="+c+")",null);
+                List idt = new ArrayList();
+                while(cursor.moveToNext()){
+                    Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
+                    ad.moveToNext();
+                    Adresse d = new Adresse(ad.getString(2),ad.getString(3),ad.getString(4),ad.getInt(5),ad.getLong(6));
+//                    idt.add(new Restaurant(cursor.getString(2),cursor.getString(3),cursor.getString(4),d,
+//                    cursor.getString(6)));
         }
     return idt;
     }

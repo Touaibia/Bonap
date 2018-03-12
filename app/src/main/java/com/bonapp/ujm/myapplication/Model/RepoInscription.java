@@ -40,7 +40,7 @@ public class RepoInscription {
 
     public RepoInscription(Context context){
         Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
-       db = new BaseDonnees(context, TABLE_CREATE,TABLE_NAME);
+       db = new BaseDonnees(context);
        this.context = context;
        db.open();
 

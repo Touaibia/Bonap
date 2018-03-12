@@ -60,11 +60,11 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
               /*  String Adress = adress.getText().toString();
                 String villle = ville.getText().toString();
                 String Telephone = telephone.getText().toString();*/
-                String NumRue = numero.getText().toString();
+                int NumRue = parseInt(numero.getText().toString());
                 String NomRue = lebeller.getText().toString();
                 String CodPostal = codePostal.getText().toString();
                 String CleintTel = ClientPhone.getText().toString();
-                Adresse ClientAdress = new  Adresse( NumRue," ",NomRue,parseInt(CodPostal),0);
+                Adresse ClientAdress = new  Adresse( NumRue, "boulvard",NomRue, CodPostal,5);
 
 
                 //  String TypeDeVoix = typeVoix.getText()
