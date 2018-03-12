@@ -5,17 +5,17 @@ package com.bonapp.ujm.myapplication.Model;
  */
 
 public class TypeCuisineRestaurant {
-    public int id;
-    public int id_type;
-    public int id_restau;
+    public long id;
+    public long id_type;
+    public long id_restau;
 
-    public TypeCuisineRestaurant(int id, int id_type, int id_restau) {
+    public TypeCuisineRestaurant(long id, long id_type, long id_restau) {
         this.id = id;
         this.id_type = id_type;
         this.id_restau = id_restau;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -23,7 +23,7 @@ public class TypeCuisineRestaurant {
         this.id = id;
     }
 
-    public int getId_type() {
+    public long getId_type() {
         return id_type;
     }
 
@@ -31,7 +31,7 @@ public class TypeCuisineRestaurant {
         this.id_type = id_type;
     }
 
-    public int getId_restau() {
+    public long getId_restau() {
         return id_restau;
     }
 

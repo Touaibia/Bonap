@@ -24,8 +24,9 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
 
     public Context context;
-    public RepoTypeCuisineRestaurant(Context context, String create) {
-        super(context, TABLE_CREATE,TABLE_NAME);
+
+    public RepoTypeCuisineRestaurant(Context context) {
+        super(context, TABLE_CREATE, TABLE_NAME);
         this.context = context;
     }
 
@@ -38,7 +39,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
         DB.insert(TABLE_NAME,null,contVal);
     }
 
-    public void supprimer(int id){
+    public void supprimer(long id){
         DB.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
     }
 
@@ -52,19 +53,35 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
     }
 
-    //Selection des Restaurants en fonction d
-    public ArrayList<Restaurant> selectionner(int id_type){
+    //Selection des Restaurants en fonction de type de cuisine
+    public ArrayList<Restaurant> selectionnerRestau(long id_type){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ RESTAU +
                 " FROM "+ TABLE_NAME +" where id_type = ?", new String[]{""+id_type} );
 
         ArrayList<Restaurant> lesRestaus = new ArrayList<>();
-
+        RepoRestaurant repoRestaurant = new RepoRestaurant(context);
         while(c.moveToNext()){
             int num = c.getInt(1);
 
-           // lesRestaus.add(new Restaurant(num,nom,img,descrip));
+            lesRestaus.add(repoRestaurant.selectionnerAccueil(num));
         }
 
         return lesRestaus;
+    }
+
+    //Selection des types de cuisine d'un restaurant
+    public ArrayList<TypeCuisine> selectionnerType(long id_restau){
+        Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ TYPE +
+                " FROM "+ TABLE_NAME +" where id_restau = ?", new String[]{""+id_restau} );
+
+        ArrayList<TypeCuisine> lesTypes = new ArrayList<>();
+        RepoTypeCuisine repoTypeCuisine = new RepoTypeCuisine(context);
+        while(c.moveToNext()){
+            int num = c.getInt(1);
+
+            lesTypes.add(repoTypeCuisine.selectionner(num));
+        }
+
+        return lesTypes;
     }
 }

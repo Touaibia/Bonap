@@ -4,53 +4,73 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by maham on 07/03/2018.
  */
 
 public class RepoAdresse extends BaseDonnees {
+    public static final String TABLE_NAME = "adresse";
+    public static final String KEY = "id";
+    public static final String NUM = "numero";
+    public static final String TYPE = "type";
+    public static final String INTITULE = "intitule";
+    public static final String CODE = "code_post";
+    public static final String RESTAU = "id_restau";
 
-    public static final String Table_create = "create table adresse(" +
-            "id integer primary key autoincrement, " +
-            "numero integer, " +
-            "typevoie text, " +
-            "intitule text, " +
-            "codepostale text, " +
-            "idresto integer);";
-    public static final String table_name = "adresse";
+    public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME +
+            " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ NUM + "CHAR(10), "+ TYPE + " CHAR(20), "+
+            INTITULE +" CHAR(50), "+ CODE +" INTEGER, " + RESTAU + " INTEGER);";
+
+    public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     public RepoAdresse(Context context) {
-        super(context, Table_create, table_name);
+        super(context, TABLE_CREATE, TABLE_NAME);
     }
 
-    public void insertAdresse(Adresse ad,int id){
-        ContentValues values = new ContentValues();
-        values.put("numero",ad.getNumero());
-        values.put("typevoie",ad.getType_voie());
-        values.put("intitule",ad.getIntitule());
-        values.put("codepostale",ad.getCode_postal());
-        values.put("idresto",id);
-        DB.insert(table_name,null,values);
+    public void ajouter(Adresse ad){
+        ContentValues contVal = new ContentValues();
+
+        contVal.put(NUM, ad.getNumero());
+        contVal.put(TYPE, ad.getType_voie());
+        contVal.put(INTITULE, ad.getIntitule());
+        contVal.put(CODE, ad.getCode_postal());
+        contVal.put(RESTAU, ad.getId_retau());
+
+        DB.insert(TABLE_NAME,null,contVal);
     }
 
-    public List<Adresse> getAdresseProche(){
-        List <Adresse> list = new ArrayList<>();
-        open();
-        Cursor cursor = DB.rawQuery("select* from "+table_name,null);
+    public void supprimer(long id){
+        DB.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
+    }
 
-        while(cursor.moveToNext()){
-            //Adresse(String numero, String type_voie, String intitule, String code_postal)
-            Adresse d = new Adresse(cursor.getInt(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4));
-            d.setId_resto(cursor.getInt(5));
-            list.add(d);
-        }
-    return list;
+    public void modifier(Adresse ad){
+        ContentValues contVal = new ContentValues();
+
+        contVal.put(NUM, ad.getNumero());
+        contVal.put(TYPE, ad.getType_voie());
+        contVal.put(INTITULE, ad.getIntitule());
+        contVal.put(CODE, ad.getCode_postal());
+        contVal.put(RESTAU, ad.getId_retau());
+
+        DB.update(TABLE_NAME, contVal, KEY  + " = ?", new String[] {String.valueOf(ad.getId())});
+
+    }
+
+    //Selectionner un Adresse
+    public Adresse selectionner(long id){
+        Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NUM +", "+ TYPE +", "+ INTITULE +", "+ CODE +
+                " FROM "+ TABLE_NAME +"where id_restau = ?", new String[]{""+id} );
+
+        int idd = c.getInt(0);
+        String num = c.getString(1);
+        String type = c.getString(2);
+        String inti = c.getString(3);
+        int code = c.getInt(4);
+
+        Adresse ad = new Adresse(idd,num,type,inti,code) ;
+
+
+        return ad;
     }
 
 }

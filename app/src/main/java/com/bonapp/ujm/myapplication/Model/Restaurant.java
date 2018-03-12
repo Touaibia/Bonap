@@ -1,5 +1,7 @@
 package com.bonapp.ujm.myapplication.Model;
 
+import android.location.Address;
+
 import java.util.ArrayList;
 
 /**
@@ -7,34 +9,53 @@ import java.util.ArrayList;
  */
 
 public class Restaurant{
-    public int id;
+    public long id;
     public String nom;
     public String email;
     public String mot_passe;
     public Adresse adresse;
     public String tel;
     public String description;
-    public   String type;
     public int image;
     public ArrayList<TypeCuisine> typeCuisines=  new ArrayList<>();
     public ArrayList<Plat> plats=new ArrayList<>();
     public ArrayList<Plat> entrees =  new ArrayList<>();
     public ArrayList<Plat> desserts =  new ArrayList<>();
 
-
-    public Restaurant() {
+    public Restaurant(long id, String nom, int image, Adresse ad) {
+        this.id = id;
+        this.nom = nom;
+        this.image = image;
+        this.adresse = ad;
     }
 
-    public Restaurant(String nom, String email, String mot_passe, Adresse adresse, String tel) {
+    public Restaurant(long id, String nom, String tel, String description, int image,
+                      ArrayList<TypeCuisine> typeCuisines, ArrayList<Plat> plats,
+                      ArrayList<Plat> entrees, ArrayList<Plat> desserts, Adresse ad) {
+        this.id = id;
+        this.nom = nom;
+        this.tel = tel;
+        this.description = description;
+        this.image = image;
+        this.typeCuisines = typeCuisines;
+        this.plats = plats;
+        this.entrees = entrees;
+        this.desserts = desserts;
+        this.adresse = ad;
+    }
+
+    public Restaurant(String nom, String email, String mot_passe, String tel) {
         this.nom = nom;
         this.email = email;
         this.mot_passe = mot_passe;
-        this.adresse = adresse;
         this.tel = tel;
-
+        this.description = "Ajouter une Description de votre Restaurant";
+        this.image = 0;
     }
 
-    public int getId() {
+
+
+    public long getId() {
         return id;
     }
 
@@ -144,7 +165,4 @@ public class Restaurant{
        this.desserts.add(new Plat(0,image,nom,prix,description));
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 }
