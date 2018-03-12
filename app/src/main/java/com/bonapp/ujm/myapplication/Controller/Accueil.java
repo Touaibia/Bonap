@@ -76,15 +76,15 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
         RepoAdresse rep = new RepoAdresse(this);
         rep.open();
-       // rep.DB.execSQL("DROP TABLE adresse");
+        //rep.DB.execSQL("DROP TABLE restaurant");
 
-              rep.insertAdresse(new Adresse(2,"rue","Camille Colard","42000"),0);
+        rep.ajouter(new Adresse("2","rue","Camille Colard",42000,0));
 
-              rep.insertAdresse(new Adresse(1,"Place","Villeboeuf","42000"),0);
-              rep.insertAdresse(new Adresse(2,"Rue","des Forces","69002"),1);
+        rep.ajouter(new Adresse("1","Place","Villeboeuf",42000,0));
+        rep.ajouter(new Adresse("25","Montée","Saint-Barthélémy",69005,0));
+        rep.ajouter(new Adresse("2","Rue","des Forces",69002,0));
 
-        //BaseDonnees db = new BaseDonnees(this);
-        //db.open();1 Place Villebœuf, 42000
+
         RepoRestaurant repo = new RepoRestaurant(this);
        // repo.ajouteRestaurant(R1);
         //repo.ajouteRestaurant(R2);
@@ -107,11 +107,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mmap);
         mapFragment.getMapAsync( this);
-
-
-
-
-
 
     }
 
@@ -191,49 +186,53 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         final Context  c = this;
         Geocoder geocoder = new Geocoder(getApplicationContext());
         RepoAdresse repoAd = new RepoAdresse(this);
+        repoAd.open();
         List<Adresse> list = new ArrayList<>();
-        list = repoAd.getAdresseProche();
+        list = repoAd.plusProcheRestoAdresse();
         RepoRestaurant rp = new RepoRestaurant(this);
 
         Toast.makeText(this,""+list.size(),Toast.LENGTH_LONG);
         localisationClient();
-        try {
+        //new Thread()
             int i;
-            for(i=0;i<list.size();i++) {
-                Toast.makeText(this,"okkk "+list.get(i).getId(),Toast.LENGTH_LONG);
-                // addresses = geocoder.getFromLocationName(adress[i], 1);
+            for (i = 0; i < list.size(); i++) {
+
                 List<Address> addresses = null;
                 Adresse ad = list.get(i);
-                    String adr =ad.getNumero()+" "+ad.getType_voie()+" "+ad.getIntitule()+" "+ad.getCode_postal();
-                addresses = geocoder.getFromLocationName(adr, 1);
+                String adr = ad.getNumero() + " " + ad.getType_voie() + " " + ad.getIntitule() + " " + ad.getCode_postal();
+                try {
+                    addresses = geocoder.getFromLocationName(adr, 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
                 double ltde = addresses.get(0).getLatitude();
                 double lont = addresses.get(0).getLongitude();
-                double dist = calculeDistance(ltde,lont,ltd,lng);
+
+                double dist = calculeDistance(ltde, lont, ltd, lng);
                 float[] results = new float[50];
-                Location.distanceBetween(ltd,lng,ltde,lont,results);
-            if(true) {
-                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(results[0]+","+results[0]*0.001));
-                marker.setTag(0);
-                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
+                if (true) {
+                    Marker marker;
+                    marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title("l1 " + ltde + " lo1 " + lont
+                            + " l2 "  + " lo2 "));
+                    //marker.wait(300);
+                    marker.setTag(0);
+                    gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(c);
-                        View resto = getLayoutInflater().inflate(R.layout.visiteresto, null);
-                        builder.setView(resto);
-                        builder.create().show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(c);
+                            View resto = getLayoutInflater().inflate(R.layout.visiteresto, null);
+                            builder.setView(resto);
+                            builder.create().show();
 
-                        //Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-                });
+                            return false;
+                        }
+                    });
+                }
             }
-        }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
     }
 
@@ -244,16 +243,13 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         if (locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER)) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 gMap.setMyLocationEnabled(true);
-                return;
+                return ;
             }
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
-
                 @Override
                 public void onLocationChanged(Location location) {
                     lng = location.getLongitude();
                     ltd = location.getLatitude();
-
-                  //  RepoAdresse repoAdresse = new RepoAdresse(this);
 
                     latLng = new LatLng(ltd, lng);
                     Geocoder geocoder = new Geocoder(getApplicationContext());
@@ -265,7 +261,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         str1 += addresses1.get(0).getCountryName() +",";
                         str1 += addresses1.get(0).getFeatureName();
                         gMap.addMarker(new MarkerOptions()
-                                .position(latLng).title(str1)
+                                .position(latLng).title(ltd +" "+lng)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         );
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -294,16 +290,14 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
             });
 
-        } else if (locationManager.isProviderEnabled(locationManager.GPS_PROVIDER)) {
+        } /*else if (locationManager.isProviderEnabled(locationManager.GPS_PROVIDER)) {
 
 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    double lng = location.getLongitude();
-                    double ltd = location.getLatitude();
-                    listLTLG.add(ltd);
-                    listLTLG.add(lng);
+                     lng = location.getLongitude();
+                     ltd = location.getLatitude();
                     latLng = new LatLng(ltd, lng);
                     Geocoder geocoder = new Geocoder(getApplicationContext());
                     try {
@@ -314,7 +308,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         String str1 = addresses1.get(0).getLocality() + ",";
                         str1 += addresses1.get(0).getCountryName() +",";
                         str1 += addresses1.get(0).getFeatureName();
-                        gMap.addMarker(new MarkerOptions().position(latLng).title(str1).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                        gMap.addMarker(new MarkerOptions().position(latLng).title(ltd+" "+lng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                         ));
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
@@ -342,7 +336,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 }
             });
 
-        }
+        }*/
 
     }
 
@@ -351,12 +345,12 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         double dist =
                 Math.sin(deg2rad(ltde)) * Math.sin(deg2rad(ltde2))
                 + Math.cos(deg2rad(ltde)) * Math.cos(deg2rad(ltde2))
-                * Math.cos(deg2rad(lng-lng2));
-        dist = Math.acos(dist);
+                * Math.cos(deg2rad(lng)-deg2rad(lng2));
+        dist = 6371*Math.acos(dist);
         dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515;
+        //dist = dist * 60 * 1.1515;
 
-        return dist*1.609344;
+        return dist*111.13384;
     }
     public double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);

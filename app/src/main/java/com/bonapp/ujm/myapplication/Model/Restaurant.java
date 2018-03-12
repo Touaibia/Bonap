@@ -53,6 +53,9 @@ public class Restaurant{
         this.image = 0;
     }
 
+    public Restaurant() {
+
+    }
 
 
     public long getId() {

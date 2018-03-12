@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class BaseDonnees extends SQLiteOpenHelper {
     public SQLiteDatabase DB ;
     public static final String DATA_BASE_NAME = "bonapp.db ";
-    private static final int VERSION =12;
+    private static final int VERSION =16;
     private String creerTable;
     private String tableName;
    /* private String TABLE_CREATE = "create table clientResto(" +

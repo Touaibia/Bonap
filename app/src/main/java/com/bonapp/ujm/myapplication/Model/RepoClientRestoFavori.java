@@ -24,7 +24,6 @@ public class RepoClientRestoFavori {
             "id_resto text);";
 
     public RepoClientRestoFavori(Context context ){
-    //Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
         db = new BaseDonnees(context, TABLE_CREATE,"clientResto");
         this.context = context;
         db.open();
@@ -45,9 +44,11 @@ public class RepoClientRestoFavori {
         while(cursor.moveToNext()){
             Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
             ad.moveToNext();
-            Adresse d = new Adresse(ad.getInt(2),ad.getString(3),ad.getString(4),ad.getString(5));
+           //Adresse(String numero, String type_voie, String intitule, int code_postal, long idr)
+            /*Adresse d = new Adresse(ad.getInt(2),ad.getString(3),ad.getString(4),ad.getString(5));
+
             idt.add(new Restaurant(cursor.getString(2),cursor.getString(3),cursor.getString(4),d,
-                    cursor.getString(6)));
+                    cursor.getString(6)));*/
         }
     return idt;
     }

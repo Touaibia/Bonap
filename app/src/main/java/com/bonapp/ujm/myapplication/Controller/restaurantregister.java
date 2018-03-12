@@ -61,7 +61,6 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                 String NomRue = lebeller.getText().toString();
                 String CodPostal = codePostal.getText().toString();
                 String resTel = restaurantPhone.getText().toString();
-              //  String TypeDeVoix = typeVoix.getText()
 
                 if (userName.trim().length() > 8 || userName.trim().length() == 0) {
                     Toast pass = Toast.makeText(restaurantregister.this, " Username Not valid", Toast.LENGTH_SHORT);
@@ -88,7 +87,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                                         Toast pass = Toast.makeText(restaurantregister.this, " Nom de la rue non valid", Toast.LENGTH_SHORT);
                                         pass.show();
                                     } else {
-                                        if (CodPostal.trim().length() != 4) {
+                                        if (CodPostal.trim().length() < 4) {
                                             Toast pass = Toast.makeText(restaurantregister.this, " Code postal non valid", Toast.LENGTH_SHORT);
                                             pass.show();
                                         } else {
@@ -111,7 +110,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
 
                                                 repoRestau.close();
 
-                                                //helper.insertContact();
+
                                                 Intent i = new Intent(restaurantregister.this, GestionProfil.class);
                                                 i.putExtra("id_restau",idRestau);
                                                 startActivity(i);

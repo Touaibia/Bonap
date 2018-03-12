@@ -144,6 +144,7 @@
                     android:layout_width="114dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="10dp"
+                    android:entries="@array/array_typevoie"
                     android:layout_weight="0.6"
                     android:background="@drawable/roundedwhite">
 
@@ -166,7 +167,7 @@
                 android:textSize="14dp"
                 android:drawablePadding="5dp"
                 android:paddingStart="10dp"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:id="@+id/restaurantLebel"
                 android:layout_marginBottom="10dp"
                 />
