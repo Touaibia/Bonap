@@ -27,7 +27,7 @@ public class RepoPlat extends BaseDonnees {
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     public RepoPlat(Context context) {
-        super(context,TABLE_CREATE,TABLE_NAME);
+        super(context);
     }
 
     public void ajouter(Plat pl){
@@ -61,7 +61,7 @@ public class RepoPlat extends BaseDonnees {
 
     public ArrayList<Plat> selectionner(long id, int type){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NOM +", "+ IMAGE +", "+ PRIX +", "+ DESCRIP +
-                " FROM "+ TABLE_NAME +"where type = ? AND id_restau = ?", new String[]{""+id,""+type} );
+                " FROM "+ TABLE_NAME +" where type = ? AND id_restau = ?", new String[]{""+id,""+type} );
 
         ArrayList<Plat> lesPlats = new ArrayList<>();
 

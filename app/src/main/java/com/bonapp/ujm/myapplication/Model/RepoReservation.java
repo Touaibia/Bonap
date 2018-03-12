@@ -31,7 +31,7 @@ public class RepoReservation extends BaseDonnees {
             HEURE + " CHAR(5), " + RESTAU + " INTEGER "+ CLIENT + " INTEGER);";
 
     public RepoReservation(Context context, String creerTable) {
-        super(context,CREATE_TABLE,TABLE_NAME);
+        super(context);
     }
 
     public void ajouter(Reservation res){

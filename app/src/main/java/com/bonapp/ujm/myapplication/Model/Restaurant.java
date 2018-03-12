@@ -22,6 +22,10 @@ public class Restaurant{
     public ArrayList<Plat> entrees =  new ArrayList<>();
     public ArrayList<Plat> desserts =  new ArrayList<>();
 
+    public Restaurant(){
+
+    }
+
     public Restaurant(long id, String nom, int image, Adresse ad) {
         this.id = id;
         this.nom = nom;

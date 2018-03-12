@@ -77,10 +77,10 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         rep.open();
        // rep.DB.execSQL("DROP TABLE adresse");
 
-              rep.insertAdresse(new Adresse(2,"rue","Camille Colard","42000"),0);
+              rep.ajouter(new Adresse("2","rue","Camille Colard",42000,5));
 
-              rep.insertAdresse(new Adresse(1,"Place","Villeboeuf","42000"),0);
-              rep.insertAdresse(new Adresse(2,"Rue","des Forces","69002"),1);
+              rep.ajouter(new Adresse("1","Place","Villeboeuf",42000,7));
+              rep.ajouter(new Adresse("2","Rue","des Forces",69002,8));
 
         //BaseDonnees db = new BaseDonnees(this);
         //db.open();1 Place Villebœuf, 42000
@@ -191,7 +191,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         Geocoder geocoder = new Geocoder(getApplicationContext());
         RepoAdresse repoAd = new RepoAdresse(this);
         List<Adresse> list = new ArrayList<>();
-        list = repoAd.getAdresseProche();
+       // list = repoAd.getAdresseProche();
         RepoRestaurant rp = new RepoRestaurant(this);
 
         Toast.makeText(this,""+list.size(),Toast.LENGTH_LONG);

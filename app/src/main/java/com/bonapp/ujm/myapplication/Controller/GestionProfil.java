@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.Model.TypeAmbianceAdapter;
@@ -31,6 +33,8 @@ public class GestionProfil extends MenuManagerActivity {
     String type="";
 
     long id_restau;
+    Restaurant restau;
+    Adresse adresse;
 
 
     @Override
@@ -38,14 +42,24 @@ public class GestionProfil extends MenuManagerActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
-        Intent intent = getIntent();
-
-        id_restau = intent.getLongExtra("id_restau",1);
+//        Intent intent = getIntent();
+//
+//        id_restau = intent.getLongExtra("id_restau",1);
 
         RepoRestaurant repoRestau = new RepoRestaurant(this);
         repoRestau.open();
 
-        Restaurant restau = repoRestau.selectionnerProfil(id_restau);
+        restau = repoRestau.selectionnerProfil(1);
+        Log.d("LE NOM", restau.getNom());
+        adresse = restau.getAdresse();
+
+        TextView nom_restau = (TextView) findViewById(R.id.nom_restau);
+        TextView ad_restau = (TextView) findViewById(R.id.adr_restau);
+        TextView tel = (TextView) findViewById(R.id.tel_restau);
+
+        nom_restau.setText(restau.getNom());
+        ad_restau.setText(adresse.getNumero()+" "+adresse.getType_voie()+" "+adresse.getIntitule()+" "+adresse.getCode_postal());
+        tel.setText(restau.getTel());
 
         Button modifInfoGen = (Button) findViewById(R.id.mod_info_gen);
 
@@ -55,7 +69,6 @@ public class GestionProfil extends MenuManagerActivity {
                 modif_info_gen();
             }
         });
-
 
 
         //Affectation de la liste des types de cuisines

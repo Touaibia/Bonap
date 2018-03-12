@@ -14,7 +14,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
     public static final String TABLE_NAME = "typeCuisineRestaurant";
     public static final String KEY = "id";
-    public static final String TYPE = "type";
+    public static final String TYPE = "id_type";
     public static final String RESTAU = "id_restau";
 
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME +
@@ -26,7 +26,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
     public Context context;
 
     public RepoTypeCuisineRestaurant(Context context) {
-        super(context, TABLE_CREATE, TABLE_NAME);
+        super(context);
         this.context = context;
     }
 
@@ -60,11 +60,16 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
         ArrayList<Restaurant> lesRestaus = new ArrayList<>();
         RepoRestaurant repoRestaurant = new RepoRestaurant(context);
+
+        repoRestaurant.open();
+
         while(c.moveToNext()){
             int num = c.getInt(1);
 
             lesRestaus.add(repoRestaurant.selectionnerAccueil(num));
         }
+
+        repoRestaurant.close();
 
         return lesRestaus;
     }
@@ -76,11 +81,14 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
         ArrayList<TypeCuisine> lesTypes = new ArrayList<>();
         RepoTypeCuisine repoTypeCuisine = new RepoTypeCuisine(context);
+        repoTypeCuisine.open();
         while(c.moveToNext()){
             int num = c.getInt(1);
 
             lesTypes.add(repoTypeCuisine.selectionner(num));
         }
+
+        repoTypeCuisine.close();
 
         return lesTypes;
     }

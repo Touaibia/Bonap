@@ -24,7 +24,7 @@ public class RepoTypeCuisine extends BaseDonnees {
 
 
     public RepoTypeCuisine(Context context) {
-        super(context, TABLE_CREATE, TABLE_NAME);
+        super(context);
     }
 
     public void ajouter(TypeCuisine tp){

@@ -23,13 +23,12 @@ public class RepoRestaurant extends BaseDonnees {
                     "nom TEXT, " +
                     "email TEXT, " +
                     "password TEXT, " +
-                    "adresse INTEGER, " +
-                    "telephone TEXT"+
-                    "description TEXT"+
+                    "telephone TEXT, "+
+                    "description TEXT, "+
                     "image INTEGER);";
 
     public RepoRestaurant(Context context) {
-        super(context, TABLE_CREATE, TABLE);
+        super(context);
         this.context = context;
     }
 
@@ -40,7 +39,6 @@ public class RepoRestaurant extends BaseDonnees {
         contentValues.put("nom",r.getNom());
         contentValues.put("email",r.getEmail());
         contentValues.put("password",r.getMot_passe());
-        contentValues.put("adresse",r.getAdresse().getId());
         contentValues.put("telephone",r.getTel());
         contentValues.put("description",r.getDescription());
         contentValues.put("image",r.getImage());
@@ -83,21 +81,35 @@ public class RepoRestaurant extends BaseDonnees {
         Cursor c = DB.rawQuery("SELECT id, nom, email, telephone, image, description"+
                 " FROM "+ TABLE +" where id = ?" , new String[]{""+id} );
 
+        c.moveToNext();
+
         String nom = c.getString(1);
         String email = c.getString(2);
         String tel = c.getString(3);
         int img = c.getInt(4);
         String descrip = c.getString(5);
 
-        Adresse ad = new RepoAdresse(context).selectionner(id);
+        RepoAdresse repoAd = new RepoAdresse(context);
+        repoAd.open();
+        Adresse ad = repoAd.selectionner(id);
+        repoAd.close();
 
         RepoPlat repoPlat = new RepoPlat(context);
+
+        repoPlat.open();
 
         ArrayList<Plat> entree = repoPlat.selectionner(id,1);
         ArrayList<Plat> chaud = repoPlat.selectionner(id,2);
         ArrayList<Plat> dessert = repoPlat.selectionner(id,3);
 
-        ArrayList<TypeCuisine> types = new RepoTypeCuisineRestaurant(context).selectionnerType(id);
+        repoPlat.close();
+
+        RepoTypeCuisineRestaurant repoTypeCuisine = new RepoTypeCuisineRestaurant(context);
+        repoTypeCuisine.open();
+
+        ArrayList<TypeCuisine> types = repoTypeCuisine.selectionnerType(id);
+
+        repoTypeCuisine.close();
 
         return  new Restaurant(id, nom,tel,descrip,img,types,chaud,entree,dessert, ad);
     }
