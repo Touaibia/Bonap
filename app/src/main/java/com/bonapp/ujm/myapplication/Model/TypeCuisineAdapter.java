@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bonapp.ujm.myapplication.Controller.GestionProfil;
 import com.bonapp.ujm.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,13 +22,11 @@ import java.util.List;
 
 public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.MyViewHolder> {
 
-    private List<Pair<String,Integer>> lesTypes = Arrays.asList(
-            Pair.create("Lyra Belacqua", 0),
-            Pair.create("Pantalaimon", 1),
-            Pair.create("Roger Parslow", 2),
-            Pair.create("Lord Asriel", 3),
-            Pair.create("Marisa Coulter", 4)
-    );
+    private ArrayList<TypeCuisine> lesTypes;
+
+    public TypeCuisineAdapter(ArrayList<TypeCuisine> lesTypes) {
+        this.lesTypes = lesTypes;
+    }
 
     @Override
     public int getItemCount() {
@@ -35,13 +34,13 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
     }
 
     //Ajout d'un nouveau type de cuisine
-    public void addType(Pair<String, Integer> pair){
-        lesTypes.add(pair);
+    public void addType(TypeCuisine type){
+        lesTypes.add(type);
     }
 
     //Suppression d'un type de cuisine
-    public void deleteType(int position){
-        lesTypes.remove(position);
+    public void deleteType(TypeCuisine type){
+        lesTypes.remove(type);
     }
 
     @Override
@@ -53,16 +52,16 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Pair<String, Integer> pair = lesTypes.get(position);
+        TypeCuisine type = lesTypes.get(position);
 
         holder.boutonSup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteType(holder.leType.second);
+                deleteType(holder.leType);
             }
         });
 
-        holder.display(pair);
+        holder.display(type);
     }
 
 
@@ -70,7 +69,7 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
 
         private TextView typeCuisine;
         private Button boutonSup;
-        private Pair<String,Integer> leType;
+        private TypeCuisine leType;
 
         public MyViewHolder(View itemView){
             super(itemView);
@@ -79,9 +78,9 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
             boutonSup = (Button) itemView.findViewById(R.id.sup_type_cuis);
         }
 
-        public void display(Pair<String, Integer> pair) {
+        public void display(TypeCuisine pair) {
             leType = pair;
-            typeCuisine.setText(pair.first);
+            typeCuisine.setText(leType.getNom());
         }
 
     }
