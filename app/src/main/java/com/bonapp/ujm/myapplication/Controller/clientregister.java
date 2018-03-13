@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.Client;
+import com.bonapp.ujm.myapplication.Model.RepoAdresse;
 import com.bonapp.ujm.myapplication.Model.RepoInscription;
 import com.bonapp.ujm.myapplication.R;
 
@@ -57,14 +58,12 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
                 String passWord = password.getText().toString();
                 String confirmPassword = confirmpassword.getText().toString();
                 String Email = email.getText().toString();
-              /*  String Adress = adress.getText().toString();
-                String villle = ville.getText().toString();
-                String Telephone = telephone.getText().toString();*/
-                int NumRue = parseInt(numero.getText().toString());
+                String typevoie = typeVoix.getSelectedItem().toString();
+                String NumRue = numero.getText().toString();
                 String NomRue = lebeller.getText().toString();
                 String CodPostal = codePostal.getText().toString();
                 String CleintTel = ClientPhone.getText().toString();
-                Adresse ClientAdress = new  Adresse( NumRue, "boulvard",NomRue, CodPostal,5);
+
 
 
                 //  String TypeDeVoix = typeVoix.getText()
@@ -76,21 +75,31 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
                 else{
                         Client user = new Client();
 
-                        user.setType("client");
+                       // user.setType("client");
                         user.setUsername(userName);
                         user.setEmail(Email);
                         user.setPassword(passWord);
-                        user.setAdresse(ClientAdress);
+                        user.setAdresse(new Adresse());
                     /*    user.setAdress(Adress);
                         user.setCity(villle);
                         user.setPhone(Telephone);*/
                         user.setPhone(CleintTel);
                     RepoInscription repoInscription = new RepoInscription(this);
-                    repoInscription.insertContact(user);
+                    repoInscription.open();
+                    long idclient = repoInscription.insertContact(user);
 
+                    if(idclient!=-1){
+                        RepoAdresse repoAd = new RepoAdresse(this);
+                        Adresse ClientAdress = new  Adresse( NumRue,typevoie,NomRue, parseInt(CodPostal),idclient);
+                        repoAd.open();
 
+                        repoAd.ajouter(ClientAdress);
+
+                        repoAd.close();
+
+                    }
                     Intent i = new Intent(this,Accueil.class);
-                    Cursor cursor = repoInscription.db.DB.rawQuery("select* from contacts where username= userName",null);
+                    Cursor cursor = repoInscription.DB.rawQuery("select* from contacts where username= userName",null);
                     while(cursor.moveToNext()){
                         i.putExtra("client", cursor.getString(2));
                     }

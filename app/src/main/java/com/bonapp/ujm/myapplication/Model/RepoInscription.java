@@ -9,9 +9,8 @@ import android.widget.Toast;
  * Created by Nianfo on 04/03/2018.
  */
 
-public class RepoInscription {
+public class RepoInscription extends BaseDonnees {
 
-    public BaseDonnees db;
     Context context;
     private  static  final String TABLE_NAME = "contacts";
     private  static  final String COLUMN_ID ="id";
@@ -29,24 +28,20 @@ public class RepoInscription {
     private  static  final String TABLE_CREATE =
             "create table contacts(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "type TEXT, " +
                     "username TEXT, " +
                     "email TEXT, " +
-                    "password TEXT, " +
-                    "numrue TEXT, " +
-                    "nomrue TEXT, " +
-                    "codepostal TEXT);";
+                    "password TEXT," +
+                    "telephone INTEGER);";
 
 
-    public RepoInscription(Context context){
-        Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
-       db = new BaseDonnees(context);
-       this.context = context;
-       db.open();
-
-   }
+    public RepoInscription(Context context) {
+        super(context);
+        Toast.makeText(context, "ouverure ok", Toast.LENGTH_LONG).show();
+        this.context = context;
+        this.tableName = "contacts";
+    }
     public boolean identification(String username, String pwd){
-        Cursor cursor = db.DB.rawQuery("select * from contacts " +
+        Cursor cursor = DB.rawQuery("select * from contacts " +
                 "where username = "+username+" and password = "+pwd,null);
 
         if (cursor.moveToNext()){
@@ -58,26 +53,16 @@ public class RepoInscription {
 
 
 
-    public void insertContact(Client conctact){
+    public long insertContact(Client conctact){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TYPE,conctact.getType());
         values.put(COLUMN_USERNAME,conctact.getUsername());
         values.put(COLUMN_EMAIL,conctact.getEmail());
         values.put(COLUMN_PASSWORD,conctact.getPassword());
-        values.put(COLUMN_NUMERORUE,conctact.getAdresse().getNumero());
-        values.put(COLUMN_NOMRUE,conctact.getAdresse().getIntitule());
-        values.put(COLUMN_CODEPOSTAL,conctact.getAdresse().getCode_postal());
         values.put(COLUMN_TELEPHONE,conctact.getPhone());
 
-        if(db.DB.insert(TABLE_NAME,null,values)==-1){
-
-            Toast.makeText(context,"echec d'insertion",Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context,"insertion ok",Toast.LENGTH_LONG).show();
-        }
-
+        return DB.insert(TABLE_NAME,null,values);
     }
 
-    public void close(){db.close();}
+    public void close(){DB.close();}
 
 }

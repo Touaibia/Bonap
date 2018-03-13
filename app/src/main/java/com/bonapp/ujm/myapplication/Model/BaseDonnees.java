@@ -14,13 +14,16 @@ import android.widget.Toast;
 public class BaseDonnees extends SQLiteOpenHelper {
     public SQLiteDatabase DB ;
     public static final String DATA_BASE_NAME = "bonapp.db ";
-    private static final int VERSION =17;
+    private static final int VERSION =19;
     private String creerTable;
     public String tableName;
-   /* private String TABLE_CREATE = "create table clientResto(" +
+    private  static  final String TABLE_CREATE =
+            "create table contacts(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "id_client TEXT, " +
-                    "id_resto TEXT)";*/
+                    "username TEXT, " +
+                    "email TEXT, " +
+                    "password TEXT," +
+                    "telephone INTEGER);";
     private static final String TABLE_RESATURANT = "create table restaurant("+
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "nom TEXT, " +
@@ -66,11 +69,11 @@ public class BaseDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(TABLE_RESATURANT);
-//        sqLiteDatabase.execSQL(TABLE_ADRESSE);
-        sqLiteDatabase.execSQL(TABLE_PLAT);
-        sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
-        sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
+//        sqLiteDatabase.execSQL(TABLE_RESATURANT);
+         sqLiteDatabase.execSQL(TABLE_CREATE);
+//        sqLiteDatabase.execSQL(TABLE_PLAT);
+//        sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
+   //     sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
     }
 
     @Override

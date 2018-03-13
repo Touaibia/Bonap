@@ -82,17 +82,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
               rep.ajouter(new Adresse("1","Place","Villeboeuf",42000,7));
               rep.ajouter(new Adresse("2","Rue","des Forces",69002,8));
 
-        //BaseDonnees db = new BaseDonnees(this);
-        //db.open();1 Place Villebœuf, 42000
         RepoRestaurant repo = new RepoRestaurant(this);
-       // repo.ajouteRestaurant(R1);
-        //repo.ajouteRestaurant(R2);
-
-       /* List<Restaurant> l = repo.;
-        for (int i =0 ;i<l.size();i++) {
-            l.get(i).setImage(R.drawable.icons8couverts50);
-            list.add(l.get(i));
-        }*/
 
        list.add(new Restaurant());
 
@@ -190,8 +180,9 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         final Context  c = this;
         Geocoder geocoder = new Geocoder(getApplicationContext());
         RepoAdresse repoAd = new RepoAdresse(this);
+        repoAd.open();
         List<Adresse> list = new ArrayList<>();
-       // list = repoAd.getAdresseProche();
+        list = repoAd.plusProcheRestoAdresse();
         RepoRestaurant rp = new RepoRestaurant(this);
 
         Toast.makeText(this,""+list.size(),Toast.LENGTH_LONG);

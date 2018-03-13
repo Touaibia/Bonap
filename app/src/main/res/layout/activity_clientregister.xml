@@ -145,6 +145,7 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.6"
+                    android:entries="@array/array_typevoie"
                     android:background="@drawable/roundedwhite">
 
                 </Spinner>
