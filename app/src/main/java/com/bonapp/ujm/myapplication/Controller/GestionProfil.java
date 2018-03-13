@@ -53,10 +53,12 @@ public class GestionProfil extends MenuManagerActivity {
 //
 //        id_restau = intent.getLongExtra("id_restau",1);
 
+        id_restau = 1;
+
         RepoRestaurant repoRestau = new RepoRestaurant(this);
         repoRestau.open();
 
-        restau = repoRestau.selectionnerProfil(1);
+        restau = repoRestau.selectionnerProfil(id_restau);
         Log.d("LE NOM", restau.getNom());
         Adresse adresse = restau.getAdresse();
 
@@ -90,11 +92,6 @@ public class GestionProfil extends MenuManagerActivity {
             }
         });
 
-        //Affectation de la liste des types d'ambiances
-//        RecyclerView rvv = (RecyclerView) findViewById(R.id.list_type_amb);
-//        rvv.setLayoutManager(new LinearLayoutManager(this));
-//        rvv.setAdapter(new TypeAmbianceAdapter());
-
         Button accesCarte = (Button) findViewById(R.id.voir_carte);
         accesCarte.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +101,16 @@ public class GestionProfil extends MenuManagerActivity {
         });
 
         builder = new AlertDialog.Builder(this);
+
+        RepoTypeCuisineRestaurant repoTypeCuisineRestaurant = new RepoTypeCuisineRestaurant(this);
+        repoTypeCuisineRestaurant.open();
+        ArrayList<TypeCuisineRestaurant> mesTypes = repoTypeCuisineRestaurant.selectAll();
+        repoTypeCuisineRestaurant.close();
+
+        for (int i = 0; i < mesTypes.size(); i++) {
+            TypeCuisineRestaurant tr = mesTypes.get(i);
+            Log.d("Ligne "+i+" ", ""+tr.getId() +" "+tr.getId_type()+" "+tr.getId_restau());
+        }
     }
 
 
@@ -191,7 +198,7 @@ public class GestionProfil extends MenuManagerActivity {
             text.setVisibility(View.INVISIBLE);
             RecyclerView rv = (RecyclerView) findViewById(R.id.list_type_cuis);
             rv.setLayoutManager(new LinearLayoutManager(this));
-            rv.setAdapter(new TypeCuisineAdapter(restau.getTypeCuisines()));
+            rv.setAdapter(new TypeCuisineAdapter(id_restau, restau.getTypeCuisines(),GestionProfil.this));
         }
     }
 
@@ -263,8 +270,11 @@ public class GestionProfil extends MenuManagerActivity {
                             //Ajout du type dans les types du Restau en BD
                             RepoTypeCuisineRestaurant repoTypeRestau = new RepoTypeCuisineRestaurant(GestionProfil.this);
                             repoTypeRestau.open();
-                            repoTypeRestau.ajouter(new TypeCuisineRestaurant(id_type,id_restau));
+                            long val = repoTypeRestau.ajouter(new TypeCuisineRestaurant(id_type,id_restau));
                             repoTypeRestau.close();
+
+                            Toast.makeText(GestionProfil.this,
+                                    "Le Nouveau Type est bien  ajouté en BD avec ID = "+val,Toast.LENGTH_LONG ).show();
 
                             setTypeCuisine();
                         }
@@ -285,9 +295,13 @@ public class GestionProfil extends MenuManagerActivity {
 
                             restau.getTypeCuisines().add(nouv);
                             setTypeCuisine();
+
+                            Toast.makeText(GestionProfil.this,
+                                    "Le Type est bien associé au Restau en BD !",Toast.LENGTH_LONG ).show();
                         }
                         else {
-
+                            Toast.makeText(GestionProfil.this,
+                                    "Rien n'a été ajouté !",Toast.LENGTH_LONG ).show();
                         }
 
                         Toast.makeText(GestionProfil.this,

@@ -77,6 +77,7 @@ public class RepoAdresse extends BaseDonnees {
 
         return ad;
     }
+
     public List<Adresse> plusProcheRestoAdresse(){
         List<Adresse> list = new ArrayList<>();
         Cursor cursor = DB.rawQuery("select* from "+TABLE_NAME,null);

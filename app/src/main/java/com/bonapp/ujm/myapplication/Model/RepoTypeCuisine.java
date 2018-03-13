@@ -76,6 +76,8 @@ public class RepoTypeCuisine extends BaseDonnees {
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NOM +", "+ IMAGE +", " + DESCRIP +
                 " FROM "+ TABLE_NAME +" where id = ?" , new String[]{""+id} );
 
+        c.moveToNext();
+
         int num = c.getInt(0);
         String nom = c.getString(1);
         int img = c.getInt(2);

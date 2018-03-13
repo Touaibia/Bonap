@@ -60,6 +60,11 @@ public class BaseDonnees extends SQLiteOpenHelper {
             "id_type INTEGER, "+
             "id_restau INTEGER)";
 
+    public static final String TABLE_IMAGE = "CREATE TABLE image(" +
+             "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+             "bitmap  BLOB, "+
+             "id_parent INTEGER);";
+
     public BaseDonnees(Context context) {
         super(context, DATA_BASE_NAME, null, VERSION);
 //        this.creerTable = creerTable;
@@ -69,11 +74,13 @@ public class BaseDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        sqLiteDatabase.execSQL(TABLE_RESATURANT);
-         sqLiteDatabase.execSQL(TABLE_CREATE);
-//        sqLiteDatabase.execSQL(TABLE_PLAT);
-//        sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
-   //     sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
+          sqLiteDatabase.execSQL(TABLE_RESATURANT);
+          sqLiteDatabase.execSQL(TABLE_ADRESSE);
+          sqLiteDatabase.execSQL(TABLE_CREATE);
+          sqLiteDatabase.execSQL(TABLE_PLAT);
+          sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
+          sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
+          sqLiteDatabase.execSQL(TABLE_IMAGE);
     }
 
     @Override

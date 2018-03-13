@@ -195,6 +195,11 @@ public class MaCarteMenu extends MenuManagerActivity {
         }
         else if (resultCode == RESULT_OK && requestCode == 30){
             Uri imageUri = data.getData();
+
+//            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+//
+//            img.setImageBitmap(bmp);
+
             //set the image in an ImageView
             conteneur.setImageURI(imageUri);
         }
