@@ -14,8 +14,8 @@ import android.widget.Toast;
 public class BaseDonnees extends SQLiteOpenHelper {
     public SQLiteDatabase DB ;
     public static final String DATA_BASE_NAME = "bonapp.db ";
-    private static final int VERSION =19;
-    private String creerTable;
+    private static final int VERSION =22;
+    public String creerTable;
     public String tableName;
     private  static  final String TABLE_CREATE =
             "create table contacts(" +
@@ -60,6 +60,7 @@ public class BaseDonnees extends SQLiteOpenHelper {
             "id_type INTEGER, "+
             "id_restau INTEGER)";
 
+
     public BaseDonnees(Context context) {
         super(context, DATA_BASE_NAME, null, VERSION);
 //        this.creerTable = creerTable;
@@ -70,15 +71,17 @@ public class BaseDonnees extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 //        sqLiteDatabase.execSQL(TABLE_RESATURANT);
-         sqLiteDatabase.execSQL(TABLE_CREATE);
+      //   sqLiteDatabase.execSQL(CREATE_TABLE);
 //        sqLiteDatabase.execSQL(TABLE_PLAT);
 //        sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
    //     sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
+        sqLiteDatabase.execSQL(creerTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+tableName);
+
             onCreate(sqLiteDatabase);
     }
 

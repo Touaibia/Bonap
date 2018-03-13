@@ -3,7 +3,10 @@ package com.bonapp.ujm.myapplication.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class RepoAdresse extends BaseDonnees {
     public static final String INTITULE = "intitule";
     public static final String CODE = "code_post";
     public static final String RESTAU = "id_restau";
+    public Context context;
 
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME +
             "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ NUM + " CHAR(10), "+ TYPE + " CHAR(20), "+
@@ -28,6 +32,9 @@ public class RepoAdresse extends BaseDonnees {
 
     public RepoAdresse(Context context) {
         super(context);
+        this.tableName = TABLE_NAME;
+        this.creerTable = TABLE_CREATE;
+        this.context = context;
     }
 
     public void ajouter(Adresse ad){
@@ -77,19 +84,24 @@ public class RepoAdresse extends BaseDonnees {
 
         return ad;
     }
-    public List<Adresse> plusProcheRestoAdresse(){
+    public List<Adresse> plusProcheRestoAdresse() {
         List<Adresse> list = new ArrayList<>();
         Cursor cursor = DB.rawQuery("select* from "+TABLE_NAME,null);
         while (cursor.moveToNext()){
-            list.add(new Adresse(
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getInt(4),
-                    cursor.getInt(5)
-            ));
+            List<Address> addresses = null;
+            String adr = cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3)+" "+cursor.getInt(4);
+
+                list.add(new Adresse(
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5)
+                ));
+
         }
         return list;
     }
+
 
 }

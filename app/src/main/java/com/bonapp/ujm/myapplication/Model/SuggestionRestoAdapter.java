@@ -60,6 +60,9 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), PageRestaurant.class);
+                    if(nom.getText().toString().equals(" ")) nom.setText("Restau à sainté");
+                    intent.putExtra("nom",nom.getText().toString());
+                    intent.putExtra("id",12);
                     startActivity(view.getContext(),intent, null);
 
                 }

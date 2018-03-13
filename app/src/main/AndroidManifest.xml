@@ -70,6 +70,7 @@
         <activity android:name=".Controller.restaurantregister"></activity>
         <activity android:name=".Controller.clientregister"></activity>
         <activity android:name=".Controller.profilclient"></activity>
+        <activity android:name=".Controller.fait_la_reservation"></activity>
     </application>
 
 </manifest>

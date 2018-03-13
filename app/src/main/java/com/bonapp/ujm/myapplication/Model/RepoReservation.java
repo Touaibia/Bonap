@@ -27,11 +27,13 @@ public class RepoReservation extends BaseDonnees {
     public static final String CLIENT = "id_client";
 
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
-            " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " DATE, "+
-            HEURE + " CHAR(5), " + RESTAU + " INTEGER "+ CLIENT + " INTEGER);";
+            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " DATE, "+
+            HEURE + " CHAR(5), " + RESTAU + " INTEGER, "+ CLIENT + " INTEGER);";
 
-    public RepoReservation(Context context, String creerTable) {
+    public RepoReservation(Context context) {
         super(context);
+        this.tableName = TABLE_NAME;
+        this.creerTable = CREATE_TABLE;
     }
 
     public void ajouter(Reservation res){

@@ -30,6 +30,7 @@ import com.bonapp.ujm.myapplication.Model.Client;
 import com.bonapp.ujm.myapplication.Model.RepoAdresse;
 import com.bonapp.ujm.myapplication.Model.RepoClientRestoFavori;
 import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
+import com.bonapp.ujm.myapplication.Model.RepoTypeCuisineRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
 import com.bonapp.ujm.myapplication.Model.SuggestionRestoAdapter;
@@ -48,6 +49,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import static java.lang.Math.abs;
 
@@ -67,22 +69,24 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     String budget;
     String type;
     String typeAmbiance;
+    List<Restaurant> list = new ArrayList<Restaurant>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
-        List<Restaurant> list = new ArrayList<Restaurant>();
 
-        RepoAdresse rep = new RepoAdresse(this);
+
+       /* RepoAdresse rep = new RepoAdresse(this);
         rep.open();
        // rep.DB.execSQL("DROP TABLE adresse");
 
               rep.ajouter(new Adresse("2","rue","Camille Colard",42000,5));
 
               rep.ajouter(new Adresse("1","Place","Villeboeuf",42000,7));
-              rep.ajouter(new Adresse("2","Rue","des Forces",69002,8));
+              rep.ajouter(new Adresse("2","Rue","des Forces",69002,8));*/
 
         RepoRestaurant repo = new RepoRestaurant(this);
+        //repo.open();
 
        list.add(new Restaurant());
 
@@ -96,10 +100,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mmap);
         mapFragment.getMapAsync( this);
-
-
-
-
 
 
     }
@@ -124,15 +124,20 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 builder.create().show();
                 break;
             case R.id.buttonFiltre:
-                Spinner distance = (Spinner) findViewById(R.id.distance);
+                View view1 = View.inflate(this,R.layout.layout_filtre,null);
+                Spinner distance = (Spinner) view1.findViewById(R.id.distance);
                 String d = distance.getSelectedItem().toString();
-                Spinner budget = (Spinner) findViewById(R.id.budget);
-                String b = distance.getSelectedItem().toString();
-                Spinner type = (Spinner) findViewById(R.id.type);
-                String t = distance.getSelectedItem().toString();
-
+                Spinner budget = (Spinner) view1.findViewById(R.id.budget);
+                String b = budget.getSelectedItem().toString();
+                Spinner type = (Spinner) view1.findViewById(R.id.type);
+                String t = type.getSelectedItem().toString();
                 this.distance = d;
-                //Toast.makeText(this, d, Toast.LENGTH_LONG).show();
+                RepoRestaurant rep = new RepoRestaurant(this);
+                RepoTypeCuisineRestaurant repo = new RepoTypeCuisineRestaurant(this);
+                rep.open();
+                list = repo.selectionnerRestau(2);
+               // list.add(rep.selectionnerAccueil(10));
+                //list.add(rep.selectionnerAccueil(1));
 
                 break;
 
@@ -182,31 +187,24 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         RepoAdresse repoAd = new RepoAdresse(this);
         repoAd.open();
         List<Adresse> list = new ArrayList<>();
-        list = repoAd.plusProcheRestoAdresse();
+        //list = repoAd.plusProcheRestoAdresse();
         RepoRestaurant rp = new RepoRestaurant(this);
 
-        Toast.makeText(this,""+list.size(),Toast.LENGTH_LONG);
-        localisationClient();
+       // localisationClient();
         try {
             int i;
             for(i=0;i<list.size();i++) {
-                Toast.makeText(this,"okkk "+list.get(i).getId(),Toast.LENGTH_LONG);
-                // addresses = geocoder.getFromLocationName(adress[i], 1);
                 List<Address> addresses = null;
                 Adresse ad = list.get(i);
                     String adr =ad.getNumero()+" "+ad.getType_voie()+" "+ad.getIntitule()+" "+ad.getCode_postal();
                 addresses = geocoder.getFromLocationName(adr, 1);
-
+                RepoRestaurant repoRestaurant = new RepoRestaurant(this);
+              // final Restaurant restaurant = repoRestaurant.selectionnerAccueil(12);
 
                 double ltde = addresses.get(0).getLatitude();
-                Toast.makeText(this,""+ltde,Toast.LENGTH_LONG);
 
                 double lont = addresses.get(0).getLongitude();
-                Toast.makeText(this,""+lont,Toast.LENGTH_LONG);
-                //Toast.makeText(this,""+listLTLG.get(0)+" "+listLTLG.get(1) ,Toast.LENGTH_LONG);
-                double dist = calculeDistance(ltde,lont,ltd,lng);
-                int d=0;
-            if(d<10) {
+
                 Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adr));
                 marker.setTag(0);
                 gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -215,6 +213,8 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(c);
                         View resto = getLayoutInflater().inflate(R.layout.visiteresto, null);
+                        TextView restauNom = resto.findViewById(R.id.restauNomVisite);
+                      //  restauNom.setText(restaurant.getNom());
                         builder.setView(resto);
                         builder.create().show();
 
@@ -222,7 +222,6 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         return false;
                     }
                 });
-            }
         }
         } catch (IOException e) {
             e.printStackTrace();
@@ -245,11 +244,9 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 public void onLocationChanged(Location location) {
                     lng = location.getLongitude();
                     ltd = location.getLatitude();
-
-                  //  RepoAdresse repoAdresse = new RepoAdresse(this);
-
-                    latLng = new LatLng(ltd, lng);
                     Geocoder geocoder = new Geocoder(getApplicationContext());
+                    latLng = new LatLng(ltd, lng);
+
                     try {
 
                         List<Address> addresses1 =  geocoder.getFromLocation(ltd,lng,1);
@@ -258,7 +255,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         str1 += addresses1.get(0).getCountryName() +",";
                         str1 += addresses1.get(0).getFeatureName();
                         gMap.addMarker(new MarkerOptions()
-                                .position(latLng).title(str1)
+                                .position(latLng).title(""+ltd)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         );
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -307,7 +304,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         String str1 = addresses1.get(0).getLocality() + ",";
                         str1 += addresses1.get(0).getCountryName() +",";
                         str1 += addresses1.get(0).getFeatureName();
-                        gMap.addMarker(new MarkerOptions().position(latLng).title(str1).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                        gMap.addMarker(new MarkerOptions().position(latLng).title(""+ltd).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                         ));
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
@@ -339,17 +336,14 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
     }
 
-    public double calculeDistance(double ltde,double lng,double ltde2,double lng2){
-        double x = Math.pow(abs(ltde)-abs(ltde2),2);
-        double y = Math.pow(abs(lng)-abs(lng2),2);
-        double d = Math.sqrt(x+y);
+    public double distance(double ltd1,double lgt1, double ltd2, double lgt2){
+        ltd1 = ltd1*Math.PI/180;
+        ltd2 = ltd2*Math.PI/180;
+        lgt1 = lgt1*Math.PI/180;
+        lgt2 = lgt2*Math.PI/180;
+        double d =  Math.cos(Math.sin(ltd1)*Math.sin(ltd2)+Math.cos(ltd1)*Math.cos(ltd2)*Math.cos(lgt2-lgt1))*6371;
 
         return d;
     }
-
-    public void plusProcheResto(int d){
-
-    }
-
 
 }
