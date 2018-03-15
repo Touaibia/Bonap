@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static java.lang.Float.parseFloat;
 
@@ -62,6 +64,18 @@ public class MaCarteMenu extends MenuManagerActivity {
                 "Vous avez "+ restaurant.plats.size()+" plats",
                 Toast.LENGTH_LONG ).show();
 
+        RepoImage repoImage = new RepoImage(this);
+        repoImage.open();
+        ArrayList<Image> images = repoImage.selectAll();
+        repoImage.close();
+
+        Toast.makeText(MaCarteMenu.this,
+                "Vous avez "+ images.size()+" Image",
+                Toast.LENGTH_LONG ).show();
+
+        for (int i=0; i < images.size(); i++){
+            Log.d("Image "+i, ""+ images.get(i).getId()+ " - "+images.get(i).getId_parent());
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.gridPlat);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,7 +92,6 @@ public class MaCarteMenu extends MenuManagerActivity {
                 ajoutNouv();
             }
         });
-
 
     }
 
@@ -130,6 +143,9 @@ public class MaCarteMenu extends MenuManagerActivity {
             repoImage.open();
             Image image = new Image(bmp, id_plat);
             long id_img = repoImage.ajouter(image);
+            Toast.makeText(MaCarteMenu.this,
+                    "L'ID de la nouvelle image est : "+ id_img,
+                    Toast.LENGTH_LONG ).show();
             image.setId(id_img);
             repoImage.close();
 
@@ -256,8 +272,12 @@ public class MaCarteMenu extends MenuManagerActivity {
             Uri imageUri = data.getData();
             //set the image in an ImageView
 
-            bmp = (Bitmap) data.getExtras().get("data");
-            adapter.setUri(imageUri);
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                adapter.setUri(bmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if (resultCode == RESULT_OK && requestCode == 30){
             Uri imageUri = data.getData();

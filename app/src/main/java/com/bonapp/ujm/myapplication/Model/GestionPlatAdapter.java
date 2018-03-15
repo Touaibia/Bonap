@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
     Context myContext;
     AlertDialog.Builder builder;
     ImageView conteneur;
+    Bitmap bmp;
 
     public GestionPlatAdapter(MaCarteMenu maCarteMenu, ArrayList<Plat> list, AlertDialog.Builder build) {
         this.plats = list;
@@ -58,12 +60,17 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
         return new GestionPlatAdapter.MyViewHolder(view);
     }
 
-    public void deletePlat(int pos, long id){
+    public void deletePlat(int pos, long id_plat, long id_img){
         RepoPlat repoPlat = new RepoPlat(myContext);
         repoPlat.open();
-        int val = repoPlat.supprimer(id);
+        int val = repoPlat.supprimer(id_plat);
         //si la dissociation se passe bien
         if(val > 0){
+
+            RepoImage repoImage = new RepoImage(myContext);
+            repoImage.open();
+            repoImage.supprimer(id_img);
+            repoImage.close();
 
             plats.remove(pos);
             notifyItemRemoved(pos);
@@ -136,7 +143,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
             }
         });
 
-        edit_img_plat.setImageDrawable(holder.imageView.getDrawable());
+        edit_img_plat.setImageBitmap(plat.getImage().bitmap);
         edit_nom_plat.setText(holder.nom.getText());
         edit_desc_plat.setText(holder.descrip.getText());
         edit_prix_plat.setText(holder.prix.getText());
@@ -159,6 +166,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
                         plat.setNom(edit_nom_plat.getText().toString());
                         plat.setDescription(edit_desc_plat.getText().toString());
                         plat.setPrix(parseFloat(edit_prix_plat.getText().toString()));
+                        plat.getImage().setBitmap(bmp);
                         repoPlat.modifier(plat);
                         repoPlat.close();
 
@@ -183,7 +191,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // ici on traite la suppression de l'élément
-                        deletePlat(holder.getAdapterPosition(),plat.getId());
+                        deletePlat(holder.getAdapterPosition(),plat.getId(),plat.getImage().getId());
 
                     }
                 })
@@ -201,8 +209,9 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
         ((Activity) myContext).startActivityForResult(photoPicker,20);
     }
 
-    public void setUri(Uri imgUri){
-        conteneur.setImageURI(imgUri);
+    public void setUri(Bitmap bmp){
+        this.bmp = bmp;
+        conteneur.setImageBitmap(bmp);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -224,7 +233,7 @@ public class GestionPlatAdapter extends RecyclerView.Adapter<GestionPlatAdapter.
 
         public void display(Plat plat) {
             nom.setText(plat.nom);
-            //imageView.setImageBitmap(plat.image.getBitmap());
+            imageView.setImageBitmap(plat.image.getBitmap());
             prix.setText(""+plat.getPrix());
             descrip.setText(plat.getDescription());
         }

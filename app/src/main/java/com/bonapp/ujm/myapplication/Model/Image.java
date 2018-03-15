@@ -11,6 +11,10 @@ public class Image {
     Bitmap bitmap;
     long id_parent;
 
+    public Image(){
+
+    }
+
     public Image(long id, Bitmap bit, long id_parent) {
         this.id = id;
         this.bitmap = bit;
@@ -34,7 +38,7 @@ public class Image {
         return bitmap;
     }
 
-    public void setCont(Bitmap cont) {
+    public void setBitmap(Bitmap cont) {
         this.bitmap = cont;
     }
 

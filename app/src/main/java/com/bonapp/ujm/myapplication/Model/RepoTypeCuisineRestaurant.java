@@ -85,7 +85,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
         repoRestaurant.open();
 
         while(c.moveToNext()){
-            int num = c.getInt(1);
+            long num = c.getInt(1);
 
             lesRestaus.add(repoRestaurant.selectionnerAccueil(num));
         }

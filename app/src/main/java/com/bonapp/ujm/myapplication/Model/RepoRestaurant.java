@@ -53,7 +53,7 @@ public class RepoRestaurant extends BaseDonnees {
         Cursor c = DB.rawQuery("SELECT id, nom"+
                 " FROM "+ TABLE +" where id = ?" , new String[]{""+id} );
 
-        int idd = c.getInt(0);
+        long idd = c.getInt(0);
         String nom = c.getString(1);
        // int img = c.getInt(2);
         /*
