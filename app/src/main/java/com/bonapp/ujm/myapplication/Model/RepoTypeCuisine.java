@@ -87,4 +87,5 @@ public class RepoTypeCuisine extends BaseDonnees {
 
         return type;
     }
+
 }

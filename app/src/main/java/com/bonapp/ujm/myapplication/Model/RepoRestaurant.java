@@ -52,8 +52,8 @@ public class RepoRestaurant extends BaseDonnees {
     public Restaurant selectionnerAccueil(long id){
         Cursor c = DB.rawQuery("SELECT id, nom"+
                 " FROM "+ TABLE +" where id = ?" , new String[]{""+id} );
-
-        long idd = c.getInt(0);
+        c.moveToNext();
+        int idd = c.getInt(0);
         String nom = c.getString(1);
        // int img = c.getInt(2);
         /*
@@ -63,9 +63,11 @@ public class RepoRestaurant extends BaseDonnees {
 
          */
 
-        Adresse ad = new RepoAdresse(context).selectionner(idd);
+        RepoAdresse ad = new RepoAdresse(context);
+                ad.open();
+        Adresse add = ad.selectionner(idd);
 
-        return  new Restaurant(idd, nom, 0, ad );
+        return  new Restaurant(idd, nom, 0, add );
     }
 
     //Selectionner mon restaurant
@@ -106,5 +108,12 @@ public class RepoRestaurant extends BaseDonnees {
         repoTypeCuisineRes.close();
 
         return  new Restaurant(id, nom,tel,descrip,0,types,chaud,entree,dessert, ad);
+    }
+
+    public long getId(String username){
+        Cursor cursor = DB.rawQuery("select id from restaurant where nom = ?",new String[]{username});
+
+        cursor.moveToNext();
+       return cursor.getInt(0);
     }
 }

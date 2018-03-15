@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bonapp.ujm.myapplication.Model.RepoInscription;
 import com.bonapp.ujm.myapplication.R;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener{
@@ -46,7 +47,16 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 String identif = identifiant.getText().toString();
                 String pass = password.getText().toString();
 
-                String paswrdClient = helper.searchClient(identif);
+                RepoInscription repoInscription = new RepoInscription(this);
+                repoInscription.open();
+                long id = repoInscription.identification(identif,pass);
+                if(id!=-1){
+                    Intent intent = new Intent(this,Accueil.class);
+                    intent.putExtra("idclient",id);
+                    startActivity(intent);
+                }
+
+                /*String paswrdClient = helper.searchClient(identif);
 
 
 
@@ -69,7 +79,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-                }
+                }*/
                 break;
             case R.id.inscriptionClient_Resto:
                 startActivity(new Intent(this, chooseusers.class));

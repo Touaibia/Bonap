@@ -58,7 +58,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             super(itemView);
             nom = (TextView) itemView.findViewById(R.id.reservationRestoNom);
             date= (TextView) itemView.findViewById(R.id.reservationDate);
-           // nbper = (TextView) itemView.findViewById(R.id.nbper);
+            nbper = (TextView) itemView.findViewById(R.id.nbper);
             //jour = (TextView) itemView.findViewById(R.id.jour);
 
 
@@ -76,10 +76,14 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         //@SuppressLint("ResourceType")
         public void display(Reservation rest){
             current = rest;
-            nom.setText(rest.restaurant.nom);
-            //date.setText(rest.date);
-           // nbper.setText(rest.nb_personnes);
-           // jour.setText(rest.jour);
+            /*
+            nom du restau à recuperer
+             */
+
+            nom.setText("nom du restaurant");
+            date.setText(rest.date.toString()+" à "+rest.heure);
+//            nbper.setText(rest.nb_personnes);
+            //jour.setText(rest.heure);
         }
     }
 }
