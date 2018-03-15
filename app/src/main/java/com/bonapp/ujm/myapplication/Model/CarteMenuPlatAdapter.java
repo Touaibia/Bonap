@@ -70,7 +70,7 @@ public class CarteMenuPlatAdapter extends RecyclerView.Adapter<CarteMenuPlatAdap
 
         public void display(Plat plats) {
             nom.setText(plats.nom);
-           imageView.setImageResource(plats.image);
+           imageView.setImageBitmap(plats.image.getBitmap());
         }
     }
 }

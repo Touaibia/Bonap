@@ -90,8 +90,8 @@ public class RepoRestaurant extends BaseDonnees {
 
         repoPlat.open();
 
-        ArrayList<Plat> entree = repoPlat.selectionner(id,1);
-        ArrayList<Plat> chaud = repoPlat.selectionner(id,2);
+        ArrayList<Plat> entree = repoPlat.selectionner(id,2);
+        ArrayList<Plat> chaud = repoPlat.selectionner(id,1);
         ArrayList<Plat> dessert = repoPlat.selectionner(id,3);
 
         repoPlat.close();

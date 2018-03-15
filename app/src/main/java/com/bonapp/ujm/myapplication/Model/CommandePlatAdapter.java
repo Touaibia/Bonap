@@ -60,7 +60,7 @@ public class CommandePlatAdapter extends RecyclerView.Adapter<CommandePlatAdapte
         public void display(Plat plats){
             nom.setText(plats.nom);
             nb_plats.setTag(plats.nb_plats);
-            imageView.setImageResource(plats.image);
+            imageView.setImageBitmap(plats.image.getBitmap());
         }
     }
 

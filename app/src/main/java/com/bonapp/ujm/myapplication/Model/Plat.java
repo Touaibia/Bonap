@@ -8,8 +8,8 @@ import android.widget.Spinner;
  */
 
 public class Plat {
-    public int id;
-    public int image;
+    public long id;
+    public Image image;
     public String nom;
     public float prix;
     public String description;
@@ -18,7 +18,7 @@ public class Plat {
     public Spinner nb_plats;
 
 
-    public Plat(int id, int image, String nom, float prix, String description) {
+    public Plat(long id, Image image, String nom, float prix, String description) {
         this.id = id;
         this.image = image;
         this.nom = nom;
@@ -26,8 +26,14 @@ public class Plat {
         this.description = description;
     }
 
-    public Plat(String nom, int image, float prix, String description, int type, long id_restau) {
-        this.image = image;
+    public Plat(long id, String nom, float prix, String description) {
+        this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.description = description;
+    }
+
+    public Plat(String nom, float prix, String description, int type, long id_restau) {
         this.nom = nom;
         this.prix = prix;
         this.description = description;
@@ -35,7 +41,11 @@ public class Plat {
         this.id_restau=id_restau;
     }
 
-    public int getImage() {
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Image getImage() {
         return image;
     }
 
@@ -51,7 +61,7 @@ public class Plat {
         return description;
     }
 
-    public void setImage(int image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 
@@ -75,7 +85,7 @@ public class Plat {
         this.type = type;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

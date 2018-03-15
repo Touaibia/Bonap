@@ -43,7 +43,6 @@ public class BaseDonnees extends SQLiteOpenHelper {
     private static final String TABLE_PLAT = "create table plat("+
             "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
             "nom TEXT, "+
-            "image INTEGER, "+
             "type INTEGER, "+
             "description TEXT, "+
             "prix REAL, "+

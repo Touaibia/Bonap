@@ -96,7 +96,9 @@ public class GestionProfil extends MenuManagerActivity {
         accesCarte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GestionProfil.this, MaCarteMenu.class));
+                Intent intent = new Intent(GestionProfil.this, MaCarteMenu.class);
+                intent.putExtra("id_restau",id_restau);
+                startActivity(intent);
             }
         });
 

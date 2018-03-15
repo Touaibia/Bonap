@@ -27,6 +27,12 @@
         android:text="@string/select_image" />
 
     <EditText
+        android:id="@+id/prix_nouv_plat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Saisir le montant"/>
+
+    <EditText
         android:id="@+id/desc_nouv_plat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
