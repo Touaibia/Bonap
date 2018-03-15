@@ -30,7 +30,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/pageNomRestau"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:background="#4b4948"

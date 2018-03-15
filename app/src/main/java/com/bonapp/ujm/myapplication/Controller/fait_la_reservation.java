@@ -11,12 +11,15 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.RepoReservation;
 import com.bonapp.ujm.myapplication.Model.Reservation;
 import com.bonapp.ujm.myapplication.R;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static java.lang.Integer.parseInt;
@@ -36,9 +39,10 @@ public class fait_la_reservation extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fait_la_reservation);
-        TextView nomdurestau = (TextView) findViewById(R.id.ReserveRestauNom);
+        TextView nom = (TextView) findViewById(R.id.ReserveRestauNom);
         Intent intent = getIntent();
-        nomdurestau.setText(intent.getStringExtra("nom"));
+        nom.setText(intent.getStringExtra("restau"));
+       // Toast.makeText(this,""+intent.getLongExtra("id",-1),Toast.LENGTH_LONG).show();
 
     }
 
@@ -124,12 +128,20 @@ public class fait_la_reservation extends AppCompatActivity implements View.OnCli
             Intent intent = getIntent();
             long id = intent.getLongExtra("id",-1);
             Reservation reservation = new Reservation();
-            String[] d = datetext.split("/");
-            int y = parseInt(d[2]);
-            int m = parseInt(d[1]);
-            int dy = parseInt(d[0]);
-            Date date1 = new Date(y,m,dy);
-            reservation.setDate(date1);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+
+            try {
+                java.util.Date date1 = sdf.parse(datetext);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date1);
+                reservation.setDate(new Date( calendar.getTimeInMillis()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             reservation.setHeure(timetext);
             reservation.setId_client(0);
             reservation.setId_restau((int)id);

@@ -3,6 +3,7 @@ package com.bonapp.ujm.myapplication.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -65,8 +66,9 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
         while(c.moveToNext()){
             int num = c.getInt(1);
+            Toast.makeText(context, "" + num+" id restau trouver", Toast.LENGTH_LONG).show();
 
-            lesRestaus.add(repoRestaurant.selectionnerAccueil(num));
+            lesRestaus.add(repoRestaurant.selectionnerAccueil(1));
         }
 
         repoRestaurant.close();

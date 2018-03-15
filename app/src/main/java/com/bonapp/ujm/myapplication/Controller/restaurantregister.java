@@ -113,9 +113,12 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
 
                                                 repoRestau.open();
 
+
                                                 Restaurant resto = new Restaurant(userName,Email,passWord,resTel);
 
                                                 long idRestau = repoRestau.ajouteRestaurant(resto);
+                                                long idr = repoRestau.getId(userName);
+                                                Toast.makeText(this,"di1 "+idRestau+" idr "+idr,Toast.LENGTH_LONG).show();
                                                 if (idRestau != -1){
                                                     Log.d("MESSAGE","Enregistré correctement id = "+idRestau);
 

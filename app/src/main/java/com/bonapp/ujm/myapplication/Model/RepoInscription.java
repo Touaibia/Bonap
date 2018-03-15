@@ -25,7 +25,7 @@ public class RepoInscription extends BaseDonnees {
     private  static  final String COLUMN_NOMRUE = "nomrue";
     private  static  final String COLUMN_CODEPOSTAL = "codepostal";
 
-    private  static  final String TABLE_CREATE =
+    private  static  final String TABLE_CONTACTE =
             "create table contacts(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "username TEXT, " +
@@ -40,14 +40,14 @@ public class RepoInscription extends BaseDonnees {
         this.context = context;
         this.tableName = "contacts";
     }
-    public boolean identification(String username, String pwd){
-        Cursor cursor = DB.rawQuery("select * from contacts " +
-                "where username = "+username+" and password = "+pwd,null);
+    public long identification(String email, String pwd){
+        Cursor cursor = DB.rawQuery("select id from contacts " +
+                "where password = "+pwd,null);
 
         if (cursor.moveToNext()){
-            return true;
+            return cursor.getInt(0) ;
         }
-        return false;
+        return -1;
     }
 
 

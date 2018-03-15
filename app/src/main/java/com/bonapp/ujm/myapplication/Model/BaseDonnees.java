@@ -59,6 +59,13 @@ public class BaseDonnees extends SQLiteOpenHelper {
             "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
             "id_type INTEGER, "+
             "id_restau INTEGER)";
+    private  static  final String TABLE_CONTACTE =
+            "create table contacts(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "username TEXT, " +
+                    "email TEXT, " +
+                    "password TEXT," +
+                    "telephone INTEGER);";
 
 
     public BaseDonnees(Context context) {
@@ -70,12 +77,14 @@ public class BaseDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        sqLiteDatabase.execSQL(TABLE_RESATURANT);
-      //   sqLiteDatabase.execSQL(CREATE_TABLE);
-//        sqLiteDatabase.execSQL(TABLE_PLAT);
-//        sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
-   //     sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
-        sqLiteDatabase.execSQL(creerTable);
+        sqLiteDatabase.execSQL(TABLE_RESATURANT);
+        sqLiteDatabase.execSQL(TABLE_ADRESSE);
+        sqLiteDatabase.execSQL(TABLE_PLAT);
+        sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
+        sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
+        sqLiteDatabase.execSQL(TABLE_CONTACTE);
+
+//        sqLiteDatabase.execSQL(creerTable);
     }
 
     @Override

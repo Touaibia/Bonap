@@ -21,9 +21,10 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="1dp"
             android:gravity="center"
+            android:background="#4b4948"
             android:text="restaurant"
             android:textColor="@color/white"
-            android:background="#4b4948"
+
             android:textSize="30dp"/>
 
         <TextView

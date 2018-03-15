@@ -49,6 +49,7 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
        public TextView nom;
        public ImageView img;
        public Restaurant current;
+       public long id;
 
         public RestoViewHolder(final View itemView) {
             super(itemView);
@@ -62,7 +63,7 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
                     Intent intent = new Intent(view.getContext(), PageRestaurant.class);
                     if(nom.getText().toString().equals(" ")) nom.setText("Restau à sainté");
                     intent.putExtra("nom",nom.getText().toString());
-                    intent.putExtra("id",12);
+                    intent.putExtra("id",id);
                     startActivity(view.getContext(),intent, null);
 
                 }
@@ -71,6 +72,7 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
 
         //@SuppressLint("ResourceType")
         public void display(Restaurant rest){
+            id = rest.getId();
             current = rest;
             nom.setText(rest.nom);
             img.setImageResource(rest.image);

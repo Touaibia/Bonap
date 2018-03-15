@@ -9,12 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.bonapp.ujm.myapplication.Model.RepoReservation;
 import com.bonapp.ujm.myapplication.Model.Reservation;
 import com.bonapp.ujm.myapplication.Model.ReservationAdapter;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
 import com.bonapp.ujm.myapplication.Model.SuggestionRestoAdapter;
 import com.bonapp.ujm.myapplication.R;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,16 +28,14 @@ public class MesReservations extends AppCompatActivity {
         setContentView(R.layout.activity_mes_reservations);
 
         List<Reservation> list = new ArrayList<>();
+        RepoReservation reservation = new RepoReservation(this);
+        reservation.open();
 
-       /* Reservation r1 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "12h-13h");
-        Reservation r2 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "14h-14h30");
-        Reservation r3 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "12h-13h30");
-        Reservation r4 = new Reservation(new Restaurant("R2", R.drawable.icons8menuutilisateurhomme50), "20h-21h");
-
-        list.add(r1);
-        list.add(r2);
-        list.add(r3);
-        list.add(r4);*/
+        try {
+            list = reservation.selectionClient(0);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         RecyclerView listv = (RecyclerView) findViewById(R.id.listReservation);
 

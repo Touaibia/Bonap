@@ -3,6 +3,7 @@ package com.bonapp.ujm.myapplication.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,7 @@ import static com.bonapp.ujm.myapplication.Model.RepoPlat.PRIX;
  */
 
 public class RepoReservation extends BaseDonnees {
-
+    Context context;
     public static final String TABLE_NAME = "reservation";
     public static final String KEY = "id";
     public static final String NB_PERS = "nb_personnes";
@@ -32,6 +33,7 @@ public class RepoReservation extends BaseDonnees {
 
     public RepoReservation(Context context) {
         super(context);
+        context = context;
         this.tableName = TABLE_NAME;
         this.creerTable = CREATE_TABLE;
     }
@@ -85,8 +87,9 @@ public class RepoReservation extends BaseDonnees {
     }
 
     public ArrayList<Reservation> selectionClient(int id_client) throws ParseException {
+       // Toast.makeText(context," okk ",Toast.LENGTH_LONG).show();
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NB_PERS +", "+ SERVICE +", "+ HEURE +", "+ DATE +", "+RESTAU+
-                " FROM "+ TABLE_NAME +"where id_client = ?", new String[]{""+id_client} );
+                " FROM "+ TABLE_NAME +" where id_client = ?", new String[]{""+id_client} );
 
         ArrayList<Reservation> lesReserv = new ArrayList<>();
 

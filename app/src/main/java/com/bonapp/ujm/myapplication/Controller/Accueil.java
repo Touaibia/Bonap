@@ -1,7 +1,9 @@
 package com.bonapp.ujm.myapplication.Controller;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -16,10 +18,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +36,10 @@ import com.bonapp.ujm.myapplication.Model.Client;
 import com.bonapp.ujm.myapplication.Model.RepoAdresse;
 import com.bonapp.ujm.myapplication.Model.RepoClientRestoFavori;
 import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
+import com.bonapp.ujm.myapplication.Model.RepoTypeCuisine;
 import com.bonapp.ujm.myapplication.Model.RepoTypeCuisineRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
+import com.bonapp.ujm.myapplication.Model.TypeCuisine;
 import com.bonapp.ujm.myapplication.R;
 import com.bonapp.ujm.myapplication.Model.SuggestionRestoAdapter;
 
@@ -46,11 +54,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import static java.lang.Integer.parseInt;
 import static java.lang.Math.abs;
 
 public class Accueil extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
@@ -62,33 +73,30 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     double lng;
     double ltd;
     List listLTLG = new ArrayList<>();
-    String [] adress = {"2 rue camille colard 42000 saint-etienne","88 rue antoine durafour"};
-    BaseDonnees db ;
+    String[] adress = {"2 rue camille colard 42000 saint-etienne", "88 rue antoine durafour"};
+    BaseDonnees db;
 
-    String distance;
+    static float distanceDemance = 0;
     String budget;
     String type;
     String typeAmbiance;
     List<Restaurant> list = new ArrayList<Restaurant>();
+    Context c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
-
-       /* RepoAdresse rep = new RepoAdresse(this);
-        rep.open();
-       // rep.DB.execSQL("DROP TABLE adresse");
-
-              rep.ajouter(new Adresse("2","rue","Camille Colard",42000,5));
-
-              rep.ajouter(new Adresse("1","Place","Villeboeuf",42000,7));
-              rep.ajouter(new Adresse("2","Rue","des Forces",69002,8));*/
+        c = this;
 
         RepoRestaurant repo = new RepoRestaurant(this);
-        //repo.open();
+        repo.open();
+        Cursor cursor = repo.DB.rawQuery("select id from restaurant",null);
+        cursor.moveToNext();
 
-       list.add(new Restaurant());
+        Toast.makeText(this, "" + cursor.getInt(0)+" km", Toast.LENGTH_LONG).show();
+
+        //list.add(new Restaurant());
 
         RecyclerView listv = (RecyclerView) findViewById(R.id.list);
 
@@ -99,7 +107,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mmap);
-        mapFragment.getMapAsync( this);
+        mapFragment.getMapAsync(this);
 
 
     }
@@ -109,53 +117,145 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.filtreRech:
-                AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
                 View view2 = getLayoutInflater().inflate(R.layout.layout_filtre, null);
-                TextView nview = (TextView) view2.findViewById(R.id.Position);
-                Spinner spd = (Spinner) view.findViewById(R.id.distance);
-                Button buttonfiltre = (Button) view2.findViewById(R.id.buttonFiltre);
+                //Recupératio de tous les types de cuisine en BD
+                RepoTypeCuisine repoTypeCuisine = new RepoTypeCuisine(this);
+                repoTypeCuisine.open();
+                ArrayList<TypeCuisine> lesTypes = repoTypeCuisine.selectionner();
+                repoTypeCuisine.close();
+                final List<String> typeIdNom = new ArrayList<>();
+                //Création d'une liste nomType_id pour le spinner
+                List<String> tab1 = new ArrayList<>();
+                for (int i=0; i < lesTypes.size(); i++){
+                    tab1.add(""+lesTypes.get(i).getNom());
+                    typeIdNom.add(""+lesTypes.get(i).getNom()+"_"+lesTypes.get(i).getId());
+
+                }
+
+                tab1.add("Autre");
+
+                final Spinner spinner = (Spinner) view2.findViewById(R.id.typegoutclient);
+                // Create an ArrayAdapter using the string array and a default spinner layout
+                ArrayAdapter<String> adapter1;
+                adapter1 = new  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tab1);
+                // Specify the layout to use when the list of choices appears
+                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                spinner.setAdapter(adapter1);
+                final String[] type = new String[1];
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
+
+                        type[0] = parent.getItemAtPosition(pos).toString();
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+
+
+                final Spinner distance = (Spinner) view2.findViewById(R.id.distance);
                 builder.setTitle(" Filtre votre rechercher");
+
+                List<String> tab = new ArrayList<>();
+                int j;
+                for (j = 1; j < 20; j++){
+                    tab.add(j+" km");
+                }
+                tab.add(60+" km");
+                tab.add("plus");
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tab);
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                distance.setAdapter(adapter);
+                final String[] dist = new String[1];
+                distance.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                       dist[0] = adapterView.getItemAtPosition(i).toString();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+
+
+                builder.setPositiveButton("VALIDE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        View view1 = View.inflate(getApplicationContext(), R.layout.layout_filtre, null);
+                        EditText adresse = (EditText) view1.findViewById(R.id.Position);
+                        String adress = adresse.getText().toString();
+                        String[] d = dist[0].split(" ");
+                        Spinner budget = (Spinner) view1.findViewById(R.id.budget);
+                        String b = budget.getSelectedItem().toString();
+
+                        if(!d[0].equals("plus")) {
+                            distanceDemance =(float) parseInt(d[0]);
+                            localisationDesRestau();
+
+                        }
+
+                        RepoTypeCuisineRestaurant repo = new RepoTypeCuisineRestaurant(getApplicationContext());
+                        repo.open();
+                        int j;
+                        for(j=0;j<typeIdNom.size();j++){
+                            String[] typeidnom = typeIdNom.get(j).split("_");
+                            if(type[0].equals(typeidnom[0])){
+                            list = repo.selectionnerRestau(parseInt(typeidnom[1]));
+                            Toast.makeText(getApplicationContext(),list.get(0).getNom(),Toast.LENGTH_LONG).show();
+                                RecyclerView listv = (RecyclerView) findViewById(R.id.list);
+
+                                listv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                                listv.setAdapter(new SuggestionRestoAdapter(list));
+                                TextView rech = (TextView) findViewById(R.id.filtreRech);
+                                rech.setOnClickListener((View.OnClickListener) c);
+                            }
+                        }
+
+
+
+
+                    }
+                });
+
                 builder.setView(view2);
-
                 builder.create().show();
-                break;
-            case R.id.buttonFiltre:
-                View view1 = View.inflate(this,R.layout.layout_filtre,null);
-                Spinner distance = (Spinner) view1.findViewById(R.id.distance);
-                String d = distance.getSelectedItem().toString();
-                Spinner budget = (Spinner) view1.findViewById(R.id.budget);
-                String b = budget.getSelectedItem().toString();
-                Spinner type = (Spinner) view1.findViewById(R.id.type);
-                String t = type.getSelectedItem().toString();
-                this.distance = d;
-                RepoRestaurant rep = new RepoRestaurant(this);
-                RepoTypeCuisineRestaurant repo = new RepoTypeCuisineRestaurant(this);
-                rep.open();
-                list = repo.selectionnerRestau(2);
-               // list.add(rep.selectionnerAccueil(10));
-                //list.add(rep.selectionnerAccueil(1));
+
 
                 break;
+
+
 
 
         }
     }
+
     @Override
-   public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.accueil:
-                startActivity(new Intent(this,Accueil.class));
-                return  true;
+                startActivity(new Intent(this, Accueil.class));
+                return true;
             case R.id.profile:
-                startActivity(new Intent(this,profilclient.class));
-                return  true;
+                startActivity(new Intent(this, profilclient.class));
+                return true;
             case R.id.Reservation:
-                startActivity(new Intent(this,MesReservations.class));
-                return  true;
+                startActivity(new Intent(this, MesReservations.class));
+                return true;
             case R.id.Reglage:
                 AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
                 View view2 = getLayoutInflater().inflate(R.layout.parametre, null);
@@ -163,11 +263,11 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                 TextView pseudo = view2.findViewById(R.id.pseudo);
                 TextView email = view2.findViewById(R.id.clientemail);
                 Intent intent = getIntent();
-               // Client client = (Client) intent.getSerializableExtra("client");
+                // Client client = (Client) intent.getSerializableExtra("client");
                 String us = intent.getStringExtra("client");
                 pseudo.setText(us);
                 //pseudo.setText(us);
-               // email.setText(client.getEmail());
+                // email.setText(client.getEmail());
                 builder.setView(view2);
 
                 builder.create().show();
@@ -177,52 +277,66 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         }
 
         return super.onOptionsItemSelected(item);
-   }
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
-        final Context  c = this;
+       localisationClient();
+
+
+    }
+
+    public void localisationDesRestau(){
         Geocoder geocoder = new Geocoder(getApplicationContext());
         RepoAdresse repoAd = new RepoAdresse(this);
         repoAd.open();
         List<Adresse> list = new ArrayList<>();
-        //list = repoAd.plusProcheRestoAdresse();
-        RepoRestaurant rp = new RepoRestaurant(this);
-
-       // localisationClient();
+        list = repoAd.plusProcheRestoAdresse();
+        localisationClient();
         try {
             int i;
-            for(i=0;i<list.size();i++) {
+            for (i = 0; i < list.size(); i++) {
+                //localistion de l'adresse de restaurant
                 List<Address> addresses = null;
                 Adresse ad = list.get(i);
-                    String adr =ad.getNumero()+" "+ad.getType_voie()+" "+ad.getIntitule()+" "+ad.getCode_postal();
+                String adr = ad.getNumero() + " " + ad.getType_voie() + " " + ad.getIntitule() + " " + ad.getCode_postal();
                 addresses = geocoder.getFromLocationName(adr, 1);
-                RepoRestaurant repoRestaurant = new RepoRestaurant(this);
-              // final Restaurant restaurant = repoRestaurant.selectionnerAccueil(12);
+                double adresslat = addresses.get(0).getLatitude();
+                double adresslong = addresses.get(0).getLongitude();
 
-                double ltde = addresses.get(0).getLatitude();
+                // recuperation de la position du client
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-                double lont = addresses.get(0).getLongitude();
+                    return;
+                }
+                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                double currentlat = location.getLatitude();
+                double currentlon = location.getLongitude();
 
-                Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(ltde, lont)).title(adr));
-                marker.setTag(0);
-                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
+                //calcule de la distance
+                float[] results = new float[10];
+                Location.distanceBetween(adresslat,adresslong,currentlat,currentlon,results);
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(c);
-                        View resto = getLayoutInflater().inflate(R.layout.visiteresto, null);
-                        TextView restauNom = resto.findViewById(R.id.restauNomVisite);
-                      //  restauNom.setText(restaurant.getNom());
-                        builder.setView(resto);
-                        builder.create().show();
-
-                        //Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-                });
-        }
+                float d = results[0]/1000;
+                if(d<=distanceDemance) {
+                    Marker marker = gMap.addMarker(new MarkerOptions().position(new LatLng(adresslat, adresslong)).title("" + results[0] / 1000));
+                    marker.setTag(0);
+                    gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(c);
+                            View resto = getLayoutInflater().inflate(R.layout.visiteresto, null);
+                            TextView restauNom = resto.findViewById(R.id.restauNomVisite);
+                            //  restauNom.setText(restaurant.getNom());
+                            builder.setView(resto);
+                            builder.create().show();
+                            Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                    });
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

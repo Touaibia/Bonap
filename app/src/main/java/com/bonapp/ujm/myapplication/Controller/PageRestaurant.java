@@ -34,14 +34,25 @@ public class PageRestaurant extends AppCompatActivity implements View.OnClickLis
         TextView carteMe =  (TextView) findViewById(R.id.CarteMenu);
         carteMe.setOnClickListener(this);
 
+        Intent intent = getIntent();
+        String nom = intent.getStringExtra("nom");
+        long id = intent.getLongExtra("id",-1);
+
+        TextView nomRestau = (TextView) findViewById(R.id.pageNomRestau);
+        nomRestau.setText(nom);
+
     }
 
     public void onClick(View view){
 
         switch (view.getId()){
             case R.id.CarteMenu:
-                Intent intent = new Intent(this,CarteMenu.class);
-                startActivity(intent);
+                Intent intent = getIntent();
+                String nomRe = intent.getStringExtra("nom");
+                long idRe = intent.getLongExtra("id",-1);
+                Intent intentR = new Intent(this,CarteMenu.class);
+                if(idRe!=-1) intentR.putExtra("idrestau",idRe);
+                startActivity(intentR);
                 break;
             case R.id.reserve:
                 Intent it = getIntent();
@@ -51,7 +62,7 @@ public class PageRestaurant extends AppCompatActivity implements View.OnClickLis
                 intent1.putExtra("restau",nom);
                 intent1.putExtra("id",id);
                 startActivity(intent1);
-               // setContentView(R.layout.fait_la_reservation);
+
                 break;
 
             case R.id.commande:
