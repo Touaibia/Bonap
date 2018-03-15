@@ -5,34 +5,42 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp">
 
+    <TextView
+        android:id="@+id/nom_plat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Le Nom du plat"/>
+
     <ImageView
         android:id="@+id/img_plat"
         android:layout_width="150dp"
         android:layout_height="120dp"
+        android:layout_below="@id/nom_plat"
         android:src="@drawable/planchecharcuterie"/>
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/prix_plat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@id/img_plat">
+        android:layout_marginLeft="60dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:text="25$"
+        android:layout_below="@id/nom_plat"
+        android:layout_toRightOf="@id/img_plat"/>
 
-        <TextView
-            android:id="@+id/nom_plat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Le Nom du plat"/>
-
-        <TextView
-            android:id="@+id/desc_plat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="La Description du plat"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/desc_plat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/prix_plat"
+        android:layout_toRightOf="@id/img_plat"
+        android:lines="3"
+        android:ellipsize="end"
+        android:textSize="15sp"
+        android:text="La Description du plat"/>
 
     <TextView
         android:id="@+id/plat_opt"

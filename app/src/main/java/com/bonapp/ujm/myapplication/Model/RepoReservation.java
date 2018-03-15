@@ -35,7 +35,6 @@ public class RepoReservation extends BaseDonnees {
         super(context);
         context = context;
         this.tableName = TABLE_NAME;
-        this.creerTable = CREATE_TABLE;
     }
 
     public void ajouter(Reservation res){

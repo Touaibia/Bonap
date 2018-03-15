@@ -53,7 +53,7 @@ public class DessertAdapter extends BaseAdapter {
         ImageView img = (ImageView) view.findViewById(R.id.imagePlat);
 
         Nom.setText(plat.get(i).nom);
-        img.setImageResource(plat.get(i).image);
+        img.setImageBitmap(plat.get(i).image.getBitmap());
         return view;
     }
 }

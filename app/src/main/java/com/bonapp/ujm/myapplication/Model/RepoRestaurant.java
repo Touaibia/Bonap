@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -91,18 +92,20 @@ public class RepoRestaurant extends BaseDonnees {
 
         repoPlat.open();
 
-        ArrayList<Plat> entree = repoPlat.selectionner(id,1);
-        ArrayList<Plat> chaud = repoPlat.selectionner(id,2);
+        ArrayList<Plat> entree = repoPlat.selectionner(id,2);
+        ArrayList<Plat> chaud = repoPlat.selectionner(id,1);
         ArrayList<Plat> dessert = repoPlat.selectionner(id,3);
 
         repoPlat.close();
 
-        RepoTypeCuisineRestaurant repoTypeCuisine = new RepoTypeCuisineRestaurant(context);
-        repoTypeCuisine.open();
+        RepoTypeCuisineRestaurant repoTypeCuisineRes = new RepoTypeCuisineRestaurant(context);
+        repoTypeCuisineRes.open();
 
-        ArrayList<TypeCuisine> types = repoTypeCuisine.selectionnerType(id);
+        ArrayList<TypeCuisine> types = repoTypeCuisineRes.selectionnerType(id);
 
-        repoTypeCuisine.close();
+        Log.d("Mon MESSAGE : ", types.size()+"");
+
+        repoTypeCuisineRes.close();
 
         return  new Restaurant(id, nom,tel,descrip,0,types,chaud,entree,dessert, ad);
     }
