@@ -1,17 +1,14 @@
 package com.bonapp.ujm.myapplication.Model;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.bonapp.ujm.myapplication.Controller.fait_la_commande;
+import com.bonapp.ujm.myapplication.Controller.GestionPublication;
 import com.bonapp.ujm.myapplication.R;
 
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.List;
 public class CommandePlatAdapter extends RecyclerView.Adapter<CommandePlatAdapter.commdViewHolder> {
 
     private List<Plat> plat;
-    public CommandePlatAdapter(fait_la_commande fait_la_commande, List<Plat> list){
+    public CommandePlatAdapter(GestionPublication.fait_la_commande fait_la_commande, List<Plat> list){
         this.plat = list;
     }
     @Override
