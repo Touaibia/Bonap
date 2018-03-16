@@ -29,13 +29,12 @@ public class RepoInscription {
     private  static  final String TABLE_CREATE =
             "create table contacts(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "type TEXT, " +
                     "username TEXT, " +
                     "email TEXT, " +
                     "password TEXT, " +
-                    "numrue TEXT, " +
-                    "nomrue TEXT, " +
-                    "codepostal TEXT);";
+                    "adresse INTEGER, " +
+                    "telephone TEXT;";
+
 
 
     public RepoInscription(Context context){
@@ -58,15 +57,13 @@ public class RepoInscription {
 
 
 
-    public void insertContact(Client conctact){
+    public long insertContact(Client conctact){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TYPE,conctact.getType());
         values.put(COLUMN_USERNAME,conctact.getUsername());
         values.put(COLUMN_EMAIL,conctact.getEmail());
         values.put(COLUMN_PASSWORD,conctact.getPassword());
         values.put(COLUMN_NUMERORUE,conctact.getAdresse().getNumero());
-        values.put(COLUMN_NOMRUE,conctact.getAdresse().getIntitule());
-        values.put(COLUMN_CODEPOSTAL,conctact.getAdresse().getCode_postal());
+        values.put("adresse",conctact.getAdresse().getId());
         values.put(COLUMN_TELEPHONE,conctact.getPhone());
 
         if(db.DB.insert(TABLE_NAME,null,values)==-1){
@@ -75,7 +72,7 @@ public class RepoInscription {
         } else {
             Toast.makeText(context,"insertion ok",Toast.LENGTH_LONG).show();
         }
-
+        return db.DB.insert(TABLE_NAME,null,values);
     }
 
     public void close(){db.close();}
