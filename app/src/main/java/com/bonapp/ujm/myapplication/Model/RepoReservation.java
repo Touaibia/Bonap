@@ -27,8 +27,8 @@ public class RepoReservation extends BaseDonnees {
     public static final String RESTAU = "id_restau";
     public static final String CLIENT = "id_client";
 
-    public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
-            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " DATE, "+
+    public static final String CREATE_RESERVATION = "CREATE TABLE " + TABLE_NAME +
+            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " TEXT, "+
             HEURE + " CHAR(5), " + RESTAU + " INTEGER, "+ CLIENT + " INTEGER);";
 
     public RepoReservation(Context context) {
@@ -37,17 +37,19 @@ public class RepoReservation extends BaseDonnees {
         this.tableName = TABLE_NAME;
     }
 
-    public void ajouter(Reservation res){
+    public long ajouter(Reservation res, String date){
         ContentValues contVal = new ContentValues();
 
         contVal.put(NB_PERS, res.getNb_personnes());
         contVal.put(SERVICE, res.getService());
-        contVal.put(DATE, String.valueOf(res.getDate()));
+        contVal.put(DATE, date);
         contVal.put(HEURE, res.getHeure());
         contVal.put(RESTAU, res.getId_restau());
         contVal.put(CLIENT, res.getId_client());
 
-        DB.insert(TABLE_NAME,null,contVal);
+        long id = DB.insert(TABLE_NAME,null,contVal);
+       // Toast.makeText(context,"reservation :"+id,Toast.LENGTH_LONG).show();
+        return id;
     }
 
     public void supprimer(int id){
@@ -86,9 +88,9 @@ public class RepoReservation extends BaseDonnees {
     }
 
     public ArrayList<Reservation> selectionClient(int id_client) throws ParseException {
-       // Toast.makeText(context," okk ",Toast.LENGTH_LONG).show();
+//       Toast.makeText(context," okknn ",Toast.LENGTH_LONG).show();
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NB_PERS +", "+ SERVICE +", "+ HEURE +", "+ DATE +", "+RESTAU+
-                " FROM "+ TABLE_NAME +" where id_client = ?", new String[]{""+id_client} );
+                " FROM "+ TABLE_NAME+" where "+CLIENT+ " = ?", new String[]{""+id_client} );
 
         ArrayList<Reservation> lesReserv = new ArrayList<>();
 
@@ -100,12 +102,10 @@ public class RepoReservation extends BaseDonnees {
             String dateStr = c.getString(4);
             int restau_id = c.getInt(5);
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
 
                 date =  dateFormat.parse(dateStr);
-
-
             lesReserv.add(new Reservation(id,nb_pers,serv,date,heure,restau_id));
         }
         return lesReserv;

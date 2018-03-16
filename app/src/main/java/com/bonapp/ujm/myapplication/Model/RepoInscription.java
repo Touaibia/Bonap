@@ -36,13 +36,13 @@ public class RepoInscription extends BaseDonnees {
 
     public RepoInscription(Context context) {
         super(context);
-        Toast.makeText(context, "ouverure ok", Toast.LENGTH_LONG).show();
+       // Toast.makeText(context, "ouverure ok", Toast.LENGTH_LONG).show();
         this.context = context;
-        this.tableName = "contacts";
+       // this.tableName = "contacts";
     }
     public long identification(String email, String pwd){
         Cursor cursor = DB.rawQuery("select id from contacts " +
-                "where password = "+pwd,null);
+                "where password = ?",new String[]{""+pwd});
 
         if (cursor.moveToNext()){
             return cursor.getInt(0) ;

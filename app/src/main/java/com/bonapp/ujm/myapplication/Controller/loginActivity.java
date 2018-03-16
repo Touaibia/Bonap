@@ -49,11 +49,15 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
                 RepoInscription repoInscription = new RepoInscription(this);
                 repoInscription.open();
+                Toast.makeText(this, "passw "+pass, Toast.LENGTH_LONG).show();
                 long id = repoInscription.identification(identif,pass);
                 if(id!=-1){
                     Intent intent = new Intent(this,Accueil.class);
                     intent.putExtra("idclient",id);
                     startActivity(intent);
+                }else {
+                    Toast.makeText(this, "identifiant incorrecte", Toast.LENGTH_LONG).show();
+
                 }
 
                 /*String paswrdClient = helper.searchClient(identif);

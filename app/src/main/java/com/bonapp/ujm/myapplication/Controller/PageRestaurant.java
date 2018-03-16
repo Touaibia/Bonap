@@ -26,7 +26,7 @@ import java.util.Timer;
 
 public class PageRestaurant extends AppCompatActivity implements View.OnClickListener{
 
-
+long idclient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +35,13 @@ public class PageRestaurant extends AppCompatActivity implements View.OnClickLis
         carteMe.setOnClickListener(this);
 
         Intent intent = getIntent();
-        String nom = intent.getStringExtra("nom");
+        String nomrestau = intent.getStringExtra("nomRestau");
         long id = intent.getLongExtra("id",-1);
+        long idcc = intent.getIntExtra("idClient",-1);
+        if(idcc!=-1) idclient = idcc;
 
         TextView nomRestau = (TextView) findViewById(R.id.pageNomRestau);
-        nomRestau.setText(nom);
+        nomRestau.setText(nomrestau);
 
     }
 
@@ -56,11 +58,13 @@ public class PageRestaurant extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.reserve:
                 Intent it = getIntent();
-                String nom = it.getStringExtra("nom");
-                long id = it.getLongExtra("id",0);
+                String nom = it.getStringExtra("nomRestau");
+                long id = it.getLongExtra("idRestau",-1);
+                long idc = it.getLongExtra("idClient",-1);
                 Intent intent1 = new Intent(this,fait_la_reservation.class);
                 intent1.putExtra("restau",nom);
-                intent1.putExtra("id",id);
+                intent1.putExtra("idrestau",id);
+                intent1.putExtra("idclient",idc);
                 startActivity(intent1);
 
                 break;
@@ -95,16 +99,36 @@ public class PageRestaurant extends AppCompatActivity implements View.OnClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.accueil:
-                startActivity(new Intent(this, Accueil.class));
+                Intent intent0 = new Intent(this, Accueil.class);
+                intent0.putExtra("idclient",idclient);
+                startActivity(intent0);
                 return true;
             case R.id.profile:
-                startActivity(new Intent(this, profilclient.class));
+                Intent intent11 = new Intent(this, profilclient.class);
+                intent11.putExtra("idclient",idclient);
+                startActivity(intent11);
                 return true;
             case R.id.Reservation:
-                startActivity(new Intent(this, MesReservations.class));
+                Intent intentm = new Intent(this, MesReservations.class);
+                intentm.putExtra("idclient",idclient);
+                startActivity(intentm);
                 return true;
+            case R.id.Reglage:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                View view2 = getLayoutInflater().inflate(R.layout.parametre, null);
+                builder.setTitle("Parametre");
+                TextView pseudo = view2.findViewById(R.id.pseudo);
+                TextView email = view2.findViewById(R.id.clientemail);
+                Intent intent = getIntent();
+                // Client client = (Client) intent.getSerializableExtra("client");
+                String us = intent.getStringExtra("client");
+                pseudo.setText(us);
+                //pseudo.setText(us);
+                // email.setText(client.getEmail());
+                builder.setView(view2);
 
-
+                builder.create().show();
+                return true;
         }
         return false;
     }

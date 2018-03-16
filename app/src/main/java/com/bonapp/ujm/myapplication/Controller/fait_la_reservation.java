@@ -92,7 +92,7 @@ public class fait_la_reservation extends AppCompatActivity implements View.OnCli
             listener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                    String time = i + ":" + i1;
+                    String time = i + ":" + i1+":"+00;
                     textViewtime = (TextView) findViewById(R.id.ReservtimeDate);
                     textViewtime.setText(time);
 
@@ -124,33 +124,44 @@ public class fait_la_reservation extends AppCompatActivity implements View.OnCli
             String[] p = nbptext.split(":");
 
             String datetext = date.getText().toString();
+            datetext = datetext+" "+time;
             String timetext = time.getText().toString();
             Intent intent = getIntent();
             long id = intent.getLongExtra("id",-1);
             Reservation reservation = new Reservation();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-
+            java.util.Date date1 = null;
             try {
-                java.util.Date date1 = sdf.parse(datetext);
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date1);
-                reservation.setDate(new Date( calendar.getTimeInMillis()));
+                date1 = sdf.parse(datetext);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            reservation.setHeure(timetext);
-            reservation.setId_client(0);
-            reservation.setId_restau((int)id);
-            reservation.setNb_personnes(parseInt(p[1]));
-            reservation.setService(0);
-            RepoReservation repo = new RepoReservation(this);
-            repo.open();
-            repo.ajouter(reservation);
-            repo.close();
+            reservation.setDate(date1);
+            Intent in = getIntent();
+            long idr = in.getLongExtra("idrestau",-1);
+            long idc = in.getLongExtra("idclient",-1);
+
+            if(idr!=-1 && idc!=-1){
+                reservation.setId_restau((int)idr);
+                reservation.setId_client((int)idc);
+                reservation.setHeure(timetext);
+                Toast.makeText(this," test "+parseInt(p[1]),Toast.LENGTH_LONG).show();
+                reservation.setNb_personnes(parseInt(p[1]));
+                reservation.setService(0);
+                RepoReservation repo = new RepoReservation(this);
+                repo.open();
+              long id1 = repo.ajouter(reservation, datetext);
+                repo.close();
+            }
+            else {
+                Toast.makeText(this,"Erreur d'enregistrement merci de reprendre",Toast.LENGTH_LONG).show();
+            }
+
+
+
 
             break;
     }
