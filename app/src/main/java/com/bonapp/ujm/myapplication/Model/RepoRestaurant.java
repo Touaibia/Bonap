@@ -32,14 +32,14 @@ public class RepoRestaurant extends BaseDonnees {
         this.tableName = "restaurant";
     }
 
-    public boolean identification(String username, String pwd){
-        Cursor cursor = DB.rawQuery("select * from restaurant " +
-                "where nom = "+username+" and password = "+pwd,null);
+    public long identification(String username, String pwd){
+        Cursor cursor = DB.rawQuery("select id from contacts " +
+                "where password = "+pwd,null);
 
         if (cursor.moveToNext()){
-            return true;
+            return cursor.getInt(0) ;
         }
-        return false;
+        return -1;
     }
 
     public long  ajouteRestaurant(Restaurant r){
