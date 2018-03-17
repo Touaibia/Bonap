@@ -66,7 +66,7 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
                     if(nom.getText().toString().equals(" ")) nom.setText("Restau à sainté");
                     intent.putExtra("nomRestau",nom.getText().toString());
                     intent.putExtra("idRestau",id);
-                    intent.putExtra("idClient",idclient);
+                    intent.putExtra("idclient",idclient);
                     startActivity(view.getContext(),intent, null);
 
                 }

@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,10 +23,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +51,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -77,12 +81,15 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     BaseDonnees db;
 
     static float distanceDemance = 0;
+    static float zoom = 10;
     String budget;
     String type;
     String typeAmbiance;
     List<Restaurant> list = new ArrayList<Restaurant>();
     Context c;
     long idclient;
+    MapFragment mapFragment;
+    ViewGroup.LayoutParams params;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,16 +111,28 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         Intent intent = getIntent();
         long id = intent.getLongExtra("idclient",-1);
         if(id!=-1) idclient = id;
-        RecyclerView listv = (RecyclerView) findViewById(R.id.list);
 
-        listv.setLayoutManager(new LinearLayoutManager(this));
-        listv.setAdapter(new SuggestionRestoAdapter(list,idclient));
         TextView rech = (TextView) findViewById(R.id.filtreRech);
         rech.setOnClickListener(this);
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
+         mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mmap);
         mapFragment.getMapAsync(this);
+        params = mapFragment.getView().getLayoutParams();
+        TextView recommandation = (TextView) findViewById(R.id.recommandation);
+        if(list.size()!=0) {
+            params.height = 800;
+            mapFragment.getView().setLayoutParams(params);
+            recommandation.setVisibility(View.VISIBLE);
+            RecyclerView listv = (RecyclerView) findViewById(R.id.list);
+            listv.setLayoutManager(new LinearLayoutManager(this));
+            listv.setAdapter(new SuggestionRestoAdapter(list, idclient));
+        }else{
+            params.height = 1500;
+            mapFragment.getView().setLayoutParams(params);
+            recommandation.setVisibility(View.INVISIBLE);
+        }
+
 
 
     }
@@ -211,6 +230,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
                         if(!d[0].equals("plus")) {
                             distanceDemance =(float) parseInt(d[0]);
+                            if(distanceDemance == (float)60) zoom = 7;
                             localisationDesRestau();
 
                         }
@@ -221,8 +241,15 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         for(j=0;j<typeIdNom.size();j++){
                             String[] typeidnom = typeIdNom.get(j).split("_");
                             if(type[0].equals(typeidnom[0])){
-                            list = repo.selectionnerRestau(parseInt(typeidnom[1]));
-                            Toast.makeText(getApplicationContext(),list.get(0).getNom(),Toast.LENGTH_LONG).show();
+
+                                TextView recommandation = (TextView) findViewById(R.id.recommandation);
+                                recommandation.setVisibility(View.VISIBLE);
+
+                                params.height = 800;
+                                mapFragment.getView().setLayoutParams(params);
+
+                                list = repo.selectionnerRestau(parseInt(typeidnom[1]));
+                                Toast.makeText(getApplicationContext(),list.get(0).getNom(),Toast.LENGTH_LONG).show();
                                 RecyclerView listv = (RecyclerView) findViewById(R.id.list);
 
                                 listv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -294,7 +321,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
-       localisationClient();
+      // localisationClient();
 
 
     }
@@ -401,7 +428,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         );
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -449,7 +476,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         gMap.addMarker(new MarkerOptions().position(latLng).title(""+ltd).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                         ));
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
                     } catch (IOException e) {
                         e.printStackTrace();

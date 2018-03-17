@@ -37,7 +37,7 @@ long idclient;
         Intent intent = getIntent();
         String nomrestau = intent.getStringExtra("nomRestau");
         long id = intent.getLongExtra("id",-1);
-        long idcc = intent.getIntExtra("idClient",-1);
+        long idcc = intent.getLongExtra("idclient",-1);
         if(idcc!=-1) idclient = idcc;
 
         TextView nomRestau = (TextView) findViewById(R.id.pageNomRestau);
@@ -60,7 +60,7 @@ long idclient;
                 Intent it = getIntent();
                 String nom = it.getStringExtra("nomRestau");
                 long id = it.getLongExtra("idRestau",-1);
-                long idc = it.getLongExtra("idClient",-1);
+                long idc = it.getLongExtra("idclient",-1);
                 Intent intent1 = new Intent(this,fait_la_reservation.class);
                 intent1.putExtra("restau",nom);
                 intent1.putExtra("idrestau",id);
