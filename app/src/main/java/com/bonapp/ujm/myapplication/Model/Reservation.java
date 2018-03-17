@@ -13,7 +13,7 @@ public class Reservation {
     int service;
     Date date;
     String heure;
-    int id_restau;
+    long id_restau;
     int id_client;
     Restaurant restaurant;
 
@@ -21,7 +21,7 @@ public class Reservation {
     }
 
 
-    public Reservation(int nb_personnes, int service, Date date,String heure, int id_restau, int id_client) {
+    public Reservation(int nb_personnes, int service, Date date,String heure, long id_restau, int id_client) {
         this.nb_personnes = nb_personnes;
         this.service = service;
         this.date = date;
@@ -40,7 +40,7 @@ public class Reservation {
     }
 
     //Recuperer les Reserv depuis le compte Cleint
-    public Reservation(int id, int nb_personnes, int service, Date date,String heure, int id_restau) {
+    public Reservation(int id, int nb_personnes, int service, Date date,String heure, long id_restau) {
         this.id = id;
         this.nb_personnes = nb_personnes;
         this.service = service;
@@ -90,11 +90,11 @@ public class Reservation {
         this.heure = heure;
     }
 
-    public int getId_restau() {
+    public long getId_restau() {
         return id_restau;
     }
 
-    public void setId_restau(int id_restau) {
+    public void setId_restau(long id_restau) {
         this.id_restau = id_restau;
     }
 

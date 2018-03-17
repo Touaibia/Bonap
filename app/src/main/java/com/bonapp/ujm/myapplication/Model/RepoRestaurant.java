@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import java.util.List;
  */
 
 public class RepoRestaurant extends BaseDonnees {
-    //BaseDonnees db;
     public Context context;
     public static final String TABLE = "restaurant";
     private static final String TABLE_CREATE =
@@ -23,14 +23,13 @@ public class RepoRestaurant extends BaseDonnees {
                     "nom TEXT, " +
                     "email TEXT, " +
                     "password TEXT, " +
-                    "adresse INTEGER, " +
-                    "telephone TEXT"+
-                    "description TEXT"+
-                    "image INTEGER);";
+                    "telephone TEXT, "+
+                    "description TEXT);";
 
     public RepoRestaurant(Context context) {
-        super(context, TABLE_CREATE, TABLE);
+        super(context);
         this.context = context;
+        this.tableName = "restaurant";
     }
 
     public boolean identification(String username, String pwd){
@@ -49,65 +48,81 @@ public class RepoRestaurant extends BaseDonnees {
         contentValues.put("nom",r.getNom());
         contentValues.put("email",r.getEmail());
         contentValues.put("password",r.getMot_passe());
-        contentValues.put("adresse",r.getAdresse().getId());
         contentValues.put("telephone",r.getTel());
-        contentValues.put("description",r.getDescription());
-        contentValues.put("image",r.getImage());
+        contentValues.put("description","la description de votre restaurant");
+       // contentValues.put("image",r.getImage());
 
-        //Toast.makeText(context,r.getNom()+" "+r.getEmail()+" "+r.getMot_passe()+" "+r.getAdresse().getId()+" "+r.getTel(),Toast.LENGTH_LONG).show();
        return DB.insert("restaurant",null,contentValues);
 
     }
 
-//    public List<Restaurant> getAllResto(){
-//        Cursor cursor = DB.rawQuery("select* from restaurant",null);
-//        List idt = new ArrayList();
-//        while(cursor.moveToNext()){
-//            //Cursor ad = db.DB.rawQuery("select* from adresse where id ="+cursor.getInt(4),null);
-//           // ad.moveToNext();
-//           // Adresse d = new Adresse(ad.getString(2),ad.getString(3),ad.getString(4),ad.getString(5));
-//            idt.add(new Restaurant(cursor.getString(1),cursor.getString(2),cursor.getString(3),
-//                    new Adresse(),
-//                    cursor.getString(5)));
-//        }
-//        return idt;
-//    }
 
     //Selectionner un restaurant après recherche
     public Restaurant selectionnerAccueil(long id){
-        Cursor c = DB.rawQuery("SELECT id, nom, image"+
+        Cursor c = DB.rawQuery("SELECT id, nom"+
                 " FROM "+ TABLE +" where id = ?" , new String[]{""+id} );
-
+        c.moveToNext();
         int idd = c.getInt(0);
         String nom = c.getString(1);
-        int img = c.getInt(2);
+       // int img = c.getInt(2);
+        /*
+            RepoImage repo = new RepoImage(this)
+            int img = repo.getImage(id)
+            à faire.
 
-        Adresse ad = new RepoAdresse(context).selectionner(idd);
+         */
 
-        return  new Restaurant(idd, nom, img, ad );
+        RepoAdresse ad = new RepoAdresse(context);
+                ad.open();
+        Adresse add = ad.selectionner(idd);
+
+        return  new Restaurant(idd, nom, 0, add );
     }
 
     //Selectionner mon restaurant
     public Restaurant selectionnerProfil(long id){
-        Cursor c = DB.rawQuery("SELECT id, nom, email, telephone, image, description"+
+        Cursor c = DB.rawQuery("SELECT id, nom, email, telephone, description"+
                 " FROM "+ TABLE +" where id = ?" , new String[]{""+id} );
+
+        c.moveToNext();
 
         String nom = c.getString(1);
         String email = c.getString(2);
         String tel = c.getString(3);
-        int img = c.getInt(4);
-        String descrip = c.getString(5);
+        //int img = c.getInt(4);
+        String descrip = c.getString(4);
 
-        Adresse ad = new RepoAdresse(context).selectionner(id);
+        RepoAdresse repoAd = new RepoAdresse(context);
+        repoAd.open();
+        Adresse ad = repoAd.selectionner(id);
+        repoAd.close();
 
         RepoPlat repoPlat = new RepoPlat(context);
 
-        ArrayList<Plat> entree = repoPlat.selectionner(id,1);
-        ArrayList<Plat> chaud = repoPlat.selectionner(id,2);
+        repoPlat.open();
+
+        ArrayList<Plat> entree = repoPlat.selectionner(id,2);
+        ArrayList<Plat> chaud = repoPlat.selectionner(id,1);
         ArrayList<Plat> dessert = repoPlat.selectionner(id,3);
 
-        ArrayList<TypeCuisine> types = new RepoTypeCuisineRestaurant(context).selectionnerType(id);
+        repoPlat.close();
 
-        return  new Restaurant(id, nom,tel,descrip,img,types,chaud,entree,dessert, ad);
+        RepoTypeCuisineRestaurant repoTypeCuisineRes = new RepoTypeCuisineRestaurant(context);
+        repoTypeCuisineRes.open();
+
+        ArrayList<TypeCuisine> types = repoTypeCuisineRes.selectionnerType(id);
+
+        Log.d("Mon MESSAGE : ", types.size()+"");
+
+        repoTypeCuisineRes.close();
+
+        return  new Restaurant(id, nom,tel,descrip,0,types,chaud,entree,dessert, ad);
+    }
+
+    public long getId(String username){
+        Cursor cursor = DB.rawQuery("select id from restaurant where nom = ?",new String[]{username});
+
+        cursor.moveToNext();
+       return cursor.getInt(0);
     }
 }

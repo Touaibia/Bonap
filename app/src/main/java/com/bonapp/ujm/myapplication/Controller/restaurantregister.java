@@ -3,7 +3,9 @@ package com.bonapp.ujm.myapplication.Controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -31,6 +33,15 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
 
         Register = (Button) findViewById(R.id.resgisterRestaurateur);
         Register.setOnClickListener(this);
+
+        Spinner spinner = (Spinner) findViewById(R.id.restaurantTypeVoix);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.type_voie, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
 
     }
@@ -61,7 +72,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                 String NomRue = lebeller.getText().toString();
                 String CodPostal = codePostal.getText().toString();
                 String resTel = restaurantPhone.getText().toString();
-              //  String TypeDeVoix = typeVoix.getText()
+                String TypeDeVoix = typeVoix.getSelectedItem().toString();
 
                 if (userName.trim().length() > 8 || userName.trim().length() == 0) {
                     Toast pass = Toast.makeText(restaurantregister.this, " Username Not valid", Toast.LENGTH_SHORT);
@@ -80,7 +91,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                                 pass.show();
                             } else {
                                 if (NumRue.trim().length() > 4 || NumRue.trim().length() == 0) {
-                                    Toast pass = Toast.makeText(restaurantregister.this, " Numero De Rue oas valid", Toast.LENGTH_SHORT);
+                                    Toast pass = Toast.makeText(restaurantregister.this, " Numero De Rue non valid", Toast.LENGTH_SHORT);
                                     pass.show();
 
                                 } else {
@@ -88,7 +99,7 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
                                         Toast pass = Toast.makeText(restaurantregister.this, " Nom de la rue non valid", Toast.LENGTH_SHORT);
                                         pass.show();
                                     } else {
-                                        if (CodPostal.trim().length() != 4) {
+                                        if (CodPostal.trim().length() != 5) {
                                             Toast pass = Toast.makeText(restaurantregister.this, " Code postal non valid", Toast.LENGTH_SHORT);
                                             pass.show();
                                         } else {
@@ -102,11 +113,20 @@ public class restaurantregister extends AppCompatActivity implements View.OnClic
 
                                                 repoRestau.open();
 
+
                                                 Restaurant resto = new Restaurant(userName,Email,passWord,resTel);
 
                                                 long idRestau = repoRestau.ajouteRestaurant(resto);
+                                                long idr = repoRestau.getId(userName);
+                                                Toast.makeText(this,"di1 "+idRestau+" idr "+idr,Toast.LENGTH_LONG).show();
                                                 if (idRestau != -1){
+                                                    Log.d("MESSAGE","Enregistré correctement id = "+idRestau);
+
+                                                    repoAd.open();
+
                                                     repoAd.ajouter(new Adresse(NumRue,typeV,NomRue,parseInt(CodPostal),idRestau));
+
+                                                    repoAd.close();
                                                 }
 
                                                 repoRestau.close();

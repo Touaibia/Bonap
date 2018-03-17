@@ -11,11 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.RepoInscription;
-import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.R;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener{
-    Boolean identification;
+
     Databasehelper helper = new Databasehelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,38 +41,24 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, Accueil.class));
                 break;
             case R.id.log:
-                EditText identifiant = (EditText) findViewById(R.id.logUsername);
+                EditText identifiant = (EditText) findViewById(R.id.logEmail);
                 EditText password = (EditText) findViewById(R.id.logPswrd);
 
                 String identif = identifiant.getText().toString();
                 String pass = password.getText().toString();
 
-              // String paswrdClient = helper.searchClient(identif);
-                RepoRestaurant repoRestau = new RepoRestaurant(this);
-                repoRestau.open();
-
-                RepoInscription repoClient = new RepoInscription(this);
-
-                identification = repoRestau.identification(identif,pass);
-                if(identification==true){
-                    repoRestau.close();
-                    Intent i = new Intent(loginActivity.this,GestionPublication.class);
-                    startActivity(i);
-
-                }else{
-                    identification = repoClient.identification(identif,pass);
-                    if(identification==true){
-                        repoClient.close();
-                        Intent i = new Intent(loginActivity.this,Accueil.class);
-                        startActivity(i);
-                    }else{
-                        Toast temp = Toast.makeText(loginActivity.this," User Not Found",Toast.LENGTH_SHORT);
-                        temp.show();
-                    }
+                RepoInscription repoInscription = new RepoInscription(this);
+                repoInscription.open();
+                long id = repoInscription.identification(identif,pass);
+                if(id!=-1){
+                    Intent intent = new Intent(this,Accueil.class);
+                    intent.putExtra("idclient",id);
+                    startActivity(intent);
                 }
 
+                /*String paswrdClient = helper.searchClient(identif);
 
-/*
+
 
                 if(paswrdClient.equals(pass)){
                     Intent i = new Intent(loginActivity.this,Accueil.class);
@@ -94,8 +79,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-                }
-                */
+                }*/
                 break;
             case R.id.inscriptionClient_Resto:
                 startActivity(new Intent(this, chooseusers.class));

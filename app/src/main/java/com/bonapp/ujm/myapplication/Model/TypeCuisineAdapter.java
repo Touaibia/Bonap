@@ -1,5 +1,6 @@
 package com.bonapp.ujm.myapplication.Model;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.bonapp.ujm.myapplication.Controller.GestionProfil;
 import com.bonapp.ujm.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,13 +23,15 @@ import java.util.List;
 
 public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.MyViewHolder> {
 
-    private List<Pair<String,Integer>> lesTypes = Arrays.asList(
-            Pair.create("Lyra Belacqua", 0),
-            Pair.create("Pantalaimon", 1),
-            Pair.create("Roger Parslow", 2),
-            Pair.create("Lord Asriel", 3),
-            Pair.create("Marisa Coulter", 4)
-    );
+    private ArrayList<TypeCuisine> lesTypes;
+    Context context;
+    long id_restau;
+
+    public TypeCuisineAdapter(long id_restau, ArrayList<TypeCuisine> lesTypes, Context context) {
+        this.lesTypes = lesTypes;
+        this.context = context;
+        this.id_restau = id_restau;
+    }
 
     @Override
     public int getItemCount() {
@@ -35,13 +39,32 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
     }
 
     //Ajout d'un nouveau type de cuisine
-    public void addType(Pair<String, Integer> pair){
-        lesTypes.add(pair);
+    public void addType(TypeCuisine type){
+        lesTypes.add(type);
     }
 
     //Suppression d'un type de cuisine
-    public void deleteType(int position){
-        lesTypes.remove(position);
+    public void deleteType(int pos, long id_type){
+        RepoTypeCuisineRestaurant repoTypeCuisineRestaurant = new RepoTypeCuisineRestaurant(context);
+        repoTypeCuisineRestaurant.open();
+        int val = repoTypeCuisineRestaurant.supprimer(id_type,id_restau);
+        //si la dissociation se passe bien
+        if(val > 0){
+
+            lesTypes.remove(pos);
+            notifyItemRemoved(pos);
+            notifyItemRangeChanged(pos, lesTypes.size());
+
+            Toast.makeText(context,
+                    "Le Type est bien dissocié du restau = "+val,Toast.LENGTH_LONG ).show();
+
+        }
+        else{
+            Toast.makeText(context,
+                    "Le Type n'est pas bien dissocié = "+val,Toast.LENGTH_LONG ).show();
+        }
+
+        repoTypeCuisineRestaurant.close();
     }
 
     @Override
@@ -53,16 +76,17 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Pair<String, Integer> pair = lesTypes.get(position);
+        TypeCuisine type = lesTypes.get(position);
+        final long id = type.getId();
 
         holder.boutonSup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteType(holder.leType.second);
+                deleteType(holder.getAdapterPosition(),id);
             }
         });
 
-        holder.display(pair);
+        holder.display(type);
     }
 
 
@@ -70,18 +94,21 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
 
         private TextView typeCuisine;
         private Button boutonSup;
-        private Pair<String,Integer> leType;
+        private TypeCuisine leType;
+
 
         public MyViewHolder(View itemView){
             super(itemView);
 
             typeCuisine = (TextView) itemView.findViewById(R.id.type_cuis);
             boutonSup = (Button) itemView.findViewById(R.id.sup_type_cuis);
+
+
         }
 
-        public void display(Pair<String, Integer> pair) {
+        public void display(TypeCuisine pair) {
             leType = pair;
-            typeCuisine.setText(pair.first);
+            typeCuisine.setText(leType.getNom());
         }
 
     }

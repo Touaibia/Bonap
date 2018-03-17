@@ -3,10 +3,12 @@ package com.bonapp.ujm.myapplication.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import static com.bonapp.ujm.myapplication.Model.RepoPlat.PRIX;
@@ -16,7 +18,7 @@ import static com.bonapp.ujm.myapplication.Model.RepoPlat.PRIX;
  */
 
 public class RepoReservation extends BaseDonnees {
-
+    Context context;
     public static final String TABLE_NAME = "reservation";
     public static final String KEY = "id";
     public static final String NB_PERS = "nb_personnes";
@@ -27,19 +29,31 @@ public class RepoReservation extends BaseDonnees {
     public static final String CLIENT = "id_client";
 
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
-            " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " DATE, "+
-            HEURE + " CHAR(5), " + RESTAU + " INTEGER "+ CLIENT + " INTEGER);";
+            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " INTEGER, "+
+            HEURE + " TEXT, " + RESTAU + " INTEGER, "+ CLIENT + " INTEGER);";
 
-    public RepoReservation(Context context, String creerTable) {
-        super(context,CREATE_TABLE,TABLE_NAME);
+    public RepoReservation(Context context) {
+        super(context);
+        context = context;
+        this.tableName = TABLE_NAME;
     }
 
     public void ajouter(Reservation res){
         ContentValues contVal = new ContentValues();
 
+        //transformation de la date en timestamp
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String jour = sdf.format(res.getDate());
+        long time = 0;
+        try {
+            time = sdf.parse(jour).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         contVal.put(NB_PERS, res.getNb_personnes());
         contVal.put(SERVICE, res.getService());
-        contVal.put(DATE, String.valueOf(res.getDate()));
+        contVal.put(DATE,time);
         contVal.put(HEURE, res.getHeure());
         contVal.put(RESTAU, res.getId_restau());
         contVal.put(CLIENT, res.getId_client());
@@ -53,10 +67,19 @@ public class RepoReservation extends BaseDonnees {
 
     public void modifier(Reservation res){
         ContentValues contVal = new ContentValues();
+        //transformation de la date en timestamp
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String jour = sdf.format(res.getDate());
+        long time = 0;
+        try {
+            time = sdf.parse(jour).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         contVal.put(NB_PERS, res.getNb_personnes());
         contVal.put(SERVICE, res.getService());
-        contVal.put(DATE, String.valueOf(res.getDate()));
+        contVal.put(DATE, time);
         contVal.put(HEURE, res.getHeure());
         contVal.put(RESTAU, res.getId_restau());
         contVal.put(CLIENT, res.getId_client());
@@ -64,9 +87,9 @@ public class RepoReservation extends BaseDonnees {
         DB.update(TABLE_NAME, contVal, KEY  + " = ?", new String[] {String.valueOf(res.getId())});
     }
 
-    public ArrayList<Reservation> selectionRestau(int id_restau, Date date){
+    public ArrayList<Reservation> selectionRestau(long id_restau, long time){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NB_PERS +", "+ SERVICE +", "+ HEURE +", "+ CLIENT +
-                " FROM "+ TABLE_NAME +"where date = ? AND id_restau = ?", new String[]{""+id_restau, String.valueOf(date)} );
+                " FROM "+ TABLE_NAME +" where date = ? AND id_restau = ?", new String[]{""+time,""+id_restau} );
 
         ArrayList<Reservation> lesReserv = new ArrayList<>();
 
@@ -83,8 +106,9 @@ public class RepoReservation extends BaseDonnees {
     }
 
     public ArrayList<Reservation> selectionClient(int id_client) throws ParseException {
+       // Toast.makeText(context," okk ",Toast.LENGTH_LONG).show();
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NB_PERS +", "+ SERVICE +", "+ HEURE +", "+ DATE +", "+RESTAU+
-                " FROM "+ TABLE_NAME +"where id_client = ?", new String[]{""+id_client} );
+                " FROM "+ TABLE_NAME +" where id_client = ?", new String[]{""+id_client} );
 
         ArrayList<Reservation> lesReserv = new ArrayList<>();
 
@@ -93,14 +117,14 @@ public class RepoReservation extends BaseDonnees {
             int nb_pers = c.getInt(1);
             int serv = c.getInt(2);
             String heure = c.getString(3);
-            String dateStr = c.getString(4);
-            int restau_id = c.getInt(5);
+            long dateStr = c.getLong(4);
+            long restau_id = c.getInt(5);
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            Date date = new Date();
-
-                date =  dateFormat.parse(dateStr);
-
+//            Calendar c = Calendar.getInstance();
+//            c.setTimeInMillis(dateStr);
+            Date date = new Date(dateStr);
+            //date =  dateFormat.parse(dateStr);
 
             lesReserv.add(new Reservation(id,nb_pers,serv,date,heure,restau_id));
         }

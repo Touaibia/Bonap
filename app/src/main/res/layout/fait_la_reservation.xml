@@ -11,8 +11,21 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="90dp">
+        >
+
+
+        <TextView
+            android:id="@+id/ReserveRestauNom"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="1dp"
+            android:gravity="center"
+            android:background="#4b4948"
+            android:text="restaurant"
+            android:textColor="@color/white"
+
+            android:textSize="30dp"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -24,11 +37,12 @@
             android:text="Fait votre reservation"
             android:textSize="30dp" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="1dp">
+
 
             <TextView
                 android:id="@+id/ReserveNbpersonne"
@@ -37,19 +51,16 @@
                 android:layout_weight="80"
                 android:background="#fff"
                 android:clickable="true"
-                android:drawableRight="@android:drawable/ic_input_add"
                 android:ems="10"
-
                 android:gravity="start|center"
                 android:onClick="onClick"
-                android:text="Nombre de personnes: 0"
+                android:text="Nombre de personnes :0"
                 android:textSize="20dp"
-                tools:layout_editor_absoluteX="62dp"
-                tools:layout_editor_absoluteY="34dp" />
+                 />
 
             <TextView
-                android:id="@+id/textView17"
-                android:layout_width="45dp"
+                android:id="@+id/pluspersonne"
+                android:layout_width="71dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
@@ -57,6 +68,23 @@
                 android:layout_weight="10"
                 android:color="#da0909"
                 android:gravity="center"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:text="+"
+                android:textSize="40dp" />
+
+            <TextView
+                android:id="@+id/moinspersonne"
+                android:layout_width="58dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="right"
+                android:layout_weight="10"
+                android:color="#da0909"
+                android:gravity="center"
+                android:clickable="true"
+                android:onClick="onClick"
                 android:text="-"
                 android:textSize="40dp" />
         </LinearLayout>
@@ -76,8 +104,7 @@
             android:onClick="onClick"
             android:text="Selectionnez une date"
             android:textSize="20dp"
-            tools:layout_editor_absoluteX="62dp"
-            tools:layout_editor_absoluteY="34dp" />
+             />
 
         <TextView
             android:id="@+id/ReservtimeDate"
@@ -94,20 +121,19 @@
             android:onClick="onClick"
             android:text="Sélectionnez l'heure"
             android:textSize="20dp"
-            tools:layout_editor_absoluteX="62dp"
-            tools:layout_editor_absoluteY="34dp" />
+             />
 
 
         <TextView
             android:id="@+id/ReserveValide"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="43dp"
             android:layout_marginBottom="1dp"
             android:background="@drawable/border_bacgrdcolor_vert"
             android:clickable="true"
             android:gravity="center"
             android:onClick="onClick"
-            android:text="validé" />
+            android:text="VALIDE" />
 
 
     </LinearLayout>

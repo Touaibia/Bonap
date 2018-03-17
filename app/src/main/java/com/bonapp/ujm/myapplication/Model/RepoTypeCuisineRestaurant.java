@@ -3,6 +3,7 @@ package com.bonapp.ujm.myapplication.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
     public static final String TABLE_NAME = "typeCuisineRestaurant";
     public static final String KEY = "id";
-    public static final String TYPE = "type";
+    public static final String TYPE = "id_type";
     public static final String RESTAU = "id_restau";
 
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME +
@@ -26,21 +27,22 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
     public Context context;
 
     public RepoTypeCuisineRestaurant(Context context) {
-        super(context, TABLE_CREATE, TABLE_NAME);
+        super(context);
         this.context = context;
     }
 
-    public void ajouter(TypeCuisineRestaurant tpr){
+    public long ajouter(TypeCuisineRestaurant tpr){
         ContentValues contVal = new ContentValues();
 
-        contVal.put(RESTAU, tpr.getId_restau());
         contVal.put(TYPE, tpr.getId_type());
+        contVal.put(RESTAU, tpr.getId_restau());
 
-        DB.insert(TABLE_NAME,null,contVal);
+
+        return DB.insert(TABLE_NAME,null,contVal);
     }
 
-    public void supprimer(long id){
-        DB.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
+    public int  supprimer(long id_type, long id_restau){
+        return DB.delete(TABLE_NAME, TYPE + " = ? and "+ RESTAU +" = ?", new String[] {String.valueOf(id_type),""+id_restau});
     }
 
     public void modifier(TypeCuisineRestaurant tpr){
@@ -53,6 +55,25 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
     }
 
+    public ArrayList<TypeCuisineRestaurant> selectAll(){
+
+        Cursor c = DB.rawQuery("SELECT "+ KEY +", "+TYPE+ ", "+ RESTAU +
+                 " FROM "+ TABLE_NAME , new String[]{} );
+
+        ArrayList<TypeCuisineRestaurant> lesTypes = new ArrayList<>();
+
+        while(c.moveToNext()){
+            long id = c.getLong(0);
+            long id_type = c.getLong(1);
+            long id_restau = c.getLong(2);
+
+            lesTypes.add(new TypeCuisineRestaurant(id, id_type, id_restau));
+        }
+
+        return lesTypes;
+
+    }
+
     //Selection des Restaurants en fonction de type de cuisine
     public ArrayList<Restaurant> selectionnerRestau(long id_type){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ RESTAU +
@@ -60,27 +81,43 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
         ArrayList<Restaurant> lesRestaus = new ArrayList<>();
         RepoRestaurant repoRestaurant = new RepoRestaurant(context);
-        while(c.moveToNext()){
-            int num = c.getInt(1);
 
-            lesRestaus.add(repoRestaurant.selectionnerAccueil(num));
+        repoRestaurant.open();
+
+        while(c.moveToNext()){
+            long num = c.getInt(1);
+
+            lesRestaus.add(repoRestaurant.selectionnerAccueil(1));
         }
+
+        repoRestaurant.close();
 
         return lesRestaus;
     }
 
     //Selection des types de cuisine d'un restaurant
     public ArrayList<TypeCuisine> selectionnerType(long id_restau){
+
+        Log.d("ID_Restau reçu ", id_restau+"");
+
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ TYPE +
                 " FROM "+ TABLE_NAME +" where id_restau = ?", new String[]{""+id_restau} );
 
         ArrayList<TypeCuisine> lesTypes = new ArrayList<>();
         RepoTypeCuisine repoTypeCuisine = new RepoTypeCuisine(context);
+        repoTypeCuisine.open();
+        int i =0;
         while(c.moveToNext()){
-            int num = c.getInt(1);
+            i++;
 
-            lesTypes.add(repoTypeCuisine.selectionner(num));
+            long id_type = c.getLong(1);
+
+            Log.d(i+"eme type ",id_type+"");
+
+            lesTypes.add(repoTypeCuisine.selectionner(id_type));
         }
+
+        repoTypeCuisine.close();
 
         return lesTypes;
     }

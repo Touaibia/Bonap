@@ -15,6 +15,11 @@ public class TypeCuisineRestaurant {
         this.id_restau = id_restau;
     }
 
+    public TypeCuisineRestaurant(long id_type, long id_restau) {
+        this.id_type = id_type;
+        this.id_restau = id_restau;
+    }
+
     public long getId() {
         return id;
     }

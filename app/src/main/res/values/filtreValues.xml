@@ -35,6 +35,15 @@
         <item>20 euros</item>
 
     </string-array>
+    <string-array name="array_typevoie">
+        <item>Rue</item>
+        <item>Boulevard</item>
+        <item>Place</item>
+        <item>Montée</item>
+        <item>Avenue</item>
+
+    </string-array>
+
     <string-array name="nb_personne">
         <item>0 quantités</item>
         <item>1 quantités</item>

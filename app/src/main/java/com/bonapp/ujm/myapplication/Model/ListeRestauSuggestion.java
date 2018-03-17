@@ -1,4 +1,4 @@
-package com.bonapp.ujm.myapplication;
+package com.bonapp.ujm.myapplication.Model;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

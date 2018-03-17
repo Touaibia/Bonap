@@ -9,9 +9,8 @@ import android.widget.Toast;
  * Created by Nianfo on 04/03/2018.
  */
 
-public class RepoInscription {
+public class RepoInscription extends BaseDonnees {
 
-    public BaseDonnees db;
     Context context;
     private  static  final String TABLE_NAME = "contacts";
     private  static  final String COLUMN_ID ="id";
@@ -26,32 +25,29 @@ public class RepoInscription {
     private  static  final String COLUMN_NOMRUE = "nomrue";
     private  static  final String COLUMN_CODEPOSTAL = "codepostal";
 
-    private  static  final String TABLE_CREATE =
+    private  static  final String TABLE_CONTACTE =
             "create table contacts(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "username TEXT, " +
                     "email TEXT, " +
-                    "password TEXT, " +
-                    "adresse INTEGER, " +
-                    "telephone TEXT;";
+                    "password TEXT," +
+                    "telephone INTEGER);";
 
 
-
-    public RepoInscription(Context context){
-        Toast.makeText(context,"ouverure ok",Toast.LENGTH_LONG).show();
-       db = new BaseDonnees(context, TABLE_CREATE,TABLE_NAME);
-       this.context = context;
-       db.open();
-
-   }
-    public boolean identification(String username, String pwd){
-        Cursor cursor = db.DB.rawQuery("select * from contacts " +
-                "where username = "+username+" and password = "+pwd,null);
+    public RepoInscription(Context context) {
+        super(context);
+        Toast.makeText(context, "ouverure ok", Toast.LENGTH_LONG).show();
+        this.context = context;
+        this.tableName = "contacts";
+    }
+    public long identification(String email, String pwd){
+        Cursor cursor = DB.rawQuery("select id from contacts " +
+                "where password = "+pwd,null);
 
         if (cursor.moveToNext()){
-            return true;
+            return cursor.getInt(0) ;
         }
-        return false;
+        return -1;
     }
 
 
@@ -62,19 +58,11 @@ public class RepoInscription {
         values.put(COLUMN_USERNAME,conctact.getUsername());
         values.put(COLUMN_EMAIL,conctact.getEmail());
         values.put(COLUMN_PASSWORD,conctact.getPassword());
-        values.put(COLUMN_NUMERORUE,conctact.getAdresse().getNumero());
-        values.put("adresse",conctact.getAdresse().getId());
         values.put(COLUMN_TELEPHONE,conctact.getPhone());
 
-        if(db.DB.insert(TABLE_NAME,null,values)==-1){
-
-            Toast.makeText(context,"echec d'insertion",Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context,"insertion ok",Toast.LENGTH_LONG).show();
-        }
-        return db.DB.insert(TABLE_NAME,null,values);
+        return DB.insert(TABLE_NAME,null,values);
     }
 
-    public void close(){db.close();}
+    public void close(){DB.close();}
 
 }

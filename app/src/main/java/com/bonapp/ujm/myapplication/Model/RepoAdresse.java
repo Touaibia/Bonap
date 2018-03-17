@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by maham on 07/03/2018.
  */
@@ -18,13 +21,13 @@ public class RepoAdresse extends BaseDonnees {
     public static final String RESTAU = "id_restau";
 
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME +
-            " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ NUM + "CHAR(10), "+ TYPE + " CHAR(20), "+
+            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ NUM + " CHAR(10), "+ TYPE + " CHAR(20), "+
             INTITULE +" CHAR(50), "+ CODE +" INTEGER, " + RESTAU + " INTEGER);";
 
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     public RepoAdresse(Context context) {
-        super(context, TABLE_CREATE, TABLE_NAME);
+        super(context);
     }
 
     public void ajouter(Adresse ad){
@@ -59,7 +62,9 @@ public class RepoAdresse extends BaseDonnees {
     //Selectionner un Adresse
     public Adresse selectionner(long id){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NUM +", "+ TYPE +", "+ INTITULE +", "+ CODE +
-                " FROM "+ TABLE_NAME +"where id_restau = ?", new String[]{""+id} );
+                " FROM "+ TABLE_NAME +" where id_restau = ?", new String[]{""+id} );
+
+        c.moveToNext();
 
         int idd = c.getInt(0);
         String num = c.getString(1);
@@ -71,6 +76,21 @@ public class RepoAdresse extends BaseDonnees {
 
 
         return ad;
+    }
+
+    public List<Adresse> plusProcheRestoAdresse(){
+        List<Adresse> list = new ArrayList<>();
+        Cursor cursor = DB.rawQuery("select* from "+TABLE_NAME,null);
+        while (cursor.moveToNext()){
+            list.add(new Adresse(
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getInt(4),
+                    cursor.getInt(5)
+            ));
+        }
+        return list;
     }
 
 }

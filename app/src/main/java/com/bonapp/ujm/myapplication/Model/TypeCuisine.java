@@ -5,7 +5,7 @@ package com.bonapp.ujm.myapplication.Model;
  */
 
 public class TypeCuisine {
-    public int id;
+    public long id;
     public String nom;
     public String description;
     public int image;
@@ -16,18 +16,18 @@ public class TypeCuisine {
         this.image = image;
     }
 
-    public TypeCuisine(int id, String nom,int image, String description) {
+    public TypeCuisine(long id, String nom,int image, String description) {
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.image = image;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

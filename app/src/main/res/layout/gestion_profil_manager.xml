@@ -70,12 +70,19 @@
                     />
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/descrip_restau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_prof"
+                android:layout_marginTop="10dp"/>
+
             <LinearLayout
                 android:id="@+id/block_type_cuis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@id/img_prof"
+                android:layout_below="@id/descrip_restau"
                 android:layout_marginTop="10dp">
 
                 <TextView
@@ -87,6 +94,15 @@
                     android:background="@color/colorAccent"
                     android:textAlignment="center"
                     android:layout_below="@id/info_gen"/>
+
+                <TextView
+                    android:id="@+id/type_cuis_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vous n'avez aucun type de cuisine pour l'instant. Veuillez en définir pour permettre
+                                    au Clients de retrouver votre restaurant"
+                    android:visibility="invisible"
+                    android:textSize="25sp"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list_type_cuis"
@@ -126,46 +142,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/block_type_amb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@id/block_plan_restau"
-                android:layout_marginTop="10dp"
-                >
-
-                <TextView
-                    android:id="@+id/tit_typ_amb"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nos Types d'Ambiances"
-                    android:textSize="30sp"
-                    android:background="@color/colorAccent"
-                    android:textAlignment="center"
-                    android:layout_marginTop="10dp"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/list_type_amb"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </android.support.v7.widget.RecyclerView>
-
-                <Button
-                    android:id="@+id/ajout_type_amb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Ajouter"/>
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/block_horaire"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@id/block_type_amb"
+                android:layout_below="@id/block_plan_restau"
                 android:layout_marginTop="10dp">
 
                 <TextView
@@ -184,6 +165,7 @@
                 android:id="@+id/voir_carte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Acceder à ma carte"
                 android:layout_below="@id/block_horaire"/>
 

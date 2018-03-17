@@ -1,5 +1,6 @@
 package com.bonapp.ujm.myapplication.Model;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 public class LesResevationsJourAdapter extends RecyclerView.Adapter<LesResevationsJourAdapter.MyViewHolder> {
 
     ArrayList<Reservation> lesReserv = new ArrayList<>();
+    Context context;
 
-    public LesResevationsJourAdapter(ArrayList<Reservation> lesReserv) {
+    public LesResevationsJourAdapter(Context context, ArrayList<Reservation> lesReserv) {
         this.lesReserv = lesReserv;
+        this.context = context;
     }
 
     @Override

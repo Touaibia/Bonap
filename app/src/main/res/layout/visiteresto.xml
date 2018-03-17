@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/restauNomVisite"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:gravity="start|center"
@@ -21,7 +21,7 @@
             android:textSize="22dp" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/restauDescVisite"
             android:layout_width="match_parent"
             android:layout_height="124dp"
             android:gravity="start|center"
@@ -29,12 +29,14 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/restauPageVisite"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#15590b"
             android:gravity="start|center"
             android:textColor="@color/white"
+            android:onClick="onClick"
+            android:clickable="true"
             android:text="page du restaurant"
             android:textSize="19dp"
             tools:layout_editor_absoluteX="38dp"

@@ -24,10 +24,10 @@ public class RepoTypeCuisine extends BaseDonnees {
 
 
     public RepoTypeCuisine(Context context) {
-        super(context, TABLE_CREATE, TABLE_NAME);
+        super(context);
     }
 
-    public void ajouter(TypeCuisine tp){
+    public long ajouter(TypeCuisine tp){
         ContentValues contVal = new ContentValues();
 
         contVal.put(NOM, tp.getNom());
@@ -35,7 +35,7 @@ public class RepoTypeCuisine extends BaseDonnees {
         contVal.put(DESCRIP, tp.getDescription());
 
 
-        DB.insert(TABLE_NAME,null,contVal);
+        return DB.insert(TABLE_NAME,null,contVal);
     }
 
     public void supprimer(int id){
@@ -72,9 +72,11 @@ public class RepoTypeCuisine extends BaseDonnees {
         return lestypes;
     }
 
-    public TypeCuisine selectionner(int id){
+    public TypeCuisine selectionner(long id){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NOM +", "+ IMAGE +", " + DESCRIP +
                 " FROM "+ TABLE_NAME +" where id = ?" , new String[]{""+id} );
+
+        c.moveToNext();
 
         int num = c.getInt(0);
         String nom = c.getString(1);
@@ -85,4 +87,5 @@ public class RepoTypeCuisine extends BaseDonnees {
 
         return type;
     }
+
 }
