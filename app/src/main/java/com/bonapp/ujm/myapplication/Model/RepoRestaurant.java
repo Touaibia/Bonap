@@ -32,6 +32,15 @@ public class RepoRestaurant extends BaseDonnees {
         this.tableName = "restaurant";
     }
 
+    public long identification(String username, String pwd){
+        Cursor cursor = DB.rawQuery("select id from contacts " +
+                "where password = "+pwd,null);
+
+        if (cursor.moveToNext()){
+            return cursor.getInt(0) ;
+        }
+        return -1;
+    }
 
     public long  ajouteRestaurant(Restaurant r){
         ContentValues contentValues = new ContentValues();

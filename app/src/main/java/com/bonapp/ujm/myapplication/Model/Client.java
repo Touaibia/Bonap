@@ -15,9 +15,30 @@ import java.util.List;
 
 public class Client implements Serializable {
 
-    String username,email,password,adress,city,phone,type;
+    String username,email,password,adress,city,phone,type,telephone;
     public Adresse adresse;
     int id;
+
+    public Client(String nom, String email, String mot_passe, String tel) {
+        this.username = nom;
+        this.email = email;
+        this.password = mot_passe;
+        this.telephone= tel;
+
+    }
+
+    public Client() {
+
+    }
+
+
+    public String getTelephone(){
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
     public int getId() {
         return id;

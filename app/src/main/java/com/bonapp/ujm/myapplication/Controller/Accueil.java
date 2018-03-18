@@ -42,6 +42,7 @@ import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.Model.RepoTypeCuisine;
 import com.bonapp.ujm.myapplication.Model.RepoTypeCuisineRestaurant;
 import com.bonapp.ujm.myapplication.Model.Restaurant;
+import com.bonapp.ujm.myapplication.Model.SharedPrefManager;
 import com.bonapp.ujm.myapplication.Model.TypeCuisine;
 import com.bonapp.ujm.myapplication.R;
 import com.bonapp.ujm.myapplication.Model.SuggestionRestoAdapter;
@@ -70,7 +71,7 @@ import static java.lang.Math.abs;
 
 public class Accueil extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
-
+    Button LogOut;
     LocationManager locationManager;
     GoogleMap gMap;
     LatLng latLng;
@@ -96,7 +97,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         setContentView(R.layout.activity_accueil);
 
         c = this;
-
+       // LogOut = (Button)  findViewById(R.id.ClientLogOut);
         RepoRestaurant repo = new RepoRestaurant(this);
         repo.open();
         Cursor cursor = repo.DB.rawQuery("select password from contacts",null);
@@ -142,6 +143,8 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -311,6 +314,12 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
                 builder.create().show();
                 return true;
+            case R.id.ClientLogOut:
+                SharedPrefManager.getInstance(this).LogOut();
+                finish();
+                startActivity(new Intent(this,loginActivity.class));
+                break;
+
 
 
         }

@@ -19,16 +19,16 @@
             android:id="@+id/go_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="30sp"
+            android:text="&lt;"
+            android:textSize="40sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:text="Aujourd'hui"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -37,8 +37,8 @@
             android:id="@+id/go_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=">"
-            android:textSize="30sp"
+            android:text="&gt;"
+            android:textSize="40sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -58,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Midi"
+            android:onClick="radioChange"
             android:layout_marginRight="15dp"/>
 
         <RadioButton
@@ -65,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Soir"
+            android:onClick="radioChange"
             android:layout_marginLeft="10dp"/>
 
     </RadioGroup>

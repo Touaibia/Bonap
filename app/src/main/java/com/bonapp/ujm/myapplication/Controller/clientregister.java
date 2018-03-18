@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bonapp.ujm.myapplication.Model.Adresse;
 import com.bonapp.ujm.myapplication.Model.Client;
 import com.bonapp.ujm.myapplication.Model.RepoAdresse;
+import com.bonapp.ujm.myapplication.Model.RepoAdresseClient;
 import com.bonapp.ujm.myapplication.Model.RepoInscription;
 import com.bonapp.ujm.myapplication.R;
 
@@ -89,7 +90,7 @@ public class clientregister extends AppCompatActivity implements View.OnClickLis
                     long idclient = repoInscription.insertContact(user);
 
                     if(idclient!=-1){
-                        RepoAdresse repoAd = new RepoAdresse(this);
+                        RepoAdresseClient repoAd = new RepoAdresseClient(this);
                         Adresse ClientAdress = new  Adresse( NumRue,typevoie,NomRue, parseInt(CodPostal),idclient);
                         repoAd.open();
 

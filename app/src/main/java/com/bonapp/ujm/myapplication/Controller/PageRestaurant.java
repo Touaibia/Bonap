@@ -1,28 +1,15 @@
 package com.bonapp.ujm.myapplication.Controller;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
-import com.bonapp.ujm.myapplication.Controller.CarteMenu;
 import com.bonapp.ujm.myapplication.R;
-
-import java.util.Calendar;
-import java.util.Timer;
 
 public class PageRestaurant extends AppCompatActivity implements View.OnClickListener{
 
@@ -70,7 +57,7 @@ long idclient;
                 break;
 
             case R.id.commande:
-                Intent intent2 = new Intent(this,fait_la_commande.class);
+                Intent intent2 = new Intent(this,GestionPublication.fait_la_commande.class);
                 startActivity(intent2);
                 break;
             case R.id.ReserveNbpersonne:

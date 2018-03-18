@@ -19,6 +19,8 @@ public class RepoPlat extends BaseDonnees {
     public static final String DESCRIP = "description";
     public static final String RESTAU = "id_restau";
 
+    public Context context;
+
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME +
             " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NOM + " CHAR(60), "  + TYPE + " INTEGER, "+
             PRIX + " REAL, " + DESCRIP + " TEXT" + RESTAU + " INTEGER);";
@@ -27,6 +29,7 @@ public class RepoPlat extends BaseDonnees {
 
     public RepoPlat(Context context) {
         super(context);
+        this.context = context;
     }
 
     public long ajouter(Plat pl){
@@ -56,6 +59,11 @@ public class RepoPlat extends BaseDonnees {
 
         DB.update(TABLE_NAME, contVal, KEY  + " = ?", new String[] {String.valueOf(pl.getId())});
 
+        RepoImage repoImage = new RepoImage(context);
+        repoImage.open();
+        repoImage.modifier(pl.getImage());
+        repoImage.close();
+
     }
 
     public ArrayList<Plat> selectionner(long id, int type){
@@ -70,7 +78,13 @@ public class RepoPlat extends BaseDonnees {
             float prix = c.getFloat(2);
             String descrip = c.getString(3);
 
-            lesPlats.add(new Plat(num,nom,prix,descrip));
+            RepoImage repoImage = new RepoImage(context);
+            repoImage.open();
+            Image image = repoImage.selectionner(num);
+
+            repoImage.close();
+
+            lesPlats.add(new Plat(num,image,nom,prix,descrip));
         }
 
         return lesPlats;
@@ -87,10 +101,13 @@ public class RepoPlat extends BaseDonnees {
         String nom = c.getString(1);
         float prix = c.getFloat(2);
         String descrip = c.getString(3);
+        RepoImage repoImage = new RepoImage(context);
+        repoImage.open();
+        Image image = repoImage.selectionner(num);
 
-        Plat plat = new Plat(num,nom,prix,descrip) ;
+        repoImage.close();
 
-
+        Plat plat = new Plat(num,image,nom,prix,descrip);
         return plat;
     }
 }

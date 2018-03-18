@@ -37,6 +37,7 @@ public abstract class MenuManagerActivity extends AppCompatActivity{
                 break;
             case R.id.event:
             /* DO ADD */
+                startActivity(new Intent(MenuManagerActivity.this, GestionEvent.class));
                 break;
             case R.id.profil:
             /* DO DELETE */

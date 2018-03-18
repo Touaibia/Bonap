@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bonapp.ujm.myapplication.Model.RepoInscription;
+import com.bonapp.ujm.myapplication.Model.RepoRestaurant;
 import com.bonapp.ujm.myapplication.R;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener{
@@ -41,7 +42,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, Accueil.class));
                 break;
             case R.id.log:
-                EditText identifiant = (EditText) findViewById(R.id.logEmail);
+                EditText identifiant = (EditText) findViewById(R.id.logUsername);
                 EditText password = (EditText) findViewById(R.id.logPswrd);
 
                 String identif = identifiant.getText().toString();
@@ -56,7 +57,18 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     intent.putExtra("idclient",id);
                     startActivity(intent);
                 }else {
-                    Toast.makeText(this, "identifiant incorrecte", Toast.LENGTH_LONG).show();
+                    RepoRestaurant  repoResto = new RepoRestaurant(this);
+                    repoResto.open();
+                    long idRest = repoInscription.identification(identif,pass);
+                    if(idRest != -1){
+                        Intent intent = new Intent(this,PageRestaurant.class);
+                        intent.putExtra("idRestaurant",idRest);
+                        startActivity(intent);
+
+                    }else{
+                        Toast temp = Toast.makeText(loginActivity.this," User Not Found",Toast.LENGTH_SHORT);
+                        temp.show();
+                    }
 
                 }
 

@@ -64,8 +64,8 @@ public class BaseDonnees extends SQLiteOpenHelper {
              "bitmap  BLOB, "+
              "id_parent INTEGER);";
 
-    public static final String TABLE_NAME = "reservation";
-    public static final String KEY = "id";
+   public static final String TABLE_NAME_R = "reservation";
+    public static final String KEY_R = "id";
     public static final String NB_PERS = "nb_personnes";
     public static final String SERVICE = "service";
     public static final String DATE = "date";
@@ -73,8 +73,8 @@ public class BaseDonnees extends SQLiteOpenHelper {
     public static final String RESTAU = "id_restau";
     public static final String CLIENT = "id_client";
 
-    public static final String CREATE_RESERVATION = "CREATE TABLE " + TABLE_NAME +
-            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " DATE, "+
+    public static final String CREATE_RESERVATION = "CREATE TABLE " + TABLE_NAME_R +
+            "(" + KEY_R + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " DATE, "+
             HEURE + " CHAR(5), " + RESTAU + " INTEGER, "+ CLIENT + " INTEGER);";
     private  static  final String TABLE_CONTACTE =
             "create table contacts(" +
@@ -83,6 +83,18 @@ public class BaseDonnees extends SQLiteOpenHelper {
                     "email TEXT, " +
                     "password TEXT," +
                     "telephone INTEGER);";
+
+    public static final String TABLE_NAME = "adresseClient";
+    public static final String KEY = "id";
+    public static final String NUM = "numero";
+    public static final String TYPE = "type";
+    public static final String INTITULE = "intitule";
+    public static final String CODE = "code_post";
+    public static final String ID_CLIENT = "id_cleint";
+
+    public static final String TABLE_CREATE_CLIENT = "CREATE TABLE " + TABLE_NAME +
+            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ NUM + " CHAR(10), "+ TYPE + " CHAR(20), "+
+            INTITULE +" CHAR(50), "+ CODE +" INTEGER, " + ID_CLIENT + " INTEGER);";
 
     public BaseDonnees(Context context) {
         super(context, DATA_BASE_NAME, null, VERSION);
@@ -93,15 +105,16 @@ public class BaseDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-/*          sqLiteDatabase.execSQL(TABLE_RESATURANT);
+         sqLiteDatabase.execSQL(TABLE_RESATURANT);
           sqLiteDatabase.execSQL(TABLE_ADRESSE);
           sqLiteDatabase.execSQL(TABLE_CREATE);
           sqLiteDatabase.execSQL(TABLE_PLAT);
           sqLiteDatabase.execSQL(TABLE_TYPE_CUISINE);
           sqLiteDatabase.execSQL(TABLE_TYPECUISINE_RESTAU);
-          sqLiteDatabase.execSQL(TABLE_IMAGE);*/
+          sqLiteDatabase.execSQL(TABLE_IMAGE);
           sqLiteDatabase.execSQL(CREATE_RESERVATION);
 //          sqLiteDatabase.execSQL(TABLE_CONTACTE);
+          sqLiteDatabase.execSQL(TABLE_CREATE_CLIENT);
 
     }
 

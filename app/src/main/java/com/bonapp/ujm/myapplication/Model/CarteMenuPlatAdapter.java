@@ -6,14 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bonapp.ujm.myapplication.Controller.CarteMenu;
 import com.bonapp.ujm.myapplication.Controller.PageRestaurant;
-import com.bonapp.ujm.myapplication.Controller.fait_la_commande;
 import com.bonapp.ujm.myapplication.R;
 
 import java.util.List;
