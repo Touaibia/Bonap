@@ -102,8 +102,6 @@ public class TypeCuisineAdapter extends RecyclerView.Adapter<TypeCuisineAdapter.
 
             typeCuisine = (TextView) itemView.findViewById(R.id.type_cuis);
             boutonSup = (Button) itemView.findViewById(R.id.sup_type_cuis);
-
-
         }
 
         public void display(TypeCuisine pair) {

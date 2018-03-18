@@ -5,6 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Created by Nianfo on 04/03/2018.
  */
@@ -50,9 +55,6 @@ public class RepoInscription extends BaseDonnees {
         return -1;
     }
 
-
-
-
     public long insertContact(Client conctact){
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME,conctact.getUsername());
@@ -61,6 +63,19 @@ public class RepoInscription extends BaseDonnees {
         values.put(COLUMN_TELEPHONE,conctact.getPhone());
 
         return DB.insert(TABLE_NAME,null,values);
+    }
+
+    public Client selectionner(int id_client) {
+        // Toast.makeText(context," okk ",Toast.LENGTH_LONG).show();
+        Cursor c = DB.rawQuery("SELECT id, username"+
+                " FROM "+ TABLE_NAME +" where id = ?", new String[]{""+id_client} );
+
+        c.moveToNext();
+
+        int id = c.getInt(0);
+        String username = c.getString(1);
+
+        return new Client(id,username);
     }
 
     public void close(){DB.close();}

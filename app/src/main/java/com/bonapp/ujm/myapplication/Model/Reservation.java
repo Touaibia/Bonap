@@ -14,14 +14,14 @@ public class Reservation {
     Date date;
     String heure;
     long id_restau;
-    int id_client;
+    long id_client;
     Restaurant restaurant;
+    Client client;
 
     public Reservation() {
     }
 
-
-    public Reservation(int nb_personnes, int service, Date date,String heure, long id_restau, int id_client) {
+    public Reservation(int nb_personnes, int service, Date date,String heure, long id_restau, long id_client) {
         this.nb_personnes = nb_personnes;
         this.service = service;
         this.date = date;
@@ -30,13 +30,29 @@ public class Reservation {
         this.id_client = id_client;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     //Recuperer les Reserv depuis le compte Retaurant
-    public Reservation(int id, int nb_personnes, int service, String heure, int id_client) {
+    public Reservation(int id, int nb_personnes, int service, String heure, Client cl) {
         this.id = id;
         this.nb_personnes = nb_personnes;
         this.service = service;
         this.heure = heure;
-        this.id_client = id_client;
+        this.client = cl;
     }
 
     //Recuperer les Reserv depuis le compte Cleint
@@ -98,7 +114,7 @@ public class Reservation {
         this.id_restau = id_restau;
     }
 
-    public int getId_client() {
+    public long getId_client() {
         return id_client;
     }
 

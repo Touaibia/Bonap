@@ -68,6 +68,7 @@ public class GestionProfil extends MenuManagerActivity {
         TextView descrip = (TextView) findViewById(R.id.descrip_restau);
 
         nom_restau.setText(restau.getNom());
+
         ad_restau.setText(adresse.getNumero()+" "+adresse.getType_voie()+" "+adresse.getIntitule()+" "+adresse.getCode_postal());
         tel.setText(restau.getTel());
         descrip.setText("A Propos de nous : "+restau.getDescription());
@@ -136,11 +137,15 @@ public class GestionProfil extends MenuManagerActivity {
         final EditText editNumRue = (EditText) myView.findViewById(R.id.edit_num_ad);
         final EditText editLabel = (EditText) myView.findViewById(R.id.edit_label_ad);
         final EditText editCodePost = (EditText) myView.findViewById(R.id.edit_code_post);
+        final EditText editEmail = (EditText) myView.findViewById(R.id.edit_email_restau);
 
         //on charge les données à modifer dans le formulaire
         editNom.setText(nomRestau.getText());
         editTel.setText(numRestau.getText());
-
+        editCodePost.setText(restau.getAdresse().getCode_postal()+"");
+        editNumRue.setText(restau.getAdresse().getNumero());
+        editLabel.setText(restau.getAdresse().getIntitule());
+        editEmail.setText(restau.getEmail());
 
         Spinner spinner = (Spinner) myView.findViewById(R.id.edit_type_voie);
         // Create an ArrayAdapter using the string array and a default spinner layout

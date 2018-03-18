@@ -5,6 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFF</color>
     <color name="whitetrans">#8000</color>
-    <color name="black">#000</color>
+    <color name="black">#daefec</color>
     <color name="colorAccueil">#F0FFFF</color>
 </resources>

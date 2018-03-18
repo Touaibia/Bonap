@@ -28,32 +28,31 @@ public class RepoReservation extends BaseDonnees {
     public static final String RESTAU = "id_restau";
     public static final String CLIENT = "id_client";
 
-    public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
-            "(" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NB_PERS + " INTEGER, " + SERVICE + " INTEGER, " + DATE + " INTEGER, "+
-            HEURE + " TEXT, " + RESTAU + " INTEGER, "+ CLIENT + " INTEGER);";
+    public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "nb_personnes  INTEGER, " +
+            "service INTEGER, " +
+            "date TEXT, "+
+            "heure TEXT, " +
+            "id_restau INTEGER, "+
+            "id_client INTEGER);";
 
     public RepoReservation(Context context) {
         super(context);
-        context = context;
-        this.tableName = TABLE_NAME;
+        this.context = context;
+        //this.tableName = TABLE_NAME;
     }
 
     public void ajouter(Reservation res){
         ContentValues contVal = new ContentValues();
 
         //transformation de la date en timestamp
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String jour = sdf.format(res.getDate());
-        long time = 0;
-        try {
-            time = sdf.parse(jour).getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         contVal.put(NB_PERS, res.getNb_personnes());
         contVal.put(SERVICE, res.getService());
-        contVal.put(DATE,time);
+        contVal.put(DATE,jour);
         contVal.put(HEURE, res.getHeure());
         contVal.put(RESTAU, res.getId_restau());
         contVal.put(CLIENT, res.getId_client());
@@ -68,18 +67,12 @@ public class RepoReservation extends BaseDonnees {
     public void modifier(Reservation res){
         ContentValues contVal = new ContentValues();
         //transformation de la date en timestamp
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String jour = sdf.format(res.getDate());
-        long time = 0;
-        try {
-            time = sdf.parse(jour).getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         contVal.put(NB_PERS, res.getNb_personnes());
         contVal.put(SERVICE, res.getService());
-        contVal.put(DATE, time);
+        contVal.put(DATE, jour);
         contVal.put(HEURE, res.getHeure());
         contVal.put(RESTAU, res.getId_restau());
         contVal.put(CLIENT, res.getId_client());
@@ -87,11 +80,14 @@ public class RepoReservation extends BaseDonnees {
         DB.update(TABLE_NAME, contVal, KEY  + " = ?", new String[] {String.valueOf(res.getId())});
     }
 
-    public ArrayList<Reservation> selectionRestau(long id_restau, long time){
+    public ArrayList<Reservation> selectionRestau(long id_restau, String date){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NB_PERS +", "+ SERVICE +", "+ HEURE +", "+ CLIENT +
-                " FROM "+ TABLE_NAME +" where date = ? AND id_restau = ?", new String[]{""+time,""+id_restau} );
+                " FROM "+ TABLE_NAME +" where date = ? AND id_restau = ?", new String[]{date,""+id_restau} );
 
         ArrayList<Reservation> lesReserv = new ArrayList<>();
+
+        RepoInscription repoInscription = new RepoInscription(context);
+        repoInscription.open();
 
         while(c.moveToNext()){
             int id = c.getInt(0);
@@ -100,8 +96,9 @@ public class RepoReservation extends BaseDonnees {
             String heure = c.getString(3);
             int cl_id = c.getInt(4);
 
-            lesReserv.add(new Reservation(id,nb_pers,serv,heure,cl_id));
+            lesReserv.add(new Reservation(id,nb_pers,serv,heure,repoInscription.selectionner(cl_id)));
         }
+        repoInscription.close();
         return lesReserv;
     }
 
@@ -117,14 +114,11 @@ public class RepoReservation extends BaseDonnees {
             int nb_pers = c.getInt(1);
             int serv = c.getInt(2);
             String heure = c.getString(3);
-            long dateStr = c.getLong(4);
+            String dateStr = c.getString(4);
             long restau_id = c.getInt(5);
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//            Calendar c = Calendar.getInstance();
-//            c.setTimeInMillis(dateStr);
-            Date date = new Date(dateStr);
-            //date =  dateFormat.parse(dateStr);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = dateFormat.parse(dateStr);
 
             lesReserv.add(new Reservation(id,nb_pers,serv,date,heure,restau_id));
         }
