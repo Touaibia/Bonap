@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarteMenu extends AppCompatActivity implements View.OnClickListener {
-
+    long idclient;
     Restaurant restaurant = new Restaurant();
 
     RecyclerView recyclerView;
@@ -28,7 +28,9 @@ public class CarteMenu extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carte_menu);
-
+        Intent intent = getIntent();
+        long id = intent.getLongExtra("idclient",-1);
+        if(id!=-1) idclient = id;
        restaurant.ajoutePlat(R.drawable.planchecharcuterie,"Planche Charcuterie",12,"Description","italien");
 
 

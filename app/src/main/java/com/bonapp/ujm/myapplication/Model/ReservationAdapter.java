@@ -1,5 +1,6 @@
 package com.bonapp.ujm.myapplication.Model;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bonapp.ujm.myapplication.Controller.PageRestaurant;
 import com.bonapp.ujm.myapplication.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static android.support.v4.content.ContextCompat.startActivity;
@@ -22,10 +24,12 @@ import static android.support.v4.content.ContextCompat.startActivity;
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ReservationViewHolder> {
 
     List<Reservation> list;
+    Context context;
 
 
-    public ReservationAdapter(List<Reservation> list){
+    public ReservationAdapter(List<Reservation> list, Context context){
         this.list = list;
+        this.context = context;
     }
     @Override
     public ReservationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,7 +62,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             super(itemView);
             nom = (TextView) itemView.findViewById(R.id.reservationRestoNom);
             date= (TextView) itemView.findViewById(R.id.reservationDate);
-            nbper = (TextView) itemView.findViewById(R.id.nbper);
+            nbper = (TextView) itemView.findViewById(R.id.ReservNbper);
             //jour = (TextView) itemView.findViewById(R.id.jour);
 
 
@@ -76,13 +80,16 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         //@SuppressLint("ResourceType")
         public void display(Reservation rest){
             current = rest;
-            /*
-            nom du restau à recuperer
-             */
 
-            nom.setText("nom du restaurant");
-            date.setText(rest.date.toString()+" à "+rest.heure);
-//            nbper.setText(rest.nb_personnes);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            RepoRestaurant rep = new RepoRestaurant(context);
+            rep.open();
+            String nomm = rep.selectionnerAccueil(rest.getId_restau()).getNom();
+            String datee = dateFormat.format(rest.getDate());
+            nom.setText(nomm);
+            date.setText(datee+" à "+rest.getHeure());
+            nbper.setText(""+rest.getNb_personnes());
             //jour.setText(rest.heure);
         }
     }

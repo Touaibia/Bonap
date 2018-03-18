@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,10 +23,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +52,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -78,11 +82,15 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     BaseDonnees db;
 
     static float distanceDemance = 0;
+    static float zoom = 10;
     String budget;
     String type;
     String typeAmbiance;
     List<Restaurant> list = new ArrayList<Restaurant>();
     Context c;
+    long idclient;
+    MapFragment mapFragment;
+    ViewGroup.LayoutParams params;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,23 +100,40 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
        // LogOut = (Button)  findViewById(R.id.ClientLogOut);
         RepoRestaurant repo = new RepoRestaurant(this);
         repo.open();
-        Cursor cursor = repo.DB.rawQuery("select id from restaurant",null);
-        cursor.moveToNext();
-
-        Toast.makeText(this, "" + cursor.getInt(0)+" km", Toast.LENGTH_LONG).show();
+        Cursor cursor = repo.DB.rawQuery("select password from contacts",null);
+        while(cursor.moveToNext()){
+       //     Toast.makeText(this,"id client "+cursor.getString(0),Toast.LENGTH_LONG).show();
+        }
 
         //list.add(new Restaurant());
+        //recuperer id du client
+        //repo.DB.execSQL("DROP TABLE IF EXISTS reservation");
 
-        RecyclerView listv = (RecyclerView) findViewById(R.id.list);
+        Intent intent = getIntent();
+        long id = intent.getLongExtra("idclient",-1);
+        if(id!=-1) idclient = id;
 
-        listv.setLayoutManager(new LinearLayoutManager(this));
-        listv.setAdapter(new SuggestionRestoAdapter(list));
         TextView rech = (TextView) findViewById(R.id.filtreRech);
         rech.setOnClickListener(this);
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
+         mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mmap);
         mapFragment.getMapAsync(this);
+        params = mapFragment.getView().getLayoutParams();
+        TextView recommandation = (TextView) findViewById(R.id.recommandation);
+        if(list.size()!=0) {
+            params.height = 800;
+            mapFragment.getView().setLayoutParams(params);
+            recommandation.setVisibility(View.VISIBLE);
+            RecyclerView listv = (RecyclerView) findViewById(R.id.list);
+            listv.setLayoutManager(new LinearLayoutManager(this));
+            listv.setAdapter(new SuggestionRestoAdapter(list, idclient));
+        }else{
+            params.height = 1500;
+            mapFragment.getView().setLayoutParams(params);
+            recommandation.setVisibility(View.INVISIBLE);
+        }
+
 
 
     }
@@ -208,6 +233,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
 
                         if(!d[0].equals("plus")) {
                             distanceDemance =(float) parseInt(d[0]);
+                            if(distanceDemance == (float)60) zoom = 7;
                             localisationDesRestau();
 
                         }
@@ -218,12 +244,19 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         for(j=0;j<typeIdNom.size();j++){
                             String[] typeidnom = typeIdNom.get(j).split("_");
                             if(type[0].equals(typeidnom[0])){
-                            list = repo.selectionnerRestau(parseInt(typeidnom[1]));
-                            Toast.makeText(getApplicationContext(),list.get(0).getNom(),Toast.LENGTH_LONG).show();
+
+                                TextView recommandation = (TextView) findViewById(R.id.recommandation);
+                                recommandation.setVisibility(View.VISIBLE);
+
+                                params.height = 800;
+                                mapFragment.getView().setLayoutParams(params);
+
+                                list = repo.selectionnerRestau(parseInt(typeidnom[1]));
+                                Toast.makeText(getApplicationContext(),list.get(0).getNom(),Toast.LENGTH_LONG).show();
                                 RecyclerView listv = (RecyclerView) findViewById(R.id.list);
 
                                 listv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                                listv.setAdapter(new SuggestionRestoAdapter(list));
+                                listv.setAdapter(new SuggestionRestoAdapter(list,idclient));
                                 TextView rech = (TextView) findViewById(R.id.filtreRech);
                                 rech.setOnClickListener((View.OnClickListener) c);
                             }
@@ -251,13 +284,19 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.accueil:
-                startActivity(new Intent(this, Accueil.class));
+               Intent intent0 = new Intent(this, Accueil.class);
+                intent0.putExtra("idclient",idclient);
+                startActivity(intent0);
                 return true;
             case R.id.profile:
-                startActivity(new Intent(this, profilclient.class));
+                Intent intent11 = new Intent(this, profilclient.class);
+                intent11.putExtra("idclient",idclient);
+                startActivity(intent11);
                 return true;
             case R.id.Reservation:
-                startActivity(new Intent(this, MesReservations.class));
+                Intent intentm = new Intent(this, MesReservations.class);
+                intentm.putExtra("idclient",idclient);
+                startActivity(intentm);
                 return true;
             case R.id.Reglage:
                 AlertDialog.Builder builder = new AlertDialog.Builder(Accueil.this);
@@ -291,7 +330,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
-       localisationClient();
+      // localisationClient();
 
 
     }
@@ -308,7 +347,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
             for (i = 0; i < list.size(); i++) {
                 //localistion de l'adresse de restaurant
                 List<Address> addresses = null;
-                Adresse ad = list.get(i);
+                final Adresse ad = list.get(i);
                 String adr = ad.getNumero() + " " + ad.getType_voie() + " " + ad.getIntitule() + " " + ad.getCode_postal();
                 addresses = geocoder.getFromLocationName(adr, 1);
                 double adresslat = addresses.get(0).getLatitude();
@@ -336,8 +375,24 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         public boolean onMarkerClick(Marker marker) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(c);
                             View resto = getLayoutInflater().inflate(R.layout.visiteresto, null);
+                            long idres = ad.getId_retau();
+                            RepoRestaurant repo = new RepoRestaurant(c);
+                            repo.open();
+                            final Restaurant restaurant = repo.selectionnerAccueil(idres);
                             TextView restauNom = resto.findViewById(R.id.restauNomVisite);
-                            //  restauNom.setText(restaurant.getNom());
+
+                            builder.setPositiveButton("Page du restaurant", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(c,PageRestaurant.class);
+                                    intent.putExtra("nomRestau",restaurant.getNom());
+                                    intent.putExtra("idrestau",restaurant.getId());
+                                    intent.putExtra("idclient",idclient);
+                                    startActivity(intent);
+                                }
+                            });
+                            restauNom.setText(restaurant.getNom());
+                            repo.close();
                             builder.setView(resto);
                             builder.create().show();
                             Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_LONG).show();
@@ -382,7 +437,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         );
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -430,7 +485,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener, 
                         gMap.addMarker(new MarkerOptions().position(latLng).title(""+ltd).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                         ));
                         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
                     } catch (IOException e) {
                         e.printStackTrace();

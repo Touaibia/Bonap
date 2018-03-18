@@ -36,6 +36,10 @@ public class Client implements Serializable {
 
     }
 
+    public Client() {
+
+    }
+
 
     public String getTelephone(){
         return telephone;

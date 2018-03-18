@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -77,7 +78,7 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
     //Selection des Restaurants en fonction de type de cuisine
     public ArrayList<Restaurant> selectionnerRestau(long id_type){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ RESTAU +
-                " FROM "+ TABLE_NAME +" where id_type = ?", new String[]{""+id_type} );
+                " FROM "+ TABLE_NAME +" where "+TYPE+" = ?", new String[]{""+id_type} );
 
         ArrayList<Restaurant> lesRestaus = new ArrayList<>();
         RepoRestaurant repoRestaurant = new RepoRestaurant(context);
@@ -86,8 +87,8 @@ public class RepoTypeCuisineRestaurant extends BaseDonnees {
 
         while(c.moveToNext()){
             long num = c.getInt(1);
-
-            lesRestaus.add(repoRestaurant.selectionnerAccueil(1));
+            Toast.makeText(context,"id restau "+num+" typid "+id_type,Toast.LENGTH_LONG).show();
+            lesRestaus.add(repoRestaurant.selectionnerAccueil(num));
         }
 
         repoRestaurant.close();

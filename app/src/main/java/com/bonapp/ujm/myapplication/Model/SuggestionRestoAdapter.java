@@ -22,10 +22,11 @@ import static android.support.v4.content.ContextCompat.startActivity;
 public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionRestoAdapter.RestoViewHolder> {
 
     List<Restaurant> list;
+    public long idclient;
 
-
-    public SuggestionRestoAdapter(List<Restaurant> list){
+    public SuggestionRestoAdapter(List<Restaurant> list,long id){
         this.list = list;
+        this.idclient = id;
     }
     @Override
     public RestoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,6 +52,7 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
        public Restaurant current;
        public long id;
 
+
         public RestoViewHolder(final View itemView) {
             super(itemView);
             nom = (TextView) itemView.findViewById(R.id.NomRest);
@@ -62,8 +64,9 @@ public class SuggestionRestoAdapter extends RecyclerView.Adapter<SuggestionResto
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), PageRestaurant.class);
                     if(nom.getText().toString().equals(" ")) nom.setText("Restau à sainté");
-                    intent.putExtra("nom",nom.getText().toString());
-                    intent.putExtra("id",id);
+                    intent.putExtra("nomRestau",nom.getText().toString());
+                    intent.putExtra("idRestau",id);
+                    intent.putExtra("idclient",idclient);
                     startActivity(view.getContext(),intent, null);
 
                 }

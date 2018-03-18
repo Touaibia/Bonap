@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-
+        android:background="#d16a4d"
         android:weightSum="1">
 
 
@@ -19,103 +19,190 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@drawable/profil"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:weightSum="1">
 
             <TextView
 
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:id="@+id/information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:text="Mes Informations"
                 android:textAlignment="center"/>
-            <TextView
 
-                android:layout_marginTop="20dp"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nom"
-                android:layout_marginStart="15dp"
-                />
-            <EditText
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:background="@drawable/roundedwhite"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:textSize="14dp"
-                android:drawablePadding="5dp"
-                android:paddingStart="10dp"
-                android:id="@+id/clientPseudoModif"
-                android:layout_weight="0.04"/>
-            <TextView
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                />
-            <EditText
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:background="@drawable/roundedwhite"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:textSize="14dp"
-                android:drawablePadding="5dp"
-                android:paddingStart="10dp"
-                android:id="@+id/clientEmailModif"
-                android:layout_weight="0.04"/>
-            <TextView
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Telephone"
-                />
+                android:layout_height="30dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white"
+                >
 
-            <EditText
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:background="@drawable/roundedwhite"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:textSize="14dp"
-                android:drawablePadding="5dp"
-                android:paddingStart="10dp"
-                android:id="@+id/clientTelephoneModif"
-                android:layout_weight="0.04"/>
-            <TextView
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Adress"
-                />
+                <TextView
 
-            <EditText
-                android:layout_marginTop="10dp"
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="start|center"
+                    android:text="Nom :" />
+
+                <TextView
+                    android:id="@+id/clientPseudoModif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="nom"
+                    android:textSize="14dp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:background="#800"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:gravity="right|center"
+                    android:onClick="onClick"
+                    android:text="Modifie" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:background="@drawable/roundedwhite"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:textSize="14dp"
-                android:drawablePadding="5dp"
-                android:paddingStart="10dp"
-                android:id="@+id/clientAdressModif"
-                android:layout_weight="0.04"/>
+                android:layout_height="30dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white">
+
+                <TextView
+
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="start|center"
+                    android:text="Email :" />
+
+                <TextView
+                    android:id="@+id/clientEmailModif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="email"
+                    android:textSize="14dp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center|right"
+                    android:background="#800"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="Modifie" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white">
+
+                <TextView
+
+                    android:id="@+id/textView444"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="start|center"
+                    android:text="Telephone :" />
+
+                <TextView
+                    android:id="@+id/clientTelephoneModif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="telephone"
+                    android:textSize="14dp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/textView333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="right|center"
+                    android:background="#800"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="Modifie" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white">
+
+                <TextView
+
+                    android:id="@+id/textView4444"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="start|center"
+                    android:text="Adresse :" />
+
+                <TextView
+                    android:id="@+id/clientAdressModif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="adresse"
+                    android:textSize="14dp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/textView3333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="right|center"
+                    android:background="#800"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="Modifie" />
+
+            </RelativeLayout>
 
             <Button
                 android:layout_width="wrap_content"

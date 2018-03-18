@@ -13,7 +13,7 @@
 
     <ImageView
         android:id="@+id/imagePlat"
-        android:layout_width="45dp"
+        android:layout_width="130dp"
         android:layout_height="100dp"
         android:autoSizeTextType="uniform"
         android:scaleType="centerCrop"
@@ -22,10 +22,11 @@
 
     <TextView
         android:id="@+id/nomPlat"
-        android:layout_width="337dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:entries="@array/nb_personne"
+        android:layout_gravity="right"
         android:gravity="center"
+        android:layout_weight="30"
         android:text="PlancheCharcuterie" />
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -92,7 +93,7 @@ public class fait_la_reservation extends AppCompatActivity implements View.OnCli
             listener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                    String time = i + ":" + i1;
+                    String time = i + ":" + i1+":"+00;
                     textViewtime = (TextView) findViewById(R.id.ReservtimeDate);
                     textViewtime.setText(time);
 
@@ -120,37 +121,60 @@ public class fait_la_reservation extends AppCompatActivity implements View.OnCli
             TextView nbp = (TextView) findViewById(R.id.ReserveNbpersonne);
             TextView date = (TextView) findViewById(R.id.ReservDate);
             TextView time = (TextView) findViewById(R.id.ReservtimeDate);
+            CheckBox midi = (CheckBox) findViewById(R.id.ServiceMidi);
+            CheckBox soire = (CheckBox) findViewById(R.id.ServiceSoire);
+
+            if(midi.isChecked()){
+
+            }
             String nbptext = nbp.getText().toString();
             String[] p = nbptext.split(":");
 
             String datetext = date.getText().toString();
+
             String timetext = time.getText().toString();
             Intent intent = getIntent();
             long id = intent.getLongExtra("id",-1);
             Reservation reservation = new Reservation();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-
+            java.util.Date date1 = null;
             try {
-                java.util.Date date1 = sdf.parse(datetext);
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date1);
-                reservation.setDate(new Date( calendar.getTimeInMillis()));
+                date1 = sdf.parse(datetext);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            reservation.setHeure(timetext);
-            reservation.setId_client(0);
-            reservation.setId_restau((int)id);
-            reservation.setNb_personnes(parseInt(p[1]));
-            reservation.setService(0);
-            RepoReservation repo = new RepoReservation(this);
-            repo.open();
-            repo.ajouter(reservation);
-            repo.close();
+            reservation.setDate(date1);
+            Intent in = getIntent();
+            long idr = in.getLongExtra("idrestau",-1);
+            long idc = in.getLongExtra("idclient",-1);
+
+            if(idr!=-1 && idc!=-1){
+                reservation.setId_restau((int)idr);
+                reservation.setId_client((int)idc);
+                reservation.setHeure(timetext);
+                Toast.makeText(this," test "+parseInt(p[1]),Toast.LENGTH_LONG).show();
+                reservation.setNb_personnes(parseInt(p[1]));
+                if(midi.isChecked()){
+                    reservation.setService(0);
+                }
+                if(soire.isChecked()){
+                    reservation.setService(1);
+                }
+
+                RepoReservation repo = new RepoReservation(this);
+                repo.open();
+              long id1 = repo.ajouter(reservation, datetext);
+                repo.close();
+            }
+            else {
+                Toast.makeText(this,"Erreur d'enregistrement merci de reprendre",Toast.LENGTH_LONG).show();
+            }
+
+
+
 
             break;
     }

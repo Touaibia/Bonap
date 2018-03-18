@@ -5,11 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.widget.Toast;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  * Created by Nianfo on 04/03/2018.
  */
@@ -41,19 +36,33 @@ public class RepoInscription extends BaseDonnees {
 
     public RepoInscription(Context context) {
         super(context);
-        Toast.makeText(context, "ouverure ok", Toast.LENGTH_LONG).show();
+       // Toast.makeText(context, "ouverure ok", Toast.LENGTH_LONG).show();
         this.context = context;
-        this.tableName = "contacts";
+       // this.tableName = "contacts";
     }
     public long identification(String email, String pwd){
         Cursor cursor = DB.rawQuery("select id from contacts " +
-                "where password = "+pwd,null);
+                "where password = ?",new String[]{""+pwd});
 
         if (cursor.moveToNext()){
             return cursor.getInt(0) ;
         }
         return -1;
     }
+
+    public Client getClient(long id){
+        Cursor cursor = DB.rawQuery("select username,email,telephone from contacts where id = ?",new String[]{""+id});
+        Client c = new Client();
+        while (cursor.moveToNext()) {
+
+            c.setUsername(cursor.getString(0));
+            c.setEmail(cursor.getString(1));
+            c.setTelephone("" + cursor.getInt(2));
+            return c;
+        }
+        return null;
+    }
+
 
     public long insertContact(Client conctact){
         ContentValues values = new ContentValues();
@@ -63,19 +72,6 @@ public class RepoInscription extends BaseDonnees {
         values.put(COLUMN_TELEPHONE,conctact.getPhone());
 
         return DB.insert(TABLE_NAME,null,values);
-    }
-
-    public Client selectionner(int id_client) {
-        // Toast.makeText(context," okk ",Toast.LENGTH_LONG).show();
-        Cursor c = DB.rawQuery("SELECT id, username"+
-                " FROM "+ TABLE_NAME +" where id = ?", new String[]{""+id_client} );
-
-        c.moveToNext();
-
-        int id = c.getInt(0);
-        String username = c.getString(1);
-
-        return new Client(id,username);
     }
 
     public void close(){DB.close();}
