@@ -59,10 +59,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 }else {
                     RepoRestaurant  repoResto = new RepoRestaurant(this);
                     repoResto.open();
-                    long idRest = repoInscription.identification(identif,pass);
+                    long idRest = repoResto.identification(identif,pass);
                     if(idRest != -1){
-                        Intent intent = new Intent(this,PageRestaurant.class);
-                        intent.putExtra("idRestaurant",idRest);
+                        Intent intent = new Intent(this,GestionProfil.class);
+                        intent.putExtra("id_restau",idRest);
                         startActivity(intent);
 
                     }else{

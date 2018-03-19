@@ -69,9 +69,9 @@ public class RepoReservation extends BaseDonnees {
         DB.update(TABLE_NAME, contVal, KEY  + " = ?", new String[] {String.valueOf(res.getId())});
     }
 
-    public ArrayList<Reservation> selectionRestau(int id_restau, Date date){
+    public ArrayList<Reservation> selectionRestau(long id_restau, String date){
         Cursor c = DB.rawQuery("SELECT "+ KEY +", "+ NB_PERS +", "+ SERVICE +", "+ HEURE +", "+ CLIENT +
-                " FROM "+ TABLE_NAME +"where date = ? AND id_restau = ?", new String[]{""+id_restau, String.valueOf(date)} );
+                " FROM "+ TABLE_NAME +" where date = ? AND id_restau = ?", new String[]{date,""+id_restau });
 
         ArrayList<Reservation> lesReserv = new ArrayList<>();
 
@@ -80,9 +80,12 @@ public class RepoReservation extends BaseDonnees {
             int nb_pers = c.getInt(1);
             int serv = c.getInt(2);
             String heure = c.getString(3);
-            int cl_id = c.getInt(4);
+            long cl_id = c.getInt(4);
 
-            lesReserv.add(new Reservation(id,nb_pers,serv,heure,cl_id));
+            RepoInscription repoInscription = new RepoInscription(context);
+            repoInscription.open();
+
+            lesReserv.add(new Reservation(id,nb_pers,serv,heure,repoInscription.getClient(cl_id)));
         }
         return lesReserv;
     }
@@ -104,8 +107,7 @@ public class RepoReservation extends BaseDonnees {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
-
-                date =  dateFormat.parse(dateStr);
+            date =  dateFormat.parse(dateStr);
             lesReserv.add(new Reservation(id,nb_pers,serv,date,heure,restau_id));
         }
         return lesReserv;

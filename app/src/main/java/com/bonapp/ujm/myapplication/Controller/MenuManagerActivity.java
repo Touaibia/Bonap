@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bonapp.ujm.myapplication.Model.SharedPrefManager;
 import com.bonapp.ujm.myapplication.R;
 
 /**
@@ -48,6 +49,9 @@ public abstract class MenuManagerActivity extends AppCompatActivity{
                 break;
             case R.id.opt:
             /* DO DELETE */
+                SharedPrefManager.getInstance(this).LogOut();
+                finish();
+                startActivity(new Intent(this,loginActivity.class));
                 break;
         }
     }

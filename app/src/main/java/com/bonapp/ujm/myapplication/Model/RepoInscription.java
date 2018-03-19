@@ -74,6 +74,15 @@ public class RepoInscription extends BaseDonnees {
         return DB.insert(TABLE_NAME,null,values);
     }
 
+    public Client getClient(int id){
+        Cursor c = DB.rawQuery("SELECT id, username"+
+                " FROM "+ TABLE_NAME +"where id = ?", new String[]{""+id});
+        c.moveToNext();
+        String nom = c.getString(1);
+
+       return new Client(id,nom);
+    }
+
     public void close(){DB.close();}
 
 }

@@ -33,7 +33,7 @@ public class RepoRestaurant extends BaseDonnees {
     }
 
     public long identification(String username, String pwd){
-        Cursor cursor = DB.rawQuery("select id from contacts " +
+        Cursor cursor = DB.rawQuery("select id from restaurant " +
                 "where password = "+pwd,null);
 
         if (cursor.moveToNext()){
